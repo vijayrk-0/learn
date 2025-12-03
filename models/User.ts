@@ -6,6 +6,8 @@ export interface IUser extends Document {
     email: string;
     password: string;
     verified: boolean;
+    resetOTP?: string;
+    resetOTPExpires?: Date;
     createdAt: Date;
     comparePassword(candidatePassword: string): Promise<boolean>;
 }
@@ -31,6 +33,12 @@ const UserSchema = new Schema<IUser>({
     verified: {
         type: Boolean,
         default: false,
+    },
+    resetOTP: {
+        type: String,
+    },
+    resetOTPExpires: {
+        type: Date,
     },
     createdAt: {
         type: Date,

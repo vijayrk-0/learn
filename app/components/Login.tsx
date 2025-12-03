@@ -169,7 +169,7 @@ export default function Login() {
                                     control={<Checkbox value="remember" color="primary" />}
                                     label="Remember me"
                                 />
-                                <Link href="#" variant="body2" underline="hover">
+                                <Link href="/forget-password" variant="body2" underline="hover">
                                     Forgot password?
                                 </Link>
                             </Box>

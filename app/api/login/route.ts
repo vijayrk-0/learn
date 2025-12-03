@@ -1,11 +1,12 @@
 import { NextResponse } from 'next/server';
-import connectDB from '@/lib/db';
-import User from '@/models/User';
+import clientPromise from '@/lib/db';
 import { generateToken } from '@/lib/jwt';
+import bcrypt from 'bcryptjs';
 
 export async function POST(request: Request) {
     try {
-        await connectDB();
+        const client = await clientPromise;
+        const db = client.db();
 
         const body = await request.json();
         const { email, password } = body;
@@ -17,7 +18,7 @@ export async function POST(request: Request) {
             );
         }
 
-        const user = await User.findOne({ email });
+        const user = await db.collection('users').findOne({ email });
         if (!user) {
             return NextResponse.json(
                 { message: 'Invalid email or password' },
@@ -25,7 +26,7 @@ export async function POST(request: Request) {
             );
         }
 
-        const isPasswordValid = await user.comparePassword(password);
+        const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             return NextResponse.json(
                 { message: 'Invalid email or password' },

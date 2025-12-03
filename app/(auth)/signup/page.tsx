@@ -1,5 +1,5 @@
 import React from 'react';
-import SignUp from '../components/SignUp';
+import SignUp from '../../components/SignUp';
 import { Box } from '@mui/material';
 
 export default function SignUpPage() {

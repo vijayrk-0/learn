@@ -4,12 +4,14 @@ import bcrypt from 'bcryptjs';
 
 export async function POST(request: Request) {
     try {
+        // Connect to MongoDB
         const client = await clientPromise;
         const db = client.db();
 
         const body = await request.json();
         const { name, email, password } = body;
 
+        // Validate input
         if (!name || !email || !password) {
             return NextResponse.json(
                 { message: 'Please provide all required fields' },
@@ -17,6 +19,7 @@ export async function POST(request: Request) {
             );
         }
 
+        // Validate password length
         if (password.length < 6) {
             return NextResponse.json(
                 { message: 'Password must be at least 6 characters' },
@@ -24,6 +27,7 @@ export async function POST(request: Request) {
             );
         }
 
+        // Check if user already exists
         const existingUser = await db.collection('users').findOne({ email });
         if (existingUser) {
             return NextResponse.json(
@@ -32,8 +36,10 @@ export async function POST(request: Request) {
             );
         }
 
+        // Hash password
         const hashedPassword = await bcrypt.hash(password, 10);
 
+        // Insert user into database
         const result = await db.collection('users').insertOne({
             name,
             email,
@@ -42,6 +48,7 @@ export async function POST(request: Request) {
             createdAt: new Date(),
         });
 
+        // Return success response
         return NextResponse.json(
             {
                 message: 'User registered successfully',

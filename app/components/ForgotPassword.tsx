@@ -30,7 +30,10 @@ import { useRouter } from 'next/navigation';
 type StepType = 'email' | 'otp' | 'password';
 
 export default function ForgotPassword() {
+    // Function to handle navigation
     const router = useRouter();
+
+    // State variables
     const [activeStep, setActiveStep] = useState<StepType>('email');
     const [email, setEmail] = useState('');
     const [otp, setOtp] = useState('');
@@ -44,6 +47,8 @@ export default function ForgotPassword() {
 
     const steps = ['Enter Email', 'Verify OTP', 'Reset Password'];
 
+
+    // Function to handle sending OTP
     const handleSendOTP = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
@@ -51,6 +56,7 @@ export default function ForgotPassword() {
         setSuccess('');
 
         try {
+            // Send OTP to user's email
             const response = await fetch('/api/send-otp', {
                 method: 'POST',
                 headers: {
@@ -74,12 +80,14 @@ export default function ForgotPassword() {
         }
     };
 
+    // Function to handle verifying OTP
     const handleVerifyOTP = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
         setError('');
         setSuccess('');
 
+        // Verify OTP
         try {
             const response = await fetch('/api/verify-otp', {
                 method: 'POST',
@@ -104,11 +112,13 @@ export default function ForgotPassword() {
         }
     };
 
+    // Function to handle resetting password
     const handleResetPassword = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
         setSuccess('');
 
+        // Validate password
         if (newPassword !== confirmPassword) {
             setError('Passwords do not match');
             return;
@@ -121,6 +131,7 @@ export default function ForgotPassword() {
 
         setLoading(true);
 
+        // Reset password
         try {
             const response = await fetch('/api/reset-password', {
                 method: 'POST',
@@ -147,6 +158,7 @@ export default function ForgotPassword() {
         }
     };
 
+    // Function to get step index
     const getStepIndex = () => {
         switch (activeStep) {
             case 'email':

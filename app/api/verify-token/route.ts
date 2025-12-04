@@ -3,6 +3,7 @@ import { verifyToken } from '@/lib/jwt';
 
 export async function GET(request: Request) {
     try {
+        // Get authorization header
         const authHeader = request.headers.get('authorization');
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
             return NextResponse.json(
@@ -11,8 +12,10 @@ export async function GET(request: Request) {
             );
         }
 
+        // Extract token from header
         const token = authHeader.substring(7);
 
+        // Verify token
         const decoded = verifyToken(token);
         if (!decoded) {
             return NextResponse.json(
@@ -21,6 +24,7 @@ export async function GET(request: Request) {
             );
         }
 
+        // Return success response
         return NextResponse.json(
             {
                 message: 'Token is valid',

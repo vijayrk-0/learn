@@ -16,6 +16,7 @@ import {
     Alert,
     CircularProgress,
 } from '@mui/material';
+
 import { Visibility, VisibilityOff, LockOutlined, EmailOutlined, PersonOutline } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 
@@ -31,9 +32,11 @@ export default function SignUp() {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
+    // Handle password visibility
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleClickShowConfirmPassword = () => setShowConfirmPassword((show) => !show);
 
+    // Handle password visibility
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
@@ -58,6 +61,7 @@ export default function SignUp() {
         }
 
         try {
+            // API call to register the user
             const response = await fetch('/api/register', {
                 method: 'POST',
                 headers: {
@@ -68,6 +72,7 @@ export default function SignUp() {
 
             const data = await response.json();
 
+            // Handle response
             if (response.ok) {
                 setSuccess('Registration successful! Redirecting to login...');
                 setTimeout(() => {
@@ -76,6 +81,7 @@ export default function SignUp() {
             } else {
                 setError(data.message || 'Registration failed');
             }
+
         } catch (err) {
             setError('An unexpected error occurred. Please try again.');
         } finally {
@@ -84,6 +90,7 @@ export default function SignUp() {
     };
 
     return (
+        // Container component for the sign up form
         <Container component="main" maxWidth="xs">
             <Box
                 sx={{
@@ -112,19 +119,24 @@ export default function SignUp() {
                                 mb: 3,
                             }}
                         >
+                            {/* Typography component for the title */}
                             <Typography component="h1" variant="h4" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
                                 Create Account
                             </Typography>
+                            {/* Typography component for the subtitle */}
                             <Typography variant="body2" color="text.secondary">
                                 Sign up to get started
                             </Typography>
                         </Box>
+                        {/* Form component */}
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                            {/* Error message */}
                             {error && (
                                 <Alert severity="error" sx={{ mb: 2 }}>
                                     {error}
                                 </Alert>
                             )}
+                            {/* Success message */}
                             {success && (
                                 <Alert severity="success" sx={{ mb: 2 }}>
                                     {success}
@@ -141,7 +153,9 @@ export default function SignUp() {
                                 autoFocus
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
+                                
                                 slotProps={{
+                                    // Add icon to the input field
                                     input: {
                                         startAdornment: (
                                             <InputAdornment position="start">
@@ -163,6 +177,7 @@ export default function SignUp() {
                                 onChange={(e) => setEmail(e.target.value)}
                                 slotProps={{
                                     input: {
+                                        // Add icon to the input field
                                         startAdornment: (
                                             <InputAdornment position="start">
                                                 <EmailOutlined color="action" />
@@ -184,11 +199,13 @@ export default function SignUp() {
                                 onChange={(e) => setPassword(e.target.value)}
                                 slotProps={{
                                     input: {
+                                        // Add icon to the input field on the left
                                         startAdornment: (
                                             <InputAdornment position="start">
                                                 <LockOutlined color="action" />
                                             </InputAdornment>
                                         ),
+                                        // Add icon to the input field on the right
                                         endAdornment: (
                                             <InputAdornment position="end">
                                                 <IconButton
@@ -247,6 +264,8 @@ export default function SignUp() {
                             >
                                 {loading ? <CircularProgress size={24} /> : 'Sign Up'}
                             </Button>
+
+                            {/* Link to login page */}
                             <Grid container justifyContent="center">
                                 <Grid>
                                     <Typography variant="body2" color="text.secondary">

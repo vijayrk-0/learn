@@ -31,12 +31,15 @@ export default function Login() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
+    // Function to toggle password visibility
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
+    // Function to handle mouse down event on password input
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
 
+    // Function to handle form submission
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setLoading(true);
@@ -69,6 +72,7 @@ export default function Login() {
     };
 
     return (
+        // Container component
         <Container component="main" maxWidth="xs">
             <Box
                 sx={{
@@ -97,19 +101,24 @@ export default function Login() {
                                 mb: 3,
                             }}
                         >
+                            {/* Typography component for the title */}
                             <Typography component="h1" variant="h4" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
                                 Welcome Back
                             </Typography>
+                            {/* Typography component for the subtitle */}
                             <Typography variant="body2" color="text.secondary">
-                                Sign in to continue
+                                Sign in to continue 
                             </Typography>
                         </Box>
+                        {/* Form component */}
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                            {/* Alert component */}
                             {error && (
                                 <Alert severity="error" sx={{ mb: 2 }}>
                                     {error}
                                 </Alert>
                             )}
+                            {/* TextField component */}
                             <TextField
                                 margin="normal"
                                 required
@@ -123,6 +132,7 @@ export default function Login() {
                                 onChange={(e) => setEmail(e.target.value)}
                                 slotProps={{
                                     input: {
+                                        // InputAdornment component
                                         startAdornment: (
                                             <InputAdornment position="start">
                                                 <EmailOutlined color="action" />
@@ -144,12 +154,15 @@ export default function Login() {
                                 onChange={(e) => setPassword(e.target.value)}
                                 slotProps={{
                                     input: {
+                                        // InputAdornment component start
                                         startAdornment: (
                                             <InputAdornment position="start">
                                                 <LockOutlined color="action" />
                                             </InputAdornment>
                                         ),
+                                        // InputAdornment component end
                                         endAdornment: (
+
                                             <InputAdornment position="end">
                                                 <IconButton
                                                     aria-label="toggle password visibility"
@@ -164,11 +177,12 @@ export default function Login() {
                                     },
                                 }}
                             />
+                            {/* Forgot password */}
                             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 1 }}>
-                                <FormControlLabel
+                                {/* <FormControlLabel
                                     control={<Checkbox value="remember" color="primary" />}
                                     label="Remember me"
-                                />
+                                /> */}
                                 <Link href="/forget-password" variant="body2" underline="hover">
                                     Forgot password?
                                 </Link>
@@ -183,6 +197,7 @@ export default function Login() {
                             >
                                 {loading ? <CircularProgress size={24} /> : 'Sign In'}
                             </Button>
+                            {/* Don't have an account */}
                             <Grid container justifyContent="center">
                                 <Grid>
                                     <Typography variant="body2" color="text.secondary">

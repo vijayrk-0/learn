@@ -4,12 +4,15 @@ import bcrypt from 'bcryptjs';
 
 export async function POST(request: Request) {
     try {
+        // Connect to MongoDB
         const client = await clientPromise;
         const db = client.db();
 
+        // Parse request body
         const body = await request.json();
         const { email, otp, newPassword } = body;
 
+        // Validate input
         if (!email || !otp || !newPassword) {
             return NextResponse.json(
                 { message: 'Email, OTP, and new password are required' },
@@ -28,6 +31,7 @@ export async function POST(request: Request) {
         // Find user
         const user = await db.collection('users').findOne({ email: email.toLowerCase() });
 
+        // Validate user
         if (!user) {
             return NextResponse.json(
                 { message: 'Invalid request' },
@@ -62,6 +66,7 @@ export async function POST(request: Request) {
         // Update password
         const hashedPassword = await bcrypt.hash(newPassword, 10);
 
+        // Update user document
         await db.collection('users').updateOne(
             { email: email.toLowerCase() },
             {
@@ -70,6 +75,7 @@ export async function POST(request: Request) {
             }
         );
 
+        // Return success response
         return NextResponse.json(
             {
                 message: 'Password reset successfully',

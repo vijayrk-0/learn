@@ -11,9 +11,11 @@ function generateOTP(): string {
 
 // Send OTP via Nodemailer (Gmail SMTP)
 async function sendOTPViaEmail(email: string, otp: string): Promise<void> {
+  // Get environment variables
   const SMTP_USER = process.env.SMTP_USER;
   const SMTP_PASS = process.env.SMTP_PASS;
 
+  // Validate environment variables
   if (!SMTP_USER || !SMTP_PASS) {
     throw new Error('SMTP_USER or SMTP_PASS is not set');
   }
@@ -21,11 +23,12 @@ async function sendOTPViaEmail(email: string, otp: string): Promise<void> {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: SMTP_USER,
+      user: SMTP_USER, // Gmail username
       pass: SMTP_PASS, // Gmail app password
     },
   });
 
+  // Create mail options
   const mailOptions = {
     from: `"Your App Name" <${SMTP_USER}>`,
     to: email,
@@ -40,14 +43,17 @@ async function sendOTPViaEmail(email: string, otp: string): Promise<void> {
   await transporter.sendMail(mailOptions);
 }
 
+// Handle POST request
 export async function POST(request: NextRequest) {
   try {
+    // Connect to MongoDB
     const client = await clientPromise;
     const db = client.db();
 
     const body = await request.json();
     const { email } = body as { email?: string };
 
+    // Validate input
     if (!email || typeof email !== 'string') {
       return NextResponse.json(
         { message: 'Please provide an email address' },
@@ -101,6 +107,7 @@ export async function POST(request: NextRequest) {
     // Send OTP via email
     await sendOTPViaEmail(normalizedEmail, otp);
 
+    // Return success response
     return NextResponse.json(
       {
         message:

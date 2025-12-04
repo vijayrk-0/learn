@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 export default function DashboardPage() {
     const { isAuthenticated } = useAuth();
     const router = useRouter();
-
+// Function to handle navigation
     useEffect(() => {
         if (!isAuthenticated) {
             router.push('/login');

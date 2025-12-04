@@ -30,6 +30,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* ThemeRegistry and AuthProvider are used to wrap the children */}
         <ThemeRegistry>
           <AuthProvider>{children}</AuthProvider>
         </ThemeRegistry>

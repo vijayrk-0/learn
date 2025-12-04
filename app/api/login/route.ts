@@ -5,12 +5,14 @@ import bcrypt from 'bcryptjs';
 
 export async function POST(request: Request) {
     try {
+        // Connect to MongoDB
         const client = await clientPromise;
         const db = client.db();
 
         const body = await request.json();
         const { email, password } = body;
 
+        // Validate input
         if (!email || !password) {
             return NextResponse.json(
                 { message: 'Please provide email and password' },
@@ -18,6 +20,7 @@ export async function POST(request: Request) {
             );
         }
 
+        // Check if user exists
         const user = await db.collection('users').findOne({ email });
         if (!user) {
             return NextResponse.json(
@@ -26,6 +29,7 @@ export async function POST(request: Request) {
             );
         }
 
+        // Verify password
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             return NextResponse.json(
@@ -34,12 +38,14 @@ export async function POST(request: Request) {
             );
         }
 
+        // Generate JWT token
         const token = generateToken({
             userId: user._id.toString(),
             email: user.email,
             name: user.name,
         });
 
+        // Return success response
         return NextResponse.json(
             {
                 message: 'Login successful',

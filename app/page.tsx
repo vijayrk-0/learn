@@ -6,9 +6,11 @@ import { useAuth } from './context/AuthContext';
 import { Box, CircularProgress } from '@mui/material';
 
 export default function Home() {
+  
   const { isAuthenticated } = useAuth();
   const router = useRouter();
 
+  // Check authentication status and redirect to appropriate page
   useEffect(() => {
     if (isAuthenticated) {
       router.push('/dashboard');

@@ -16,6 +16,7 @@ import { LogoutOutlined, VerifiedUser, Email, Person } from '@mui/icons-material
 import { useAuth } from '../context/AuthContext';
 
 export default function Dashboard() {
+    // Function to handle logout
     const { user, logout } = useAuth();
 
     return (
@@ -41,6 +42,7 @@ export default function Dashboard() {
                 >
                     <CardContent>
                         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 4 }}>
+                            {/* Avatar component */}
                             <Avatar
                                 sx={{
                                     width: 80,
@@ -61,11 +63,15 @@ export default function Dashboard() {
                         </Box>
 
                         <Box sx={{ mt: 3 }}>
+                            {/* Typography component */}
                             <Typography variant="h6" sx={{ mb: 2, fontWeight: 'bold' }}>
                                 Account Information
                             </Typography>
+                            {/* Stack component */}
                             <Stack spacing={2}>
+                                {/* Box component */}
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                                    {/* Person icon */}
                                     <Person color="action" />
                                     <Box>
                                         <Typography variant="caption" color="text.secondary">
@@ -77,6 +83,7 @@ export default function Dashboard() {
                                     </Box>
                                 </Box>
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                                    {/* Email icon */}
                                     <Email color="action" />
                                     <Box>
                                         <Typography variant="caption" color="text.secondary">
@@ -88,12 +95,14 @@ export default function Dashboard() {
                                     </Box>
                                 </Box>
                                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                                    {/* Verified user icon */}
                                     <VerifiedUser color="action" />
                                     <Box>
                                         <Typography variant="caption" color="text.secondary">
                                             Account Status
                                         </Typography>
                                         <Box sx={{ mt: 0.5 }}>
+                                            {/* Chip component */}
                                             <Chip
                                                 label={user?.verified ? 'Verified' : 'Not Verified'}
                                                 color={user?.verified ? 'success' : 'warning'}
@@ -106,6 +115,7 @@ export default function Dashboard() {
                         </Box>
 
                         <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
+                            {/* Logout button */}
                             <Button
                                 variant="outlined"
                                 color="error"

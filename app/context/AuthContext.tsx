@@ -1,8 +1,9 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 
+// Define the User interface 
 interface User {
     id: string;
     name: string;
@@ -10,6 +11,7 @@ interface User {
     verified: boolean;
 }
 
+// Define the AuthContextType interface
 interface AuthContextType {
     user: User | null;
     token: string | null;
@@ -26,6 +28,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [isLoading, setIsLoading] = useState(true);
     const router = useRouter();
 
+    // useEffect to check for stored token and user
     useEffect(() => {
         const storedToken = localStorage.getItem('token');
         const storedUser = localStorage.getItem('user');
@@ -37,6 +40,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setIsLoading(false);
     }, []);
 
+
+    // Store the token and user in localStorage and update the state
     const login = (newToken: string, userData: User) => {
         localStorage.setItem('token', newToken);
         localStorage.setItem('user', JSON.stringify(userData));
@@ -44,6 +49,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser(userData);
     };
 
+    // Clear the token and user from localStorage and redirect to login page
     const logout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
@@ -67,6 +73,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
+// Custom hook to use the AuthContext
 export function useAuth() {
     const context = useContext(AuthContext);
     if (context === undefined) {

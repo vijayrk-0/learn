@@ -3,12 +3,15 @@ import clientPromise from '@/lib/db';
 
 export async function POST(request: Request) {
     try {
+        // Connect to MongoDB
         const client = await clientPromise;
         const db = client.db();
 
+        // Parse request body
         const body = await request.json();
         const { email, otp } = body;
 
+        // Validate input
         if (!email || !otp) {
             return NextResponse.json(
                 { message: 'Email and OTP are required' },

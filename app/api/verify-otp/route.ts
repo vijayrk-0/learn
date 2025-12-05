@@ -1,13 +1,8 @@
 import { NextResponse } from 'next/server';
-import clientPromise from '@/lib/db';
+import { findUserByEmail } from '@/lib/users-db';
 
 export async function POST(request: Request) {
     try {
-        // Connect to MongoDB
-        const client = await clientPromise;
-        const db = client.db();
-
-        // Parse request body
         const body = await request.json();
         const { email, otp } = body;
 
@@ -20,7 +15,7 @@ export async function POST(request: Request) {
         }
 
         // Find user
-        const user = await db.collection('users').findOne({ email: email.toLowerCase() });
+        const user = findUserByEmail(email);
 
         if (!user) {
             return NextResponse.json(

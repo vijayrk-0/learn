@@ -1,0 +1,16 @@
+[
+  {
+    "name": "vijay",
+    "email": "mycodealchemy@gmail.com",
+    "password": "$2b$10$tvjC2gtlaRunLWuWx5FhmuHEFa9B1ub9lu7f0bKwaO8Evz42G3gQS",
+    "verified": false,
+    "createdAt": "2025-12-04T17:10:39.938Z"
+  },
+  {
+    "name": "test",
+    "email": "test1@gmail.com",
+    "password": "$2b$10$ofR8NTNnviLOi8FAlZ3MjucAhu0DmmQi8f0lFTUIrQHOlFTBVRcWm",
+    "verified": false,
+    "createdAt": "2025-12-05T05:04:43.637Z"
+  }
+]

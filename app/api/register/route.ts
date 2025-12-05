@@ -1,13 +1,9 @@
 import { NextResponse } from 'next/server';
-import clientPromise from '@/lib/db';
+import { createUser, findUserByEmail } from '@/lib/users-db';
 import bcrypt from 'bcryptjs';
 
 export async function POST(request: Request) {
     try {
-        // Connect to MongoDB
-        const client = await clientPromise;
-        const db = client.db();
-
         const body = await request.json();
         const { name, email, password } = body;
 
@@ -28,7 +24,7 @@ export async function POST(request: Request) {
         }
 
         // Check if user already exists
-        const existingUser = await db.collection('users').findOne({ email });
+        const existingUser = findUserByEmail(email);
         if (existingUser) {
             return NextResponse.json(
                 { message: 'User with this email already exists' },
@@ -40,12 +36,11 @@ export async function POST(request: Request) {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Insert user into database
-        const result = await db.collection('users').insertOne({
+        const newUser = createUser({
             name,
             email,
             password: hashedPassword,
             verified: false,
-            createdAt: new Date(),
         });
 
         // Return success response
@@ -53,10 +48,9 @@ export async function POST(request: Request) {
             {
                 message: 'User registered successfully',
                 user: {
-                    id: result.insertedId,
-                    name,
-                    email,
-                    verified: false,
+                    name: newUser.name,
+                    email: newUser.email,
+                    verified: newUser.verified,
                 },
             },
             { status: 201 }

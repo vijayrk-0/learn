@@ -1,13 +1,9 @@
 import { NextResponse } from 'next/server';
-import clientPromise from '@/lib/db';
+import { findUserByEmail, updateUser } from '@/lib/users-db';
 import bcrypt from 'bcryptjs';
 
 export async function POST(request: Request) {
     try {
-        // Connect to MongoDB
-        const client = await clientPromise;
-        const db = client.db();
-
         // Parse request body
         const body = await request.json();
         const { email, otp, newPassword } = body;
@@ -29,7 +25,7 @@ export async function POST(request: Request) {
         }
 
         // Find user
-        const user = await db.collection('users').findOne({ email: email.toLowerCase() });
+        const user = findUserByEmail(email);
 
         // Validate user
         if (!user) {
@@ -48,7 +44,9 @@ export async function POST(request: Request) {
         }
 
         // Check if OTP is expired
-        if (new Date() > user.resetOTPExpires) {
+        // Need to parse date string back to Date object if stored as string in JSON
+        const otpExpires = new Date(user.resetOTPExpires);
+        if (new Date() > otpExpires) {
             return NextResponse.json(
                 { message: 'OTP has expired. Please request a new one.' },
                 { status: 400 }
@@ -67,13 +65,10 @@ export async function POST(request: Request) {
         const hashedPassword = await bcrypt.hash(newPassword, 10);
 
         // Update user document
-        await db.collection('users').updateOne(
-            { email: email.toLowerCase() },
-            {
-                $set: { password: hashedPassword },
-                $unset: { resetOTP: "", resetOTPExpires: "" }
-            }
-        );
+        updateUser(email, {
+            $set: { password: hashedPassword },
+            $unset: { resetOTP: "", resetOTPExpires: "" }
+        });
 
         // Return success response
         return NextResponse.json(

@@ -1,14 +1,10 @@
 import { NextResponse } from 'next/server';
-import clientPromise from '@/lib/db';
+import { findUserByEmail } from '@/lib/users-db';
 import { generateToken } from '@/lib/jwt';
 import bcrypt from 'bcryptjs';
 
 export async function POST(request: Request) {
     try {
-        // Connect to MongoDB
-        const client = await clientPromise;
-        const db = client.db();
-
         const body = await request.json();
         const { email, password } = body;
 
@@ -21,7 +17,7 @@ export async function POST(request: Request) {
         }
 
         // Check if user exists
-        const user = await db.collection('users').findOne({ email });
+        const user = findUserByEmail(email);
         if (!user) {
             return NextResponse.json(
                 { message: 'Invalid email or password' },
@@ -40,7 +36,7 @@ export async function POST(request: Request) {
 
         // Generate JWT token
         const token = generateToken({
-            userId: user._id.toString(),
+            userId: user._id || user.email,
             email: user.email,
             name: user.name,
         });
@@ -51,7 +47,7 @@ export async function POST(request: Request) {
                 message: 'Login successful',
                 token,
                 user: {
-                    id: user._id,
+                    id: user._id || user.email,
                     name: user.name,
                     email: user.email,
                     verified: user.verified,

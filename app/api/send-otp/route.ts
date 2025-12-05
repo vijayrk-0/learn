@@ -1,7 +1,7 @@
 // app/api/send-otp/route.ts
 
 import { NextRequest, NextResponse } from 'next/server';
-import clientPromise from '@/lib/db';
+import { findUserByEmail, updateUser } from '@/lib/users-db';
 import nodemailer from 'nodemailer';
 
 // Generate 6‑digit OTP
@@ -46,10 +46,6 @@ async function sendOTPViaEmail(email: string, otp: string): Promise<void> {
 // Handle POST request
 export async function POST(request: NextRequest) {
   try {
-    // Connect to MongoDB
-    const client = await clientPromise;
-    const db = client.db();
-
     const body = await request.json();
     const { email } = body as { email?: string };
 
@@ -73,7 +69,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Find user
-    const user = await db.collection('users').findOne({ email: normalizedEmail });
+    const user = findUserByEmail(normalizedEmail);
 
     // Always respond generically (do not reveal if email exists)
     if (!user) {
@@ -94,15 +90,12 @@ export async function POST(request: NextRequest) {
     const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
 
     // Save OTP to user document
-    await db.collection('users').updateOne(
-      { email: normalizedEmail },
-      {
-        $set: {
-          resetOTP: otp,
-          resetOTPExpires: otpExpiry
-        }
+    updateUser(normalizedEmail, {
+      $set: {
+        resetOTP: otp,
+        resetOTPExpires: otpExpiry
       }
-    );
+    });
 
     // Send OTP via email
     await sendOTPViaEmail(normalizedEmail, otp);

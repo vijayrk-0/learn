@@ -3,13 +3,14 @@
 import React, { useEffect } from 'react';
 import Dashboard from '../components/Dashboard';
 import { Box } from '@mui/material';
-import { useAuth } from '../context/AuthContext';
+import { useSelector } from 'react-redux';
+import type { RootState } from '@/app/store/store';
 import { useRouter } from 'next/navigation';
 
 export default function DashboardPage() {
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated } = useSelector((state: RootState) => state.auth);
     const router = useRouter();
-// Function to handle navigation
+    // Function to handle navigation
     useEffect(() => {
         if (!isAuthenticated) {
             router.push('/login');

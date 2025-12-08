@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ReduxProvider } from "./components/ReduxProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,6 +20,7 @@ export const metadata: Metadata = {
 
 import ThemeRegistry from "./components/ThemeRegistry";
 import { AuthProvider } from "./context/AuthContext";
+import { AuthInitializer } from "./context/AuthInitializer";
 
 export default function RootLayout({
   children,
@@ -32,7 +34,11 @@ export default function RootLayout({
       >
         {/* ThemeRegistry and AuthProvider are used to wrap the children */}
         <ThemeRegistry>
-          <AuthProvider>{children}</AuthProvider>
+          <ReduxProvider>
+            <AuthInitializer>
+{children}
+            </AuthInitializer>
+          </ReduxProvider>
         </ThemeRegistry>
       </body>
     </html>

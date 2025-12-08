@@ -19,11 +19,19 @@ import {
     CircularProgress,
 } from '@mui/material';
 import { Visibility, VisibilityOff, LockOutlined, EmailOutlined } from '@mui/icons-material';
-import { useAuth } from '../context/AuthContext';
+// import { useAuth } from '../context/AuthContext';
 import { useRouter } from 'next/navigation';
 
+
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '@/app/store/authSlice';
+// import type { RootState } from '@/app/store/store';
+
 export default function Login() {
-    const { login } = useAuth();
+    
+    const dispatch = useDispatch();
+    // const { isAuthenticated, isLoading} = useSelector((state: RootState) => state.auth);
+    
     const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState('');
@@ -58,7 +66,10 @@ export default function Login() {
 
             if (response.ok) {
                 // Store token and user data using AuthContext
-                login(data.token, data.user);
+                dispatch(
+                    login({token: data.token, user: data.user})
+                )
+                // login(data.token, data.user);
                 // Redirect to dashboard
                 router.push('/dashboard');
             } else {

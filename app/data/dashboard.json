@@ -1,0 +1,317 @@
+{
+  "meta": {
+    "environment": "staging",
+    "generatedAt": "2025-12-08T06:00:00.000Z",
+    "timeRange": "last_24h"
+  },
+  "summary": {
+    "totalApis": 18,
+    "totalRequests": 184520,
+    "avgLatencyMs": 142,
+    "errorRatePercent": 1.8,
+    "activeConsumers": 64
+  },
+  "kpis": [
+    {
+      "id": "requests",
+      "label": "Requests (24h)",
+      "value": 184520,
+      "changePercent": 8.4,
+      "trend": "up"
+    },
+    {
+      "id": "latency",
+      "label": "Avg Latency",
+      "value": 142,
+      "unit": "ms",
+      "changePercent": -5.1,
+      "trend": "down"
+    },
+    {
+      "id": "errors",
+      "label": "Error Rate",
+      "value": 1.8,
+      "unit": "%",
+      "changePercent": 0.3,
+      "trend": "up"
+    },
+    {
+      "id": "throughput",
+      "label": "Peak RPS",
+      "value": 920,
+      "unit": "req/s",
+      "changePercent": 11.2,
+      "trend": "up"
+    }
+  ],
+  "trafficByHour": [
+    {
+      "hour": "00:00",
+      "requests": 3820,
+      "errors": 62,
+      "avgLatencyMs": 173
+    },
+    {
+      "hour": "01:00",
+      "requests": 3512,
+      "errors": 55,
+      "avgLatencyMs": 168
+    },
+    {
+      "hour": "02:00",
+      "requests": 2978,
+      "errors": 41,
+      "avgLatencyMs": 159
+    },
+    {
+      "hour": "03:00",
+      "requests": 2640,
+      "errors": 39,
+      "avgLatencyMs": 151
+    },
+    {
+      "hour": "04:00",
+      "requests": 2914,
+      "errors": 36,
+      "avgLatencyMs": 148
+    },
+    {
+      "hour": "05:00",
+      "requests": 3421,
+      "errors": 47,
+      "avgLatencyMs": 139
+    },
+    {
+      "hour": "06:00",
+      "requests": 4982,
+      "errors": 71,
+      "avgLatencyMs": 144
+    },
+    {
+      "hour": "07:00",
+      "requests": 7320,
+      "errors": 96,
+      "avgLatencyMs": 151
+    },
+    {
+      "hour": "08:00",
+      "requests": 10412,
+      "errors": 123,
+      "avgLatencyMs": 162
+    },
+    {
+      "hour": "09:00",
+      "requests": 13288,
+      "errors": 181,
+      "avgLatencyMs": 171
+    },
+    {
+      "hour": "10:00",
+      "requests": 14932,
+      "errors": 192,
+      "avgLatencyMs": 163
+    },
+    {
+      "hour": "11:00",
+      "requests": 15584,
+      "errors": 214,
+      "avgLatencyMs": 158
+    },
+    {
+      "hour": "12:00",
+      "requests": 16291,
+      "errors": 236,
+      "avgLatencyMs": 147
+    },
+    {
+      "hour": "13:00",
+      "requests": 17032,
+      "errors": 241,
+      "avgLatencyMs": 139
+    },
+    {
+      "hour": "14:00",
+      "requests": 17654,
+      "errors": 251,
+      "avgLatencyMs": 138
+    },
+    {
+      "hour": "15:00",
+      "requests": 18109,
+      "errors": 263,
+      "avgLatencyMs": 141
+    },
+    {
+      "hour": "16:00",
+      "requests": 17784,
+      "errors": 248,
+      "avgLatencyMs": 145
+    },
+    {
+      "hour": "17:00",
+      "requests": 16971,
+      "errors": 237,
+      "avgLatencyMs": 152
+    },
+    {
+      "hour": "18:00",
+      "requests": 15822,
+      "errors": 221,
+      "avgLatencyMs": 161
+    },
+    {
+      "hour": "19:00",
+      "requests": 14410,
+      "errors": 202,
+      "avgLatencyMs": 167
+    },
+    {
+      "hour": "20:00",
+      "requests": 13194,
+      "errors": 184,
+      "avgLatencyMs": 159
+    },
+    {
+      "hour": "21:00",
+      "requests": 11876,
+      "errors": 169,
+      "avgLatencyMs": 153
+    },
+    {
+      "hour": "22:00",
+      "requests": 9821,
+      "errors": 141,
+      "avgLatencyMs": 149
+    },
+    {
+      "hour": "23:00",
+      "requests": 7648,
+      "errors": 112,
+      "avgLatencyMs": 151
+    }
+  ],
+  "topApis": [
+    {
+      "name": "Auth Service",
+      "version": "v1",
+      "method": "POST",
+      "path": "/auth/login",
+      "status": "healthy",
+      "requests": 32840,
+      "errorRatePercent": 0.9,
+      "p95LatencyMs": 210,
+      "ownerTeam": "Platform"
+    },
+    {
+      "name": "User Service",
+      "version": "v2",
+      "method": "GET",
+      "path": "/users/{id}",
+      "status": "healthy",
+      "requests": 27410,
+      "errorRatePercent": 1.2,
+      "p95LatencyMs": 182,
+      "ownerTeam": "User Management"
+    },
+    {
+      "name": "Billing Service",
+      "version": "v1",
+      "method": "POST",
+      "path": "/billing/charge",
+      "status": "degraded",
+      "requests": 15872,
+      "errorRatePercent": 3.4,
+      "p95LatencyMs": 391,
+      "ownerTeam": "Payments"
+    },
+    {
+      "name": "Catalog Service",
+      "version": "v1",
+      "method": "GET",
+      "path": "/catalog/items",
+      "status": "healthy",
+      "requests": 22194,
+      "errorRatePercent": 0.7,
+      "p95LatencyMs": 167,
+      "ownerTeam": "Product"
+    },
+    {
+      "name": "Notification Service",
+      "version": "v1",
+      "method": "POST",
+      "path": "/notify/send",
+      "status": "healthy",
+      "requests": 13704,
+      "errorRatePercent": 2.1,
+      "p95LatencyMs": 248,
+      "ownerTeam": "Comms"
+    }
+  ],
+  "statusCodes": [
+    {
+      "code": 200,
+      "count": 178240
+    },
+    {
+      "code": 400,
+      "count": 2140
+    },
+    {
+      "code": 401,
+      "count": 1290
+    },
+    {
+      "code": 404,
+      "count": 1620
+    },
+    {
+      "code": 500,
+      "count": 1230
+    }
+  ],
+  "topConsumers": [
+    {
+      "name": "mobile-app",
+      "type": "public",
+      "requests": 71240,
+      "errorRatePercent": 1.3,
+      "lastSeen": "2025-12-08T05:58:00.000Z"
+    },
+    {
+      "name": "partner-portal",
+      "type": "partner",
+      "requests": 43218,
+      "errorRatePercent": 2.7,
+      "lastSeen": "2025-12-08T05:55:00.000Z"
+    },
+    {
+      "name": "internal-batch-jobs",
+      "type": "internal",
+      "requests": 38971,
+      "errorRatePercent": 0.8,
+      "lastSeen": "2025-12-08T05:50:00.000Z"
+    }
+  ],
+  "alerts": [
+    {
+      "id": "ALT-1",
+      "severity": "high",
+      "title": "Billing Service error rate",
+      "message": "Error rate above 3% for 15 minutes",
+      "metric": "errorRatePercent",
+      "api": "Billing Service",
+      "triggeredAt": "2025-12-08T05:30:00.000Z",
+      "status": "firing"
+    },
+    {
+      "id": "ALT-2",
+      "severity": "medium",
+      "title": "Latency regression on /auth/login",
+      "message": "p95 latency above 250 ms",
+      "metric": "p95LatencyMs",
+      "api": "Auth Service",
+      "triggeredAt": "2025-12-08T04:55:00.000Z",
+      "status": "resolved"
+    }
+  ]
+}

@@ -2,7 +2,7 @@
   {
     "name": "vijay",
     "email": "mycodealchemy@gmail.com",
-    "password": "$2b$10$tvjC2gtlaRunLWuWx5FhmuHEFa9B1ub9lu7f0bKwaO8Evz42G3gQS",
+    "password": "$2b$10$wx.UiJ/C5GLaR23XSCmqsOi5ZBsRcbRRDwFufnQa9XiCyhAG8NLT6",
     "verified": false,
     "createdAt": "2025-12-04T17:10:39.938Z"
   },
@@ -12,5 +12,12 @@
     "password": "$2b$10$ofR8NTNnviLOi8FAlZ3MjucAhu0DmmQi8f0lFTUIrQHOlFTBVRcWm",
     "verified": false,
     "createdAt": "2025-12-05T05:04:43.637Z"
+  },
+  {
+    "name": "vijay",
+    "email": "test@gmail.com",
+    "password": "$2b$10$1sBuS2BvopU0ZCmX/xKt6.tD79ohM3o8zh9UsdwznBp7EZlFxIJ/.",
+    "verified": false,
+    "createdAt": "2025-12-08T06:20:44.289Z"
   }
 ]

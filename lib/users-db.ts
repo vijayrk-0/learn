@@ -23,7 +23,7 @@ export const getUsers = () => {
     }
 };
 
-// Helper to save users to the file
+// Helper to write users to the file
 export const saveUsers = (users: any[]) => {
     try {
         fs.writeFileSync(dataFilePath, JSON.stringify(users, null, 2));

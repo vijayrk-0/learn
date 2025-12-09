@@ -2,12 +2,13 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from './context/AuthContext';
+import { useSelector } from 'react-redux';
+import { RootState } from './store/store';
 import { Box, CircularProgress } from '@mui/material';
 
 export default function Home() {
-  
-  const { isAuthenticated } = useAuth();
+
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
   const router = useRouter();
 
   // Check authentication status and redirect to appropriate page

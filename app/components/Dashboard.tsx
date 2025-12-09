@@ -27,95 +27,30 @@ import {
 } from '@mui/icons-material';
 
 // TypeScript interfaces for type safety
-interface DashboardData {
-    meta: {
-        environment: string;
-        generatedAt: string;
-        timeRange: string;
-    };
-    summary: {
-        totalApis: number;
-        totalRequests: number;
-        avgLatencyMs: number;
-        errorRatePercent: number;
-        activeConsumers: number;
-    };
-    kpis: Array<{
-        id: string;
-        label: string;
-        value: number;
-        unit?: string;
-        changePercent: number;
-        trend: 'up' | 'down';
-    }>;
-    topApis: Array<{
-        name: string;
-        version: string;
-        method: string;
-        path: string;
-        status: 'healthy' | 'degraded' | 'down';
-        requests: number;
-        errorRatePercent: number;
-        p95LatencyMs: number;
-        ownerTeam: string;
-    }>;
-    alerts: Array<{
-        id: string;
-        severity: 'high' | 'medium' | 'low';
-        title: string;
-        message: string;
-        metric: string;
-        api: string;
-        triggeredAt: string;
-        status: 'firing' | 'resolved';
-    }>;
-    topConsumers: Array<{
-        name: string;
-        type: string;
-        requests: number;
-        errorRatePercent: number;
-        lastSeen: string;
-    }>;
-}
+
 
 // Importing logout action and useDispatch
 import { logout } from '@/app/store/authSlice';
+import { useGetDashboardDataQuery } from '@/app/store/dashboard';
 import { useDispatch } from 'react-redux';
 
 export default function Dashboard() {
     // Using useDispatch to dispatch actions
     const dispatch = useDispatch();
-    
+
     // Using useState to manage state
-    const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+    // Use RTK Query hook to fetch dashboard data
+    const {
+        data: dashboardData,
+        isLoading: loading,
+        error: queryError,
+        refetch
+    } = useGetDashboardDataQuery(undefined, {
+        pollingInterval: 1000,
+    });
 
-    // Fetch dashboard data
-    const fetchDashboardData = async () => {
-        try {
-            setLoading(true);
-            setError(null);
-            const response = await fetch('/api/dashboard');
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const data: DashboardData = await response.json();
-            setDashboardData(data);
-        } catch (err) {
-            setError(err instanceof Error ? err.message : 'Failed to load dashboard data');
-            console.error('Error fetching dashboard data:', err);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        // Fetch dashboard data on mount
-        fetchDashboardData();
-    }, []);
+    // Map RTK Query error to string if needed, although usually we handle SerializedError or FetchBaseQueryError
+    const error = queryError ? 'Failed to load dashboard data' : null;
 
     // Helper functions
     const getStatusColor = (status: string) => {
@@ -160,7 +95,7 @@ export default function Dashboard() {
                 <Alert
                     severity="error"
                     action={
-                        <Button color="inherit" size="small" onClick={fetchDashboardData}>
+                        <Button color="inherit" size="small" onClick={refetch}>
                             Retry
                         </Button>
                     }
@@ -214,7 +149,7 @@ export default function Dashboard() {
                         <Box sx={{ display: 'flex', gap: 1.5 }}>
                             <Button
                                 startIcon={<Refresh />}
-                                onClick={fetchDashboardData}
+                                onClick={refetch}
                                 variant="outlined"
                                 size="small"
                                 sx={{ borderRadius: 2, textTransform: 'none', fontWeight: 600 }}
@@ -225,7 +160,7 @@ export default function Dashboard() {
                                 variant="contained"
                                 color="error"
                                 startIcon={<LogoutOutlined />}
-                                onClick={()=>{
+                                onClick={() => {
                                     dispatch(logout());
                                 }}
                                 size="small"
@@ -250,7 +185,7 @@ export default function Dashboard() {
                                 </Typography>
                                 {/* Alerts Grid */}
                                 <Grid container spacing={2}>
-                                    {dashboardData.alerts.map((alert) => (
+                                    {dashboardData.alerts.map((alert: any) => (
                                         <Grid size={12} key={alert.id}>
                                             <Alert
                                                 severity={getSeverityColor(alert.severity) as any}
@@ -314,7 +249,7 @@ export default function Dashboard() {
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {dashboardData.topApis.map((api, index) => (
+                                        {dashboardData.topApis.map((api: any, index: number) => (
                                             <TableRow
                                                 key={index}
                                                 sx={{ '&:last-child td, &:last-child th': { border: 0 }, '&:hover': { bgcolor: 'action.hover' } }}
@@ -461,7 +396,7 @@ export default function Dashboard() {
                             </Box>
                             <Box>
                                 {/* Top Consumers Grid */}
-                                {dashboardData.topConsumers.map((consumer, index) => (
+                                {dashboardData.topConsumers.map((consumer: any, index: number) => (
                                     <Box
                                         key={index}
                                         sx={{

@@ -19,5 +19,12 @@
     "password": "$2b$10$1sBuS2BvopU0ZCmX/xKt6.tD79ohM3o8zh9UsdwznBp7EZlFxIJ/.",
     "verified": false,
     "createdAt": "2025-12-08T06:20:44.289Z"
+  },
+  {
+    "name": "vijay",
+    "email": "vijay_test@gmail.com",
+    "password": "$2b$10$qUrdIs.g2RTU2Ojhj.8hte/G9cKg/ucVvOCy4Q8gQ5PGHk9oLMIG2",
+    "verified": false,
+    "createdAt": "2025-12-09T10:07:23.676Z"
   }
 ]

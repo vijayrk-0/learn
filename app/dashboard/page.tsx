@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import  { useEffect } from 'react';
 import Dashboard from '../components/Dashboard';
 import { Box } from '@mui/material';
 import { useSelector } from 'react-redux';

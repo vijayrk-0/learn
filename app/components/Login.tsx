@@ -27,6 +27,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login } from '@/app/store/authSlice';
 // import type { RootState } from '@/app/store/store';
 
+import { z } from 'zod';
+
+const emailSchema = z
+  .string()
+  .min(1, { message: 'Email is required' })
+  .refine(
+    (val) =>
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val),
+    { message: 'Invalid email address' }
+  );
+const loginSchema = z.object({
+  email: emailSchema,
+  password: z.string().min(6, 'Password must be at least 6 characters'),
+});
+
 export default function Login() {
     
     const dispatch = useDispatch();
@@ -52,7 +67,15 @@ export default function Login() {
         event.preventDefault();
         setLoading(true);
         setError('');
+const result = loginSchema.safeParse({ email, password });
 
+        if (!result.success) {
+        // Take the first issue from Zod
+        const firstError = result.error.issues[0];
+        setError(firstError?.message || 'Invalid input');
+        setLoading(false);
+        return;
+        }
         try {
             const response = await fetch('/api/login', {
                 method: 'POST',

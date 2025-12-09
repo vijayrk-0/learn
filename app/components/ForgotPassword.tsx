@@ -26,6 +26,35 @@ import {
 import IconButton from '@mui/material/IconButton';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { z } from 'zod';
+
+export const emailSchema = z
+  .string()
+  .min(1, { message: 'Email is required' })
+  .refine(
+    (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val),
+    { message: 'Invalid email address' }
+  );
+
+export const otpSchema = z
+  .string()
+  .min(1, { message: 'OTP is required' })
+  .length(6, { message: 'OTP must be 6 digits' });
+
+export const resetPasswordSchema = z
+  .object({
+    newPassword: z
+      .string()
+      .min(1, { message: 'Password is required' })
+      .min(6, { message: 'Password must be at least 6 characters long' }),
+    confirmPassword: z
+      .string()
+      .min(1, { message: 'Confirm password is required' }),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: 'Passwords do not match',
+    path: ['confirmPassword'],
+  });
 
 type StepType = 'email' | 'otp' | 'password';
 
@@ -54,6 +83,15 @@ export default function ForgotPassword() {
         setLoading(true);
         setError('');
         setSuccess('');
+
+        // Zod validation
+          const result = emailSchema.safeParse(email);
+        if (!result.success) {
+            const first = result.error.issues[0];
+            setError(first?.message || 'Invalid email');
+            setLoading(false);
+            return;
+        }
 
         try {
             // Send OTP to user's email
@@ -87,6 +125,14 @@ export default function ForgotPassword() {
         setError('');
         setSuccess('');
 
+        // Zod validation
+        const result = otpSchema.safeParse(otp);
+        if (!result.success) {
+            const first = result.error.issues[0];
+            setError(first?.message || 'Invalid OTP');
+            setLoading(false);
+            return;
+  }
         // Verify OTP
         try {
             const response = await fetch('/api/verify-otp', {
@@ -118,6 +164,13 @@ export default function ForgotPassword() {
         setError('');
         setSuccess('');
 
+
+        const result = resetPasswordSchema.safeParse({ newPassword, confirmPassword });
+        if (!result.success) {
+            const first = result.error.issues[0];
+            setError(first?.message || 'Invalid password');
+            return;
+        }
         // Validate password
         if (newPassword !== confirmPassword) {
             setError('Passwords do not match');

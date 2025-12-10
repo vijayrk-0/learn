@@ -19,37 +19,9 @@ import {
 
 import { Visibility, VisibilityOff, LockOutlined, EmailOutlined, PersonOutline } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
-import { z } from 'zod';
+import { signupSchema } from '@/lib/validation-schema';
+import * as yup from 'yup';
 
-
-const emailSchema = z
-  .string()
-  .min(1, { message: 'Email is required' })
-  .refine(
-    (val) =>
-      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val),
-    { message: 'Invalid email address' }
-  );
-
-const signUpSchema = z
-  .object({
-    name: z
-      .string()
-      .min(1, { message: 'Name is required' })
-      .min(2, { message: 'Name must be at least 2 characters' }),
-    email: emailSchema,
-    password: z
-      .string()
-      .min(1, { message: 'Password is required' })
-      .min(6, { message: 'Password must be at least 6 characters' }),
-    confirmPassword: z
-      .string()
-      .min(1, { message: 'Confirm password is required' }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: 'Passwords do not match',
-    path: ['confirmPassword'],
-  });
 
 
 export default function SignUp() {
@@ -79,31 +51,16 @@ export default function SignUp() {
         setError('');
         setSuccess('');
 
-            const result = signUpSchema.safeParse({
-      name,
-      email,
-      password,
-      confirmPassword,
-    });
-
-    if (!result.success) {
-      const firstIssue = result.error.issues[0];
-      setError(firstIssue?.message || 'Invalid input');
-      setLoading(false);
-      return;
-    }
-
-        // Client-side validation
-        if (password !== confirmPassword) {
-            setError('Passwords do not match');
+        try {
+            await signupSchema.validate({ name, email, password, confirmPassword });
+        } catch (error) {
+            if (error instanceof yup.ValidationError) {
+                setError(error.message);
+                setLoading(false);
+                return;
+            }
+            setError('An unexpected error occurred. Please try again.');
             setLoading(false);
-            return;
-        }
-
-        if (password.length < 6) {
-            setError('Password must be at least 6 characters');
-            setLoading(false);
-            return;
         }
 
         try {

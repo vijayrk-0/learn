@@ -20,11 +20,12 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^7.0.0",
     "mongoose": "^9.0.0",
-    "next": "16.0.6",
+    "next": "^16.0.8",
     "nodemailer": "^7.0.11",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-redux": "^9.2.0",
+    "yup": "^1.7.1",
     "zod": "^4.1.13"
   },
   "devDependencies": {

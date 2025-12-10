@@ -26,35 +26,8 @@ import {
 import IconButton from '@mui/material/IconButton';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { z } from 'zod';
-
-export const emailSchema = z
-  .string()
-  .min(1, { message: 'Email is required' })
-  .refine(
-    (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val),
-    { message: 'Invalid email address' }
-  );
-
-export const otpSchema = z
-  .string()
-  .min(1, { message: 'OTP is required' })
-  .length(6, { message: 'OTP must be 6 digits' });
-
-export const resetPasswordSchema = z
-  .object({
-    newPassword: z
-      .string()
-      .min(1, { message: 'Password is required' })
-      .min(6, { message: 'Password must be at least 6 characters long' }),
-    confirmPassword: z
-      .string()
-      .min(1, { message: 'Confirm password is required' }),
-  })
-  .refine((data) => data.newPassword === data.confirmPassword, {
-    message: 'Passwords do not match',
-    path: ['confirmPassword'],
-  });
+import { emailField as emailSchema, otpField as otpSchema, resetPasswordSchema } from '@/lib/validation-schema';
+import * as yup from 'yup';
 
 type StepType = 'email' | 'otp' | 'password';
 
@@ -84,11 +57,16 @@ export default function ForgotPassword() {
         setError('');
         setSuccess('');
 
-        // Zod validation
-          const result = emailSchema.safeParse(email);
-        if (!result.success) {
-            const first = result.error.issues[0];
-            setError(first?.message || 'Invalid email');
+        // yep validation
+        try {
+            await emailSchema.validate({ email });
+        } catch (err) {
+            if(err instanceof yup.ValidationError) {
+                setError(err.message);
+                setLoading(false);
+                return;
+            }
+            setError('An error occurred. Please try again.');
             setLoading(false);
             return;
         }
@@ -125,14 +103,20 @@ export default function ForgotPassword() {
         setError('');
         setSuccess('');
 
-        // Zod validation
-        const result = otpSchema.safeParse(otp);
-        if (!result.success) {
-            const first = result.error.issues[0];
-            setError(first?.message || 'Invalid OTP');
+        // yep validation
+        try {
+            await otpSchema.validate({ otp });
+        } catch (err) {
+            if(err instanceof yup.ValidationError) {
+                setError(err.message);
+                setLoading(false);
+                return;
+            }
+            setError('An error occurred. Please try again.');
             setLoading(false);
             return;
-  }
+        }
+
         // Verify OTP
         try {
             const response = await fetch('/api/verify-otp', {
@@ -164,13 +148,20 @@ export default function ForgotPassword() {
         setError('');
         setSuccess('');
 
-
-        const result = resetPasswordSchema.safeParse({ newPassword, confirmPassword });
-        if (!result.success) {
-            const first = result.error.issues[0];
-            setError(first?.message || 'Invalid password');
+        // yep validation
+        try {
+            await resetPasswordSchema.validate({ newPassword, confirmPassword });
+        } catch (err) {
+            if(err instanceof yup.ValidationError) {
+                setError(err.message);
+                setLoading(false);
+                return;
+            }
+            setError('An error occurred. Please try again.');
+            setLoading(false);
             return;
         }
+
         // Validate password
         if (newPassword !== confirmPassword) {
             setError('Passwords do not match');

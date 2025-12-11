@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import {
     Table,
     TableBody,
@@ -180,7 +181,20 @@ export default function ApiTable({
                                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                                 >
                                     <TableCell component="th" scope="row" sx={{ fontWeight: 500 }}>
-                                        {row.name}
+                                        <Link
+                                            href={`/dashboard/apis/${encodeURIComponent(row.name)}-${encodeURIComponent(row.method)}-${encodeURIComponent(row.path)}`}
+                                            style={{
+                                                textDecoration: "none",
+                                                color: "inherit",
+                                                display: "inline-block",
+                                                borderBottom: "1px solid transparent",
+                                                transition: "border-color 0.2s"
+                                            }}
+                                            onMouseOver={(e) => e.currentTarget.style.borderColor = "#1976d2"}
+                                            onMouseOut={(e) => e.currentTarget.style.borderColor = "transparent"}
+                                        >
+                                            {row.name}
+                                        </Link>
                                     </TableCell>
                                     <TableCell>{row.version}</TableCell>
                                     <TableCell>

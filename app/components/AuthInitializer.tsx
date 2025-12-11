@@ -5,12 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { initAuth } from '@/store/slice/authSlice';
 import type { AppDispatch, RootState } from '@/store/store';
 import { Box, CircularProgress } from '@mui/material';
+import React from 'react';
 
 export function AuthInitializer({ children }: { children: React.ReactNode }) {
     const dispatch = useDispatch<AppDispatch>();
     const { isLoading } = useSelector((state: RootState) => state.auth);
 
     useEffect(() => {
+        // Initialize auth state from localStorage if it available
         dispatch(initAuth());
     }, [dispatch]);
 
@@ -30,5 +32,5 @@ export function AuthInitializer({ children }: { children: React.ReactNode }) {
         );
     }
 
-    return <>{children}</>;
+    return <React.Fragment>{children}</React.Fragment>;
 }

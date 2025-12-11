@@ -5,7 +5,7 @@ import {
     Typography,
     Chip,
 } from '@mui/material';
-import { formatNumber } from './utils';
+import { formatNumber } from '@/app/dashboard/utils';
 
 interface DashboardTopConsumersProps {
     topConsumers: any[];

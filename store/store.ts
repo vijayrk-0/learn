@@ -20,7 +20,12 @@ export const store = configureStore({
     },
     // Create a middleware
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(dashboardApi.middleware).concat(dashboardApiList.middleware).concat(authApi.middleware).concat(forgetPasswordApi.middleware),
+        getDefaultMiddleware().concat(
+            dashboardApi.middleware,
+            dashboardApiList.middleware,
+            authApi.middleware,
+            forgetPasswordApi.middleware
+        ),
 })
 
 // Create an RootState and AppDispatch

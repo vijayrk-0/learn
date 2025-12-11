@@ -4,6 +4,7 @@ import "./globals.css";
 import { ReduxProvider } from "./components/ReduxProvider";
 import ThemeRegistry from "./components/ThemeRegistry";
 import { AuthInitializer } from "./components/AuthInitializer";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import { Box, Container } from "@mui/material";
@@ -42,63 +43,65 @@ export default function RootLayout({
       >
         <ThemeRegistry>
           <ReduxProvider>
-            <AuthInitializer>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  flex: 1,
-                  minHeight: 0,      // allow children to shrink
-                }}
-              >
-                {/* Header */}
+            <ErrorBoundary>
+              <AuthInitializer>
                 <Box
-                  component="header"
                   sx={{
-                    flexShrink: 0,
-                    zIndex: 10,
-                  }}
-                >
-                  <Header />
-                </Box>
-
-                {/* Main */}
-                <Box
-                  component="main"
-                  sx={{
-                    flex: 1,
-                    minHeight: 0,
-                    overflowY: "auto",
-                    overflowX: "hidden",
                     display: "flex",
                     flexDirection: "column",
+                    flex: 1,
+                    minHeight: 0,      // allow children to shrink
                   }}
                 >
-                  <Container
-                    maxWidth="lg"
+                  {/* Header */}
+                  <Box
+                    component="header"
                     sx={{
-                      flex: 1,
-                      width: "100%",
-                      minHeight: "calc(100vh - 200px)",
-                      py: { xs: 2, sm: 3, md: 4 },
+                      flexShrink: 0,
+                      zIndex: 10,
                     }}
                   >
-                    {children}
-                  </Container>
-                </Box>
+                    <Header />
+                  </Box>
 
-                {/* Footer */}
-                <Box
-                  component="footer"
-                  sx={{
-                    flexShrink: 0,
-                    zIndex: 10,
-                  }}
-                >
-                  <Footer />
+                  {/* Main */}
+                  <Box
+                    component="main"
+                    sx={{
+                      flex: 1,
+                      minHeight: 0,
+                      overflowY: "auto",
+                      overflowX: "hidden",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Container
+                      maxWidth="lg"
+                      sx={{
+                        flex: 1,
+                        width: "100%",
+                        minHeight: "calc(100vh - 200px)",
+                        py: { xs: 2, sm: 3, md: 4 },
+                      }}
+                    >
+                      {children}
+                    </Container>
+                  </Box>
+
+                  {/* Footer */}
+                  <Box
+                    component="footer"
+                    sx={{
+                      flexShrink: 0,
+                      zIndex: 10,
+                    }}
+                  >
+                    <Footer />
+                  </Box>
                 </Box>
-              </Box>
-            </AuthInitializer>
+              </AuthInitializer>
+            </ErrorBoundary>
           </ReduxProvider>
         </ThemeRegistry>
       </body>

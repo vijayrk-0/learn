@@ -1,34 +1,23 @@
 import { NextResponse } from 'next/server';
 import { createUser, findUserByEmail } from '@/lib/users-db';
 import bcrypt from 'bcryptjs';
+import { signupSchema } from '@/lib/api-validators';
+import { errorResponse, successResponse, HttpStatus } from '@/lib/api-response';
 
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-        const { name, email, password } = body;
 
-        // Validate input
-        if (!name || !email || !password) {
-            return NextResponse.json(
-                { message: 'Please provide all required fields' },
-                { status: 400 }
-            );
-        }
-
-        // Validate password length
-        if (password.length < 6) {
-            return NextResponse.json(
-                { message: 'Password must be at least 6 characters' },
-                { status: 400 }
-            );
-        }
+        // Validate input with Yup
+        const validated = await signupSchema.validate(body, { abortEarly: false });
+        const { name, email, password } = validated;
 
         // Check if user already exists
-        const existingUser = findUserByEmail(email);
+        const existingUser = await findUserByEmail(email);
         if (existingUser) {
-            return NextResponse.json(
-                { message: 'User with this email already exists' },
-                { status: 409 }
+            return errorResponse(
+                'User with this email already exists',
+                HttpStatus.CONFLICT
             );
         }
 
@@ -36,7 +25,7 @@ export async function POST(request: Request) {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Insert user into database
-        const newUser = createUser({
+        const newUser = await createUser({
             name,
             email,
             password: hashedPassword,
@@ -44,22 +33,27 @@ export async function POST(request: Request) {
         });
 
         // Return success response
-        return NextResponse.json(
+        return successResponse(
             {
-                message: 'User registered successfully',
                 user: {
                     name: newUser.name,
                     email: newUser.email,
                     verified: newUser.verified,
                 },
             },
-            { status: 201 }
+            'User registered successfully',
+            HttpStatus.CREATED
         );
     } catch (error: any) {
+        // Handle validation errors
+        if (error.name === 'ValidationError') {
+            return errorResponse(error.message, HttpStatus.BAD_REQUEST);
+        }
+
         console.error('Registration error:', error);
-        return NextResponse.json(
-            { message: error.message || 'An error occurred during registration' },
-            { status: 500 }
+        return errorResponse(
+            error.message || 'An error occurred during registration',
+            HttpStatus.INTERNAL_SERVER_ERROR
         );
     }
 }

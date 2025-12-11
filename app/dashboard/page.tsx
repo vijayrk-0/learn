@@ -11,17 +11,14 @@ import {
 
 // Importing logout action and useDispatch
 import { useGetDashboardDataQuery } from '@/store/rtk/dashboardRTK';
-import { useDispatch } from 'react-redux';
 
 import DashboardAlerts from './components/DashboardAlerts';
 import DashboardTopApis from './components/DashboardTopApis';
 import DashboardSummary from './components/DashboardSummary';
 import DashboardTopConsumers from './components/DashboardTopConsumers';
+import { useEffect } from 'react';
 
 export default function Dashboard() {
-    // Using useDispatch to dispatch actions
-    const dispatch = useDispatch();
-
     // Use RTK Query hook to fetch dashboard data
     const {
         data: dashboardData,

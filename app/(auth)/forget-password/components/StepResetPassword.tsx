@@ -36,28 +36,37 @@ const StepResetPassword: React.FC<StepResetPasswordProps> = ({
                 required
                 fullWidth
                 name="newPassword"
-                label="New Password"
+                placeholder="New password"
                 type={showPassword ? "text" : "password"}
                 id="newPassword"
                 value={newPassword}
                 onChange={(e) => onNewPasswordChange(e.target.value)}
-                InputProps={{
-                    startAdornment: (
-                        <InputAdornment position="start">
-                            <LockOutlined color="action" />
-                        </InputAdornment>
-                    ),
-                    endAdornment: (
-                        <InputAdornment position="end">
-                            <IconButton
-                                aria-label="toggle password visibility"
-                                onClick={() => setShowPassword(!showPassword)}
-                                edge="end"
-                            >
-                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                            </IconButton>
-                        </InputAdornment>
-                    ),
+                slotProps={{
+                    input: {
+                        startAdornment: (
+                            <InputAdornment position="start" sx={{ pl: 1, pr: 1 }}>
+                                <LockOutlined color="action" />
+                            </InputAdornment>
+                        ),
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    edge="end"
+                                    size="small"
+                                    sx={{
+                                        "&:hover": {
+                                            backgroundColor: "action.hover",
+                                        },
+                                        px: 2,
+                                    }}
+                                >
+                                    {showPassword ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
+                                </IconButton>
+                            </InputAdornment>
+                        ),
+                    },
                 }}
             />
             <TextField
@@ -65,34 +74,43 @@ const StepResetPassword: React.FC<StepResetPasswordProps> = ({
                 required
                 fullWidth
                 name="confirmPassword"
-                label="Confirm Password"
+                placeholder="Confirm password"
                 type={showConfirmPassword ? "text" : "password"}
                 id="confirmPassword"
                 value={confirmPassword}
                 onChange={(e) => onConfirmPasswordChange(e.target.value)}
-                InputProps={{
-                    startAdornment: (
-                        <InputAdornment position="start">
-                            <LockOutlined color="action" />
-                        </InputAdornment>
-                    ),
-                    endAdornment: (
-                        <InputAdornment position="end">
-                            <IconButton
-                                aria-label="toggle password visibility"
-                                onClick={() =>
-                                    setShowConfirmPassword(!showConfirmPassword)
-                                }
-                                edge="end"
-                            >
-                                {showConfirmPassword ? (
-                                    <VisibilityOff />
-                                ) : (
-                                    <Visibility />
-                                )}
-                            </IconButton>
-                        </InputAdornment>
-                    ),
+                slotProps={{
+                    input: {
+                        startAdornment: (
+                            <InputAdornment position="start" sx={{ pl: 1, pr: 1 }}>
+                                <LockOutlined color="action" />
+                            </InputAdornment>
+                        ),
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={() =>
+                                        setShowConfirmPassword(!showConfirmPassword)
+                                    }
+                                    edge="end"
+                                    size="small"
+                                    sx={{
+                                        "&:hover": {
+                                            backgroundColor: "action.hover",
+                                        },
+                                        px: 2,
+                                    }}
+                                >
+                                    {showConfirmPassword ? (
+                                        <VisibilityOff fontSize="small" />
+                                    ) : (
+                                        <Visibility fontSize="small" />
+                                    )}
+                                </IconButton>
+                            </InputAdornment>
+                        ),
+                    },
                 }}
             />
             <Button

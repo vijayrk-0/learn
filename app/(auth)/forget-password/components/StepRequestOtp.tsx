@@ -28,18 +28,20 @@ const StepRequestOtp: React.FC<StepRequestOtpProps> = ({
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                placeholder="Email address"
                 name="email"
                 autoComplete="email"
                 autoFocus
                 value={email}
                 onChange={(e) => onEmailChange(e.target.value)}
-                InputProps={{
-                    startAdornment: (
-                        <InputAdornment position="start">
-                            <EmailOutlined color="action" />
-                        </InputAdornment>
-                    ),
+                slotProps={{
+                    input: {
+                        startAdornment: (
+                            <InputAdornment position="start" sx={{ pl: 1, pr: 1 }}>
+                                <EmailOutlined color="action" />
+                            </InputAdornment>
+                        ),
+                    },
                 }}
             />
             <Button

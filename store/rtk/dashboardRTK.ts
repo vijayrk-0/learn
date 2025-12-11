@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { RootState } from "../store";
 
-import { topApiInterface,metaInterface } from "@/app/dashboard/dashboardSchema";
+import { topApiInterface, metaInterface } from "@/app/dashboard/dashboardSchema";
 
 
 // Dashboard interface
@@ -76,7 +76,7 @@ export type TopApisQueryArgs = {
 
 // shared prepareHeaders for bearer token
 const authBaseQuery = fetchBaseQuery({
-  baseUrl: `${process.env.BASE_URL}`,
+  baseUrl: "/api",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
     if (token) {

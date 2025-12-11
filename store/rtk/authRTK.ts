@@ -4,7 +4,7 @@ import { LoginInterface, LoginResponseInterface, SignupRequestInterface, SignupR
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.BASE_URL}/auth`, 
+    baseUrl: `api/auth`,
   }),
   // Auth endpoints
   endpoints: (builder) => ({
@@ -19,7 +19,7 @@ export const authApi = createApi({
     // Auth signup mutation
     signup: builder.mutation<SignupResponseInterface, SignupRequestInterface>({
       query: (body) => ({
-        url: 'signup', 
+        url: 'sign-up',
         method: 'POST',
         body,
       }),

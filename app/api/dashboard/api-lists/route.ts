@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import { getRespectiveFilePath } from "@/lib/utils";
+import { getRespectiveFilePath, readFile, writeFile } from "@/lib/utils";
 
 // Top API type
 type TopApi = {
@@ -23,119 +22,108 @@ type Dashboard = {
 // Data file path
 const dataFile = getRespectiveFilePath("dashboard");
 
-// Read from file function  
-async function readDashboard(): Promise<Dashboard> {
-    const raw = await fs.readFile(dataFile, "utf-8");
-    return JSON.parse(raw);
-}
-
-// Write to file function
-async function writeDashboard(data: Dashboard) {
-    await fs.writeFile(dataFile, JSON.stringify(data, null, 2), "utf-8");
-}
-
 export async function GET(request: Request) {
     // Get query params
-  const { searchParams } = new URL(request.url);
+    const { searchParams } = new URL(request.url);
 
-//   Get page and limit set default to 1 and 10
-  const page = Number(searchParams.get('page') ?? '1');
-  const limit = Number(searchParams.get('limit') ?? '10');
+    //   Get page and limit set default to 1 and 10
+    const page = Number(searchParams.get('page') ?? '1');
+    const limit = Number(searchParams.get('limit') ?? '10');
 
-//   Validate page and limit
-  const safePage = Number.isFinite(page) && page > 0 ? page : 1;
+    //   Validate page and limit
+    const safePage = Number.isFinite(page) && page > 0 ? page : 1;
 
-//   Validate limit
-  const safeLimit =
-    Number.isFinite(limit) && limit > 0 && limit <= 100 ? limit : 10;
+    //   Validate limit
+    const safeLimit =
+        Number.isFinite(limit) && limit > 0 && limit <= 100 ? limit : 10;
 
-//   Get filters
-  const filters = {
-    name: searchParams.get('name') || undefined,
-    version: searchParams.get('version') || undefined,
-    method: searchParams.get('method') || undefined,
-    path: searchParams.get('path') || undefined,
-    status: searchParams.get('status') || undefined,
-    requests: searchParams.get('requests') || undefined,
-    errorRatePercent: searchParams.get('errorRatePercent') || undefined,
-    p95LatencyMs: searchParams.get('p95LatencyMs') || undefined,
-    ownerTeam: searchParams.get('ownerTeam') || undefined,
-  };
-
-//   Read from file
-  const dashboard = await readDashboard();
-
-//   Filter
-  const filtered = dashboard.topApis.filter((item: any) => {
-    // string contains (case-insensitive)
-    const matchString = (field: keyof typeof filters) => {
-      const value = filters[field];
-      if (!value) return true;
-      const itemVal = String(item[field] ?? '');
-      return itemVal.toLowerCase().includes(value.toLowerCase());
+    //   Get filters
+    const filters = {
+        name: searchParams.get('name') || undefined,
+        version: searchParams.get('version') || undefined,
+        method: searchParams.get('method') || undefined,
+        path: searchParams.get('path') || undefined,
+        status: searchParams.get('status') || undefined,
+        requests: searchParams.get('requests') || undefined,
+        errorRatePercent: searchParams.get('errorRatePercent') || undefined,
+        p95LatencyMs: searchParams.get('p95LatencyMs') || undefined,
+        ownerTeam: searchParams.get('ownerTeam') || undefined,
     };
 
-    // numeric equals or range (e.g. ">=100", "<50")
-    const matchNumber = (field: keyof typeof filters) => {
-      const value = filters[field];
-      if (!value) return true;
-      const raw = item[field];
-      const num = typeof raw === 'number' ? raw : Number(raw);
-      if (!Number.isFinite(num)) return false;
+    //   Read from file
+    const dashboard = await readFile(dataFile);
 
-      // very simple operator parsing: >=, <=, >, <, =
-      const opMatch = value.match(/^(>=|<=|>|<|=)(.+)$/);
-      if (opMatch) {
-        const op = opMatch[1];
-        const comp = Number(opMatch[2]);
-        if (!Number.isFinite(comp)) return false;
-        switch (op) {
-          case '>': return num > comp;
-          case '<': return num < comp;
-          case '>=': return num >= comp;
-          case '<=': return num <= comp;
-          case '=': return num === comp;
-        }
-      }
+    //   Filter
+    const filtered = dashboard.topApis.filter((item: any) => {
+        // string contains (case-insensitive)
+        const matchString = (field: keyof typeof filters) => {
+            const value = filters[field];
+            if (!value) return true;
+            const itemVal = String(item[field] ?? '');
+            return itemVal.toLowerCase().includes(value.toLowerCase());
+        };
 
-      // fallback: plain equality
-      const eq = Number(value);
-      if (!Number.isFinite(eq)) return false;
-      return num === eq;
-    };
+        // numeric equals or range (e.g. ">=100", "<50")
+        const matchNumber = (field: keyof typeof filters) => {
+            const value = filters[field];
+            if (!value) return true;
+            const raw = item[field];
+            const num = typeof raw === 'number' ? raw : Number(raw);
+            if (!Number.isFinite(num)) return false;
 
-    return (
-      matchString('name') &&
-      matchString('version') &&
-      matchString('method') &&
-      matchString('path') &&
-      matchString('status') &&
-      matchString('ownerTeam') &&
-      matchNumber('requests') &&
-      matchNumber('errorRatePercent') &&
-      matchNumber('p95LatencyMs')
-    );
-  });
+            // very simple operator parsing: >=, <=, >, <, =
+            const opMatch = value.match(/^(>=|<=|>|<|=)(.+)$/);
+            if (opMatch) {
+                const op = opMatch[1];
+                const comp = Number(opMatch[2]);
+                if (!Number.isFinite(comp)) return false;
+                switch (op) {
+                    case '>': return num > comp;
+                    case '<': return num < comp;
+                    case '>=': return num >= comp;
+                    case '<=': return num <= comp;
+                    case '=': return num === comp;
+                }
+            }
 
-//   Get total and paged items
-  const total = filtered.length;
-  const offset = (safePage - 1) * safeLimit;
-  const pagedItems = filtered.slice(offset, offset + safeLimit);
+            // fallback: plain equality
+            const eq = Number(value);
+            if (!Number.isFinite(eq)) return false;
+            return num === eq;
+        };
 
-  return NextResponse.json({
-    page: safePage,
-    limit: safeLimit,
-    total,
-    totalPages: Math.ceil(total / safeLimit),
-    data: pagedItems,
-  });
+        return (
+            matchString('name') &&
+            matchString('version') &&
+            matchString('method') &&
+            matchString('path') &&
+            matchString('status') &&
+            matchString('ownerTeam') &&
+            matchNumber('requests') &&
+            matchNumber('errorRatePercent') &&
+            matchNumber('p95LatencyMs')
+        );
+    });
+
+    //   Get total and paged items
+    const total = filtered.length;
+    const offset = (safePage - 1) * safeLimit;
+    const pagedItems = filtered.slice(offset, offset + safeLimit);
+
+    return NextResponse.json({
+        page: safePage,
+        limit: safeLimit,
+        total,
+        totalPages: Math.ceil(total / safeLimit),
+        data: pagedItems,
+    });
 }
 
 
 // POST /api/top-apis -> add new API
 export async function POST(req: NextRequest) {
     const body = (await req.json()) as TopApi;
-    const dashboard = await readDashboard();
+    const dashboard: Dashboard = await readFile(dataFile);
 
     const exists = dashboard.topApis.find(
         (api) =>
@@ -151,7 +139,7 @@ export async function POST(req: NextRequest) {
     }
 
     dashboard.topApis.push(body);
-    await writeDashboard(dashboard);
+    await writeFile(dashboard, dataFile);
     return NextResponse.json(body, { status: 201 });
 }
 
@@ -163,7 +151,7 @@ export async function PATCH(req: NextRequest) {
     };
 
     // Read from file
-    const dashboard = await readDashboard();
+    const dashboard: Dashboard = await readFile(dataFile);
     // Find index of API to update
     const idx = dashboard.topApis.findIndex(
         (api) =>
@@ -183,7 +171,7 @@ export async function PATCH(req: NextRequest) {
     // Update in file
     dashboard.topApis[idx] = { ...dashboard.topApis[idx], ...patch };
     // Write back to file
-    await writeDashboard(dashboard);
+    await writeFile(dashboard, dataFile);
     // Return updated API
     return NextResponse.json(dashboard.topApis[idx]);
 }
@@ -197,7 +185,7 @@ export async function DELETE(req: NextRequest) {
     };
 
     // Read from file
-    const dashboard = await readDashboard();
+    const dashboard: Dashboard = await readFile(dataFile);
     const before = dashboard.topApis.length;
 
     // Delete from file
@@ -219,7 +207,7 @@ export async function DELETE(req: NextRequest) {
     }
 
     // Write back to file
-    await writeDashboard(dashboard);
+    await writeFile(dashboard, dataFile);
     // Return success response
     return NextResponse.json({ ok: true });
 }

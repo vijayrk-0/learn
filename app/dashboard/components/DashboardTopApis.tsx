@@ -14,10 +14,10 @@ import {
     CircularProgress,
     Avatar,
 } from '@mui/material';
-import { getStatusColor, formatNumber } from './utils';
-
+import { getStatusColor, formatNumber } from '@/app/dashboard/utils';
+import { topApiInterface } from '@/app/dashboard/dashboardSchema';
 interface DashboardTopApisProps {
-    topApis: any[];
+    topApis: topApiInterface[];
 }
 
 const DashboardTopApis: React.FC<DashboardTopApisProps> = ({ topApis }) => {

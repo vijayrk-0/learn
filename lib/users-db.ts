@@ -1,82 +1,114 @@
-import { getRespectiveFilePath } from './utils';
-import fs from 'fs';
+// userStore.ts
+import { promises as fs } from 'fs';
+import { getRespectiveFilePath, readFile, writeFile } from './utils';
 
-const dataFilePath = getRespectiveFilePath("users");
+// User type definition
+export type User = {
+    _id?: string;
+    email?: string;
+    password?: string;
+    name?: string;
+    verified?: boolean;
+    otp?: string;
+    otpExpires?: Date | string;
+    resetOTP?: string;
+    resetOTPExpires?: Date | string;
+    createdAt?: string;
+};
 
-// Helper to read users from the file
-export const getUsers = () => {
+const dataFilePath = getRespectiveFilePath('users');
+
+// Read all users
+export const getUsers = async (): Promise<User[]> => {
     try {
-        if (!fs.existsSync(dataFilePath)) {
-            return [];
-        }
-        const fileContent = fs.readFileSync(dataFilePath, 'utf-8');
-        // Handle case where file might be empty or just "module.exports = ..."
-        try {
-            return JSON.parse(fileContent);
-        } catch (e) {
-            // If it fails, maybe it's empty or invalid
-            return [];
-        }
+        // Check if file exists using async method
+        await fs.access(dataFilePath);
+        const data = await readFile(dataFilePath);
+        return Array.isArray(data) ? (data as User[]) : [];
     } catch (error) {
+        // File doesn't exist or read error
         console.error('Error reading users file:', error);
         return [];
     }
 };
 
-// Helper to write users to the file
-export const saveUsers = (users: any[]) => {
+// Write all users
+export const saveUsers = async (users: User[]): Promise<void> => {
     try {
-        fs.writeFileSync(dataFilePath, JSON.stringify(users, null, 2));
+        // Fix parameter order: writeFile(data, filePath)
+        await writeFile(users, dataFilePath);
     } catch (error) {
         console.error('Error writing users file:', error);
         throw new Error('Failed to save user data');
     }
 };
 
-// find user by email
-export const findUserByEmail = (email: string) => {
-    const users = getUsers();
-    return users.find((user: any) => user.email === email.toLowerCase());
+// Find user by email
+export const findUserByEmail = async (email: string): Promise<User | undefined> => {
+    const users = await getUsers();
+    const normalizedEmail = email.toLowerCase();
+    return users.find((user) => user.email?.toLowerCase() === normalizedEmail);
 };
 
-// create user
-export const createUser = (user: any) => {
-    const users = getUsers();
-    // Check if user already exists
-    if (users.find((u: any) => u.email === user.email.toLowerCase())) {
+// Create user
+export const createUser = async (user: User): Promise<User> => {
+    const users = await getUsers();
+    const normalizedEmail = user.email?.toLowerCase();
+
+    if (!normalizedEmail) {
+        throw new Error('Email is required');
+    }
+
+    if (users.find((u) => u.email?.toLowerCase() === normalizedEmail)) {
         throw new Error('User already exists');
     }
-    users.push({ ...user, email: user.email.toLowerCase(), createdAt: new Date() });
-    saveUsers(users);
-    return user;
+
+    const newUser: User = {
+        ...user,
+        email: normalizedEmail,
+        createdAt: new Date().toISOString(),
+    };
+
+    users.push(newUser);
+    await saveUsers(users);
+
+    return newUser;
 };
 
-// update user
-export const updateUser = (email: string, updates: any) => {
-    const users = getUsers();
-    const index = users.findIndex((user: any) => user.email === email.toLowerCase());
+// Update user
+export const updateUser = async (
+    email: string,
+    updates: any
+): Promise<User | null> => {
+    const users = await getUsers();
+    const normalizedEmail = email.toLowerCase();
+
+    const index = users.findIndex(
+        (user) => user.email?.toLowerCase() === normalizedEmail
+    );
+
     if (index === -1) {
-        return null; 
+        return null;
     }
 
-    // Apply updates
-    let updatedUser = { ...users[index] };
+    let updatedUser: User = { ...users[index] };
 
     if (updates.$set) {
         updatedUser = { ...updatedUser, ...updates.$set };
     }
+
     if (updates.$unset) {
         for (const key in updates.$unset) {
-            delete updatedUser[key];
+            delete (updatedUser as any)[key];
         }
     }
 
-    // If no mongo-style operators, assume direct update
     if (!updates.$set && !updates.$unset) {
-        updatedUser = { ...updatedUser, ...updates };
+        updatedUser = { ...updatedUser, ...(updates as Partial<User>) };
     }
 
     users[index] = updatedUser;
-    saveUsers(users);
+    await saveUsers(users);
+
     return updatedUser;
 };

@@ -116,8 +116,8 @@ export default function ForgotPassword() {
 
         try {
             await resetPasswordSchema.validate({
-                newPassword,
-                confirmPassword,
+                password: newPassword,
+                confirmPassword: confirmPassword,
             });
         } catch (err) {
             if (err instanceof yup.ValidationError) {
@@ -170,97 +170,106 @@ export default function ForgotPassword() {
     return (
         <Box
             sx={{
-                maxWidth: 500,
-                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                minHeight: "100vh",
                 p: { xs: 2, sm: 3 },
             }}
         >
-            <Card
+            <Box
                 sx={{
-                    boxShadow: 3,
-                    borderRadius: 2,
-                    p: { xs: 2, sm: 3 },
-                    bgcolor: "background.paper",
+                    maxWidth: 500,
+                    width: "100%",
                 }}
             >
-                <CardContent>
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            mb: 3,
-                        }}
-                    >
-                        <Typography
-                            component="h1"
-                            variant="h4"
+                <Card
+                    sx={{
+                        boxShadow: 3,
+                        borderRadius: 2,
+                        p: { xs: 2, sm: 3 },
+                        bgcolor: "background.paper",
+                    }}
+                >
+                    <CardContent>
+                        <Box
                             sx={{
-                                fontWeight: "bold",
-                                color: "primary.main",
-                                mb: 1,
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+                                mb: 3,
                             }}
                         >
-                            Forgot Password
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Reset your password in 3 simple steps
-                        </Typography>
-                    </Box>
+                            <Typography
+                                component="h1"
+                                variant="h4"
+                                sx={{
+                                    fontWeight: "bold",
+                                    color: "primary.main",
+                                    mb: 1,
+                                }}
+                            >
+                                Forgot Password
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                Reset your password in 3 simple steps
+                            </Typography>
+                        </Box>
 
-                    <Stepper activeStep={getStepIndex()} sx={{ mb: 4 }}>
-                        {steps.map((label) => (
-                            <Step key={label}>
-                                <StepLabel>{label}</StepLabel>
-                            </Step>
-                        ))}
-                    </Stepper>
+                        <Stepper activeStep={getStepIndex()} sx={{ mb: 4 }}>
+                            {steps.map((label) => (
+                                <Step key={label}>
+                                    <StepLabel>{label}</StepLabel>
+                                </Step>
+                            ))}
+                        </Stepper>
 
-                    {error && (
-                        <Alert severity="error" sx={{ mb: 2 }}>
-                            {error}
-                        </Alert>
-                    )}
-                    {success && (
-                        <Alert severity="success" sx={{ mb: 2 }}>
-                            {success}
-                        </Alert>
-                    )}
+                        {error && (
+                            <Alert severity="error" sx={{ mb: 2 }}>
+                                {error}
+                            </Alert>
+                        )}
+                        {success && (
+                            <Alert severity="success" sx={{ mb: 2 }}>
+                                {success}
+                            </Alert>
+                        )}
 
-                    {activeStep === "email" && (
-                        <StepRequestOtp
-                            email={email}
-                            onEmailChange={setEmail}
-                            onSubmit={handleSendOTP}
-                            loading={loading}
-                        />
-                    )}
+                        {activeStep === "email" && (
+                            <StepRequestOtp
+                                email={email}
+                                onEmailChange={setEmail}
+                                onSubmit={handleSendOTP}
+                                loading={loading}
+                            />
+                        )}
 
-                    {activeStep === "otp" && (
-                        <StepVerifyOtp
-                            email={email}
-                            otp={otp}
-                            onOtpChange={setOtp}
-                            onSubmit={handleVerifyOTP}
-                            onChangeEmail={() => setActiveStep("email")}
-                            loading={loading}
-                        />
-                    )}
+                        {activeStep === "otp" && (
+                            <StepVerifyOtp
+                                email={email}
+                                otp={otp}
+                                onOtpChange={setOtp}
+                                onSubmit={handleVerifyOTP}
+                                onChangeEmail={() => setActiveStep("email")}
+                                loading={loading}
+                            />
+                        )}
 
-                    {activeStep === "password" && (
-                        <StepResetPassword
-                            newPassword={newPassword}
-                            onNewPasswordChange={setNewPassword}
-                            confirmPassword={confirmPassword}
-                            onConfirmPasswordChange={setConfirmPassword}
-                            onSubmit={handleResetPassword}
-                            loading={loading}
-                        />
-                    )}
+                        {activeStep === "password" && (
+                            <StepResetPassword
+                                newPassword={newPassword}
+                                onNewPasswordChange={setNewPassword}
+                                confirmPassword={confirmPassword}
+                                onConfirmPasswordChange={setConfirmPassword}
+                                onSubmit={handleResetPassword}
+                                loading={loading}
+                            />
+                        )}
 
-                    <ForgotPasswordFooter />
-                </CardContent>
-            </Card>
+                        <ForgotPasswordFooter />
+                    </CardContent>
+                </Card>
+            </Box>
         </Box>
     );
 }

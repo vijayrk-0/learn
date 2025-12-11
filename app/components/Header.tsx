@@ -16,7 +16,7 @@ export default function Header() {
 
     const router = useRouter();
     useEffect(() => {
-        if (!isAuthenticated && pathname !== "/login" && pathname !== "/signup" && pathname !== "/" && pathname !== "/forget-password") {
+        if (!isAuthenticated && pathname !== "/login" && pathname !== "/signup" && pathname !== "/forget-password") {
             router.push("/login");
         }
     }, [isAuthenticated]);

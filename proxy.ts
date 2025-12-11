@@ -6,6 +6,11 @@ import { verifyToken } from "@/lib/jwt";
 // proxy middleware
 export async function proxy(request: NextRequest) {
 
+  // skip the auth endpoints
+  if (request.nextUrl.pathname.startsWith("/api/auth")) {
+    return NextResponse.next();
+  }
+
   // get token from header or cookie
   const authHeader = request.headers.get("authorization");
   // get token from header

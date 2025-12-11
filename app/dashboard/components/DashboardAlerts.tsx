@@ -10,19 +10,11 @@ import {
     CheckCircle,
     Warning,
 } from '@mui/icons-material';
-import { getSeverityColor } from './utils';
-
-interface AlertItem {
-    id: string | number;
-    severity: string;
-    status: string;
-    title: string;
-    message: string;
-    api: string;
-}
+import { getSeverityColor } from '@/app/dashboard/utils';
+import {AlertItemInterface} from '@/app/dashboard/dashboardSchema';
 
 interface DashboardAlertsProps {
-    alerts: AlertItem[];
+    alerts: AlertItemInterface[];
 }
 
 const DashboardAlerts: React.FC<DashboardAlertsProps> = ({ alerts }) => {

@@ -1,10 +1,5 @@
 import jwt from 'jsonwebtoken';
-
-const JWT_SECRET = process.env.JWT_SECRET;
-
-if (!JWT_SECRET) {
-    throw new Error('Please define the JWT_SECRET environment variable inside .env.local');
-}
+import { env } from './env';
 
 // Interface for JWT payload
 export interface JWTPayload {
@@ -15,7 +10,7 @@ export interface JWTPayload {
 
 // Function to generate JWT token
 export function generateToken(payload: JWTPayload): string {
-    return jwt.sign(payload, JWT_SECRET!, {
+    return jwt.sign(payload, env.JWT_SECRET, {
         expiresIn: '7d',
     });
 }
@@ -23,7 +18,7 @@ export function generateToken(payload: JWTPayload): string {
 // Function to verify JWT token
 export function verifyToken(token: string): JWTPayload | null {
     try {
-        const decoded = jwt.verify(token, JWT_SECRET!) as JWTPayload;
+        const decoded = jwt.verify(token, env.JWT_SECRET) as JWTPayload;
         return decoded;
     } catch (error) {
         return null;

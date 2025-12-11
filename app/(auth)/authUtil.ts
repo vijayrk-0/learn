@@ -7,9 +7,21 @@ export const loadAuthFromStorage = () => {
     const token = localStorage.getItem('token');
     const userJson = localStorage.getItem('user');
 
+    // Parse user safely - check if value exists and is not the string "undefined"
+    let user = null;
+    if (userJson && userJson !== 'undefined' && userJson !== 'null') {
+        try {
+            user = JSON.parse(userJson);
+        } catch (error) {
+            console.error('Failed to parse user from localStorage:', error);
+            // Clear invalid data
+            localStorage.removeItem('user');
+        }
+    }
+
     return {
-        token,
-        user: userJson ? JSON.parse(userJson) : null,
+        token: token && token !== 'undefined' && token !== 'null' ? token : null,
+        user,
     };
 };
 

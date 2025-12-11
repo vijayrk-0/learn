@@ -4,15 +4,10 @@ import {
     Box,
     Typography,
 } from '@mui/material';
-import { formatNumber } from './utils';
-
+import { formatNumber } from '@/app/dashboard/utils';
+import { summaryInterface } from '@/app/dashboard/dashboardSchema';
 interface DashboardSummaryProps {
-    summary: {
-        totalRequests: number;
-        avgLatencyMs: number;
-        errorRatePercent: number;
-        activeConsumers: number;
-    };
+    summary: summaryInterface;
 }
 
 const DashboardSummary: React.FC<DashboardSummaryProps> = ({ summary }) => {

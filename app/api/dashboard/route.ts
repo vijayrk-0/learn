@@ -1,16 +1,13 @@
 import { NextResponse } from 'next/server';
-import { promises as fs } from 'fs';
-import {getRespectiveFilePath} from "@/lib/utils";
+import { getRespectiveFilePath, readFile } from "@/lib/utils";
 
-
+// GET request handler
 export async function GET(request: Request) {
     try {
         // Read the dashboard JSON file
         const filePath = getRespectiveFilePath("dashboard");
 
-        const fileContents = await fs.readFile(filePath, 'utf8');
-
-        const dashboardData = JSON.parse(fileContents);
+        const dashboardData = await readFile(filePath);
 
         // Return the dashboard data with cache control headers
         return NextResponse.json(dashboardData, {

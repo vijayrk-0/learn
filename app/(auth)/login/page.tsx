@@ -24,7 +24,6 @@ import AuthFooter from "@/app/(auth)/components/AuthFooter";
 export default function Login() {
     const dispatch = useDispatch();
     const router = useRouter();
-    // Login mutation
     const [loginMutation, { isLoading }] = useLoginMutation();
 
     const [email, setEmail] = useState("");
@@ -35,7 +34,7 @@ export default function Login() {
         event.preventDefault();
         setError("");
 
-        // Login client side validation
+        // Client-side validation
         try {
             await loginSchema.validate({ email, password });
         } catch (error) {
@@ -47,65 +46,92 @@ export default function Login() {
             return;
         }
 
-        // Login server side validation
+        // Server-side validation
         try {
             const result = await loginMutation({ email, password }).unwrap();
-            dispatch(setAuth({ token: result.token, user: result.user }));
+            dispatch(
+                setAuth({
+                    token: result?.data?.token,
+                    user: result?.data?.user,
+                })
+            );
             router.push("/dashboard");
         } catch (err: any) {
-            setError(err?.data?.message || "Login failed. Please try again.");
+            setError(
+                err?.data?.message ||
+                "Login failed. Please check your details and try again."
+            );
         }
     };
 
     return (
-        // Login Wrapper    
-        <AuthCard title="Welcome Back" subtitle="Sign in to continue">
+        <AuthCard
+            title="Welcome back"
+            subtitle="Please sign in to continue"
+        >
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-                {/* Error Alert message */}
                 {error && (
                     <Alert severity="error" sx={{ mb: 2 }}>
                         {error}
                     </Alert>
                 )}
-                {/* Email Input */}
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    autoComplete="email"
-                    autoFocus
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    slotProps={{
-                        input: {
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <EmailOutlined color="action" />
-                                </InputAdornment>
-                            ),
-                        },
-                    }}
-                />
-                {/* Password Input */}
+
+<TextField
+  margin="normal"
+  required
+  fullWidth
+  id="email"
+  placeholder="Email address"
+  name="email"
+  autoComplete="email"
+  autoFocus
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+  slotProps={{
+    input: {
+      startAdornment: (
+        <InputAdornment
+          position="start"
+          sx={{
+            pl: 1,           // padding left inside adornment
+            pr: 1,
+            color: "text.secondary",
+          }}
+        >
+          <EmailOutlined fontSize="small" />
+        </InputAdornment>
+      ),
+    },
+  }}
+/>
+
+
+
+
                 <PasswordField
                     value={password}
+                    placeholder="Password"
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                {/* Forgot Password Link */}
-                <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mt: 1 }}>
+
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        mt: 1,
+                    }}
+                >
                     <Link href="/forget-password" variant="body2" underline="hover">
-                        Forgot password?
+                        Forgot your password?
                     </Link>
                 </Box>
-                {/* Submit Button */}
-                <SubmitButton isLoading={isLoading}>Sign In</SubmitButton>
-                {/* Auth Footer */}
+
+                <SubmitButton isLoading={isLoading}>Sign in</SubmitButton>
+
                 <AuthFooter
-                    text="Don't have an account?"
-                    linkText="Sign Up"
+                    text="Don't have an account yet?"
+                    linkText="Sign up"
                     linkHref="/signup"
                 />
             </Box>

@@ -40,7 +40,7 @@ const StepVerifyOtp: React.FC<StepVerifyOtpProps> = ({
                 required
                 fullWidth
                 id="otp"
-                label="Enter OTP"
+                placeholder="Enter 6-digit OTP"
                 name="otp"
                 autoFocus
                 value={otp}
@@ -49,12 +49,14 @@ const StepVerifyOtp: React.FC<StepVerifyOtpProps> = ({
                     maxLength: 6,
                     pattern: "[0-9]*",
                 }}
-                InputProps={{
-                    startAdornment: (
-                        <InputAdornment position="start">
-                            <PinOutlined color="action" />
-                        </InputAdornment>
-                    ),
+                slotProps={{
+                    input: {
+                        startAdornment: (
+                            <InputAdornment position="start" sx={{ pl: 1, pr: 1 }}>
+                                <PinOutlined color="action" />
+                            </InputAdornment>
+                        ),
+                    },
                 }}
             />
             <Button

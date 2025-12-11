@@ -25,7 +25,7 @@ export async function POST(request: Request) {
         }
 
         // Find user
-        const user = findUserByEmail(email);
+        const user = await findUserByEmail(email);
 
         // Validate user
         if (!user) {
@@ -65,7 +65,7 @@ export async function POST(request: Request) {
         const hashedPassword = await bcrypt.hash(newPassword, 10);
 
         // Update user document
-        updateUser(email, {
+        await updateUser(email, {
             $set: { password: hashedPassword },
             $unset: { resetOTP: "", resetOTPExpires: "" }
         });

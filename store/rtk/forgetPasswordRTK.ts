@@ -37,7 +37,7 @@ interface ResetPasswordResponse {
 export const forgetPasswordApi = createApi({
   reducerPath: 'forgetPasswordApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.BASE_URL}/auth`,
+    baseUrl: `api/auth`,
   }),
   endpoints: (builder) => ({
     // Forget Password endpoints sendOtp

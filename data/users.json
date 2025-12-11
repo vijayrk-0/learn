@@ -2,11 +2,9 @@
   {
     "name": "vijay",
     "email": "mycodealchemy@gmail.com",
-    "password": "$2b$10$wx.UiJ/C5GLaR23XSCmqsOi5ZBsRcbRRDwFufnQa9XiCyhAG8NLT6",
+    "password": "$2b$10$wxipFzL/fp0mQOvEKQlSb.prhsL/b4q3LzSrHrc1hKsF2.yAcGbLG",
     "verified": false,
-    "createdAt": "2025-12-04T17:10:39.938Z",
-    "resetOTP": "855823",
-    "resetOTPExpires": "2025-12-10T19:06:39.019Z"
+    "createdAt": "2025-12-04T17:10:39.938Z"
   },
   {
     "name": "test",
@@ -30,5 +28,12 @@
     "password": "$2b$10$qUrdIs.g2RTU2Ojhj.8hte/G9cKg/ucVvOCy4Q8gQ5PGHk9oLMIG2",
     "verified": false,
     "createdAt": "2025-12-09T10:07:23.676Z"
+  },
+  {
+    "name": "teest",
+    "email": "vijay@gmail.com",
+    "password": "$2b$10$Ok9hXulbQNJqwZ9JBt62XOL8tujGIWo9ct.tjZ8VN.nu8xeaZyoNG",
+    "verified": false,
+    "createdAt": "2025-12-11T13:37:00.347Z"
   }
 ]

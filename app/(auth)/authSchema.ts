@@ -30,8 +30,10 @@ export interface LoginInterface {
 
 // Auth Response Interface
 export interface LoginResponseInterface {
-  token: string;
-  user: User;
+  data: {
+    token: string;
+    user: User;
+  };
   message: string;
 }
 

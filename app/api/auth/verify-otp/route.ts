@@ -15,7 +15,7 @@ export async function POST(request: Request) {
         }
 
         // Find user
-        const user = findUserByEmail(email);
+        const user = await findUserByEmail(email);
 
         if (!user) {
             return NextResponse.json(

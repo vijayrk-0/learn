@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
 import { promises as fs } from 'fs';
-import path from 'path';
+import {getRespectiveFilePath} from "@/lib/utils";
 
 
 export async function GET(request: Request) {
     try {
         // Read the dashboard JSON file
-        const filePath = path.join(process.cwd(), 'app', 'data', 'dashboard.json');
+        const filePath = getRespectiveFilePath("dashboard");
 
         const fileContents = await fs.readFile(filePath, 'utf8');
 
@@ -45,3 +45,4 @@ export async function GET(request: Request) {
         );
     }
 }
+

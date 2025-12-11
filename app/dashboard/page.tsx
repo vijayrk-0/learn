@@ -1,37 +1,95 @@
 'use client';
 
-import  { useEffect } from 'react';
-import Dashboard from '../components/Dashboard';
-import { Box } from '@mui/material';
-import { useSelector } from 'react-redux';
-import type { RootState } from '@/app/store/store';
-import { useRouter } from 'next/navigation';
+import {
+    Box,
+    Button,
+    Container,
+    Grid,
+    CircularProgress,
+    Alert,
+} from '@mui/material';
 
-export default function DashboardPage() {
-    const { isAuthenticated } = useSelector((state: RootState) => state.auth);
-    const router = useRouter();
-    // Function to handle navigation
-    useEffect(() => {
-        if (!isAuthenticated) {
-            router.push('/login');
-        }
-    }, [isAuthenticated, router]);
+// Importing logout action and useDispatch
+import { useGetDashboardDataQuery } from '@/store/rtk/dashboardRTK';
+import { useDispatch } from 'react-redux';
 
-    if (!isAuthenticated) {
-        return null;
+import DashboardAlerts from './components/DashboardAlerts';
+import DashboardTopApis from './components/DashboardTopApis';
+import DashboardSummary from './components/DashboardSummary';
+import DashboardTopConsumers from './components/DashboardTopConsumers';
+
+export default function Dashboard() {
+    // Using useDispatch to dispatch actions
+    const dispatch = useDispatch();
+
+    // Use RTK Query hook to fetch dashboard data
+    const {
+        data: dashboardData,
+        isLoading: loading,
+        error: queryError,
+        refetch
+    } = useGetDashboardDataQuery(undefined, {
+        pollingInterval: 100000,
+    });
+
+    // Map RTK Query error to string if needed
+    const error = queryError ? 'Failed to load dashboard data' : null;
+
+    // Loading state
+    if (loading) {
+        return (
+            <Container maxWidth="xl" sx={{ mt: 4 }}>
+                <Box display="flex" justifyContent="center" alignItems="center" minHeight="60vh">
+                    <CircularProgress size={60} />
+                </Box>
+            </Container>
+        );
+    }
+
+    // Error state
+    if (error || !dashboardData) {
+        return (
+            <Container maxWidth="xl" sx={{ mt: 4 }}>
+                <Alert
+                    severity="error"
+                    action={
+                        <Button color="inherit" size="small" onClick={refetch}>
+                            Retry
+                        </Button>
+                    }
+                >
+                    {error || 'No dashboard data available'}
+                </Alert>
+            </Container>
+        );
     }
 
     return (
-        <Box
-            sx={{
-                minHeight: '100vh',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
-            }}
-        >
-            <Dashboard />
+        <Box sx={{ bgcolor: '#f8f9fa', width: '100%', overflowX: 'hidden', minHeight: '100vh', pb: 8 }}>
+            {/* Main Content */}
+            <Container maxWidth="xl" sx={{ mt: 4 }}>
+                <Grid container spacing={3}>
+                    {/* Left Column - Alerts & Top APIs */}
+                    <Grid size={{ xs: 12, lg: 8 }}>
+                        {/* Alerts Section */}
+                        {dashboardData.alerts.length > 0 && (
+                            <DashboardAlerts alerts={dashboardData.alerts} />
+                        )}
+
+                        {/* Top APIs Table */}
+                        <DashboardTopApis topApis={dashboardData.topApis} />
+                    </Grid>
+
+                    {/* Right Sidebar - Summary & Consumers */}
+                    <Grid size={{ xs: 12, lg: 4 }}>
+                        {/* Summary Card */}
+                        <DashboardSummary summary={dashboardData.summary} />
+
+                        {/* Top Consumers */}
+                        <DashboardTopConsumers topConsumers={dashboardData.topConsumers} />
+                    </Grid>
+                </Grid>
+            </Container>
         </Box>
     );
 }

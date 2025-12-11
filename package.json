@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "next:dev": "next dev",
+    "dev": "next dev",
     "data:update": "python app/data/update_data.py",
-    "dev": "concurrently \"npm run next:dev\" \"npm run data:update\"",
+    "test": "concurrently \"npm run dev\" \"npm run data:update\"",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

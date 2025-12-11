@@ -2,8 +2,8 @@
 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { initAuth } from '@/app/store/authSlice';
-import type { AppDispatch, RootState } from '@/app/store/store';
+import { initAuth } from '@/store/slice/authSlice';
+import type { AppDispatch, RootState } from '@/store/store';
 import { Box, CircularProgress } from '@mui/material';
 
 export function AuthInitializer({ children }: { children: React.ReactNode }) {

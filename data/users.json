@@ -4,7 +4,9 @@
     "email": "mycodealchemy@gmail.com",
     "password": "$2b$10$wx.UiJ/C5GLaR23XSCmqsOi5ZBsRcbRRDwFufnQa9XiCyhAG8NLT6",
     "verified": false,
-    "createdAt": "2025-12-04T17:10:39.938Z"
+    "createdAt": "2025-12-04T17:10:39.938Z",
+    "resetOTP": "855823",
+    "resetOTPExpires": "2025-12-10T19:06:39.019Z"
   },
   {
     "name": "test",
@@ -18,7 +20,9 @@
     "email": "test@gmail.com",
     "password": "$2b$10$1sBuS2BvopU0ZCmX/xKt6.tD79ohM3o8zh9UsdwznBp7EZlFxIJ/.",
     "verified": false,
-    "createdAt": "2025-12-08T06:20:44.289Z"
+    "createdAt": "2025-12-08T06:20:44.289Z",
+    "resetOTP": "474626",
+    "resetOTPExpires": "2025-12-10T19:04:48.733Z"
   },
   {
     "name": "vijay",

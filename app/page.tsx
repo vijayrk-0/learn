@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
-import { RootState } from './store/store';
+import { RootState } from '../store/store';
 import { Box, CircularProgress } from '@mui/material';
 
 export default function Home() {

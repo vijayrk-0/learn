@@ -1,7 +1,7 @@
+import { getRespectiveFilePath } from './utils';
 import fs from 'fs';
-import path from 'path';
 
-const dataFilePath = path.join(process.cwd(), 'app', 'data', 'users.json');
+const dataFilePath = getRespectiveFilePath("users");
 
 // Helper to read users from the file
 export const getUsers = () => {

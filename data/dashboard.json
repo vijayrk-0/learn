@@ -1,21 +1,21 @@
 {
   "meta": {
     "environment": "staging",
-    "generatedAt": "2025-12-09T11:14:13.495861Z",
+    "generatedAt": "2025-12-09T18:18:25.761081Z",
     "timeRange": "last_24h"
   },
   "summary": {
     "totalApis": 5,
-    "totalRequests": 150800,
+    "totalRequests": 154441,
     "avgLatencyMs": 1,
-    "errorRatePercent": 0.26,
+    "errorRatePercent": 0.8,
     "activeConsumers": 3
   },
   "kpis": [
     {
       "id": "requests",
       "label": "Requests (24h)",
-      "value": 150800,
+      "value": 154441,
       "changePercent": 8.4,
       "trend": "up"
     },
@@ -30,7 +30,7 @@
     {
       "id": "errors",
       "label": "Error Rate",
-      "value": 0.26,
+      "value": 0.8,
       "unit": "%",
       "changePercent": 0.3,
       "trend": "up"
@@ -83,135 +83,124 @@
     },
     {
       "hour": "06:00",
-      "requests": 780,
-      "errors": 2,
+      "requests": 316,
+      "errors": 1,
       "avgLatencyMs": 1
     },
     {
       "hour": "07:00",
-      "requests": 3033,
-      "errors": 7,
-      "avgLatencyMs": 1
-    },
-    {
-      "hour": "08:00",
-      "requests": 3810,
-      "errors": 9,
-      "avgLatencyMs": 1
-    },
-    {
-      "hour": "09:00",
-      "requests": 8361,
+      "requests": 2779,
       "errors": 22,
       "avgLatencyMs": 1
     },
     {
-      "hour": "10:00",
-      "requests": 9615,
-      "errors": 25,
-      "avgLatencyMs": 1
-    },
-    {
-      "hour": "11:00",
-      "requests": 11132,
-      "errors": 30,
-      "avgLatencyMs": 1
-    },
-    {
-      "hour": "12:00",
-      "requests": 11153,
-      "errors": 29,
-      "avgLatencyMs": 1
-    },
-    {
-      "hour": "13:00",
-      "requests": 11367,
-      "errors": 30,
-      "avgLatencyMs": 1
-    },
-    {
-      "hour": "14:00",
-      "requests": 11730,
-      "errors": 30,
-      "avgLatencyMs": 1
-    },
-    {
-      "hour": "15:00",
-      "requests": 12978,
-      "errors": 36,
-      "avgLatencyMs": 1
-    },
-    {
-      "hour": "16:00",
-      "requests": 12999,
-      "errors": 36,
-      "avgLatencyMs": 1
-    },
-    {
-      "hour": "17:00",
-      "requests": 10984,
-      "errors": 30,
-      "avgLatencyMs": 1
-    },
-    {
-      "hour": "18:00",
-      "requests": 12337,
-      "errors": 33,
-      "avgLatencyMs": 1
-    },
-    {
-      "hour": "19:00",
-      "requests": 10225,
+      "hour": "08:00",
+      "requests": 3441,
       "errors": 28,
       "avgLatencyMs": 1
     },
     {
+      "hour": "09:00",
+      "requests": 8257,
+      "errors": 66,
+      "avgLatencyMs": 1
+    },
+    {
+      "hour": "10:00",
+      "requests": 9741,
+      "errors": 74,
+      "avgLatencyMs": 1
+    },
+    {
+      "hour": "11:00",
+      "requests": 11716,
+      "errors": 92,
+      "avgLatencyMs": 1
+    },
+    {
+      "hour": "12:00",
+      "requests": 12376,
+      "errors": 99,
+      "avgLatencyMs": 1
+    },
+    {
+      "hour": "13:00",
+      "requests": 12375,
+      "errors": 100,
+      "avgLatencyMs": 1
+    },
+    {
+      "hour": "14:00",
+      "requests": 12404,
+      "errors": 100,
+      "avgLatencyMs": 1
+    },
+    {
+      "hour": "15:00",
+      "requests": 13359,
+      "errors": 108,
+      "avgLatencyMs": 1
+    },
+    {
+      "hour": "16:00",
+      "requests": 13595,
+      "errors": 113,
+      "avgLatencyMs": 1
+    },
+    {
+      "hour": "17:00",
+      "requests": 11674,
+      "errors": 93,
+      "avgLatencyMs": 1
+    },
+    {
+      "hour": "18:00",
+      "requests": 12550,
+      "errors": 95,
+      "avgLatencyMs": 1
+    },
+    {
+      "hour": "19:00",
+      "requests": 10579,
+      "errors": 86,
+      "avgLatencyMs": 1
+    },
+    {
       "hour": "20:00",
-      "requests": 7572,
-      "errors": 20,
+      "requests": 7460,
+      "errors": 60,
       "avgLatencyMs": 1
     },
     {
       "hour": "21:00",
-      "requests": 5911,
-      "errors": 15,
+      "requests": 5762,
+      "errors": 47,
       "avgLatencyMs": 1
     },
     {
       "hour": "22:00",
-      "requests": 4491,
-      "errors": 11,
+      "requests": 4120,
+      "errors": 32,
       "avgLatencyMs": 1
     },
     {
       "hour": "23:00",
-      "requests": 2322,
-      "errors": 6,
+      "requests": 1937,
+      "errors": 14,
       "avgLatencyMs": 1
     }
   ],
   "topApis": [
     {
       "name": "Auth Service",
-      "version": "v1",
+      "version": "v3",
       "method": "POST",
       "path": "/auth/login",
       "status": "healthy",
-      "requests": 19750,
-      "errorRatePercent": 0.94,
-      "p95LatencyMs": 20,
+      "requests": 27737,
+      "errorRatePercent": 4.02,
+      "p95LatencyMs": 25,
       "ownerTeam": "Platform"
-    },
-    {
-      "name": "User Service",
-      "version": "v2",
-      "method": "GET",
-      "path": "/users/{id}",
-      "status": "healthy",
-      "requests": 79367,
-      "errorRatePercent": 0.1,
-      "p95LatencyMs": 20,
-      "ownerTeam": "User Management"
     },
     {
       "name": "Billing Service",
@@ -219,8 +208,8 @@
       "method": "POST",
       "path": "/billing/charge",
       "status": "degraded",
-      "requests": 11183,
-      "errorRatePercent": 1.05,
+      "requests": 8616,
+      "errorRatePercent": 0.19,
       "p95LatencyMs": 20,
       "ownerTeam": "Payments"
     },
@@ -230,7 +219,7 @@
       "method": "GET",
       "path": "/catalog/items",
       "status": "healthy",
-      "requests": 20110,
+      "requests": 18976,
       "errorRatePercent": 0.05,
       "p95LatencyMs": 20,
       "ownerTeam": "Product"
@@ -241,55 +230,77 @@
       "method": "POST",
       "path": "/notify/send",
       "status": "healthy",
-      "requests": 19984,
+      "requests": 16926,
       "errorRatePercent": 0.05,
       "p95LatencyMs": 20,
       "ownerTeam": "Comms"
+    },
+    {
+      "name": "test",
+      "version": "v1",
+      "method": "GET",
+      "path": "/test",
+      "status": "healthy",
+      "requests": 0,
+      "errorRatePercent": 0,
+      "p95LatencyMs": 0,
+      "ownerTeam": "Test"
+    },
+    {
+      "name": "test2",
+      "version": "v1",
+      "method": "GET",
+      "path": "",
+      "status": "healthy",
+      "requests": 0,
+      "errorRatePercent": 0,
+      "p95LatencyMs": 0,
+      "ownerTeam": "Test"
     }
   ],
   "statusCodes": [
     {
       "code": 200,
-      "count": 150408
+      "count": 153206
     },
     {
       "code": 400,
-      "count": 137
+      "count": 432
     },
     {
       "code": 401,
-      "count": 58
+      "count": 185
     },
     {
       "code": 404,
-      "count": 98
+      "count": 308
     },
     {
       "code": 500,
-      "count": 99
+      "count": 310
     }
   ],
   "topConsumers": [
     {
       "name": "mobile-app",
       "type": "public",
-      "requests": 98018,
+      "requests": 66227,
       "errorRatePercent": 1.3,
-      "lastSeen": "2025-12-08T07:06:15Z"
+      "lastSeen": "2025-12-08T07:14:16Z"
     },
     {
       "name": "partner-portal",
       "type": "partner",
-      "requests": 28862,
+      "requests": 25495,
       "errorRatePercent": 2.7,
-      "lastSeen": "2025-12-08T07:02:25Z"
+      "lastSeen": "2025-12-08T07:11:16Z"
     },
     {
       "name": "internal-batch-jobs",
       "type": "internal",
-      "requests": 49463,
+      "requests": 53574,
       "errorRatePercent": 0.8,
-      "lastSeen": "2025-12-08T06:58:11Z"
+      "lastSeen": "2025-12-08T07:06:09Z"
     }
   ],
   "alerts": [
@@ -301,9 +312,9 @@
       "metric": "errorRatePercent",
       "api": "Billing Service",
       "triggeredAt": "2025-12-08T05:30:00.000Z",
-      "status": "firing",
+      "status": "resolved",
       "firstSeenAt": "2025-12-09T10:26:53.271622Z",
-      "lastStatusChangeAt": "2025-12-09T11:14:13.495823Z",
+      "lastStatusChangeAt": "2025-12-09T18:18:25.761029Z",
       "history": [
         {
           "status": "firing",
@@ -2856,6 +2867,818 @@
         {
           "status": "firing",
           "at": "2025-12-09T11:14:13.495823Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:08:24.412353Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:08:25.420669Z"
+        },
+        {
+          "status": "ticket_open",
+          "at": "2025-12-09T18:08:26.433476Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:08:27.449998Z"
+        },
+        {
+          "status": "ticket_open",
+          "at": "2025-12-09T18:08:29.490449Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:08:30.513504Z"
+        },
+        {
+          "status": "ticket_open",
+          "at": "2025-12-09T18:08:31.531548Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:08:32.551157Z"
+        },
+        {
+          "status": "ticket_open",
+          "at": "2025-12-09T18:08:33.570184Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:08:34.592098Z"
+        },
+        {
+          "status": "ticket_open",
+          "at": "2025-12-09T18:08:36.632324Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:08:37.654528Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:08:40.736219Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:08:41.753148Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:08:42.772538Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:08:45.810770Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:08:46.825994Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:08:48.858595Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:08:51.927036Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:08:54.985457Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:08:57.095615Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:08:58.126492Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:00.233945Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:01.283179Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:03.396759Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:04.453569Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:06.546510Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:08.661633Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:10.750217Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:12.838726Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:17.079342Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:18.110317Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:20.219673Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:21.271523Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:22.327692Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:23.359353Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:24.409044Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:25.441568Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:30.701197Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:31.746533Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:32.807698Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:34.882723Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:39.040062Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:40.078128Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:41.130624Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:42.170440Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:46.390423Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:47.432497Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:49.513558Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:51.573529Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:53.643715Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:54.671946Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:57.779543Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:59.825678Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:10:01.915697Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:10:04.000525Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:10:09.282784Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:10:11.344934Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:10:13.448978Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:10:14.482328Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:10:18.705752Z"
+        },
+        {
+          "status": "ticket_open",
+          "at": "2025-12-09T18:10:19.753427Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:10:23.960419Z"
+        },
+        {
+          "status": "ticket_open",
+          "at": "2025-12-09T18:10:27.114598Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:10:31.318639Z"
+        },
+        {
+          "status": "ticket_open",
+          "at": "2025-12-09T18:10:32.377711Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:10:33.440906Z"
+        },
+        {
+          "status": "ticket_open",
+          "at": "2025-12-09T18:10:36.608794Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:10:37.673686Z"
+        },
+        {
+          "status": "ticket_open",
+          "at": "2025-12-09T18:10:39.802905Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:10:40.861452Z"
+        },
+        {
+          "status": "ticket_open",
+          "at": "2025-12-09T18:10:42.987305Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:10:44.047365Z"
+        },
+        {
+          "status": "ticket_open",
+          "at": "2025-12-09T18:10:45.111512Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:10:46.168412Z"
+        },
+        {
+          "status": "ticket_open",
+          "at": "2025-12-09T18:10:47.228637Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:10:49.336346Z"
+        },
+        {
+          "status": "ticket_open",
+          "at": "2025-12-09T18:10:50.398319Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:10:51.458462Z"
+        },
+        {
+          "status": "ticket_open",
+          "at": "2025-12-09T18:10:54.641405Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:10:59.928395Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:11:00.972477Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:11:02.027355Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:11:07.209877Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:11:09.308740Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:11:10.345964Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:11:12.445440Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:11:13.477834Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:11:15.561606Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:11:17.662915Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:11:20.833850Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:11:22.918164Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:11:26.099134Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:11:27.145544Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:11:30.320396Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:11:31.361742Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:11:33.479057Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:11:40.763415Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:11:46.030943Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:11:47.073795Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:11:49.219668Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:11:51.319072Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:11:56.613123Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:11:57.638755Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:00.724025Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:04.820452Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:06.903672Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:07.947616Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:11.074143Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:15.189345Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:16.223083Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:19.299102Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:20.341504Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:22.395730Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:23.432043Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:25.488909Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:26.539583Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:31.677814Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:32.723472Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:34.773798Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:35.814771Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:37.872581Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:40.992945Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:42.022770Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:43.063549Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:44.091570Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:49.306335Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:50.332696Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:53.435431Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:54.463412Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:58.636850Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:59.665945Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:13:03.809314Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:13:09.994213Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:13:15.136239Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:13:16.153283Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:13:18.235067Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:13:19.263315Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:13:20.287607Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:13:22.338513Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:13:27.549097Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:13:28.578413Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:13:29.619335Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:13:30.636774Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:13:34.798789Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:13:39.942431Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:13:44.125939Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:13:45.154360Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:13:46.196051Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:13:47.224778Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:13:50.351735Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:13:51.375872Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:13:52.407714Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:13:57.549609Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:13:58.580578Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:13:59.600208Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:14:01.663699Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:14:03.707139Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:14:06.842683Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:14:07.866965Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:14:12.021471Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:14:15.101598Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:14:17.170280Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:14:19.236526Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:14:20.277899Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:14:22.334799Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:14:23.368160Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:14:24.402609Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:14:26.486586Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:14:35.761278Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:14:36.799299Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:14:46.047925Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:14:48.133667Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:14:49.155176Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:14:50.197200Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:14:58.440923Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:14:59.462321Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:15:04.615589Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:15:06.676136Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:15:22.158810Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:15:23.197865Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:15:25.265639Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:15:26.304755Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:15:28.363029Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:15:29.413383Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:15:35.591021Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:15:37.669095Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:15:45.911228Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:15:51.122829Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:15:53.181977Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:15:54.223754Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:15:55.261836Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:15:56.301388Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:16:05.637515Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:16:06.697480Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:16:08.803108Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:16:09.871563Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:16:23.371546Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:16:24.396181Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:16:36.738643Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:16:37.784785Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:18:23.688802Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:18:25.761029Z"
         }
       ]
     },
@@ -2869,7 +3692,7 @@
       "triggeredAt": "2025-12-08T04:55:00.000Z",
       "status": "resolved",
       "firstSeenAt": "2025-12-09T10:26:53.272297Z",
-      "lastStatusChangeAt": "2025-12-09T11:14:13.495851Z",
+      "lastStatusChangeAt": "2025-12-09T18:16:22.354838Z",
       "history": [
         {
           "status": "firing",
@@ -4382,2576 +5205,561 @@
         {
           "status": "resolved",
           "at": "2025-12-09T11:14:13.495851Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:08:28.470919Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:08:30.513531Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:08:48.858617Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:08:50.906208Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:08:56.033750Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:08:58.126529Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:08:59.176554Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:01.283241Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:18.110351Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:19.171270Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:20.219709Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:21.271557Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:30.701235Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:31.746573Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:36.952985Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:39.040100Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:47.432565Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:48.479367Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:53.643744Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:54.671974Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:56.740610Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:09:57.779569Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:09:59.825706Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:10:00.869924Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:10:07.163762Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:10:08.224394Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:10:16.592097Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:10:17.663458Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:10:18.705786Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:10:19.753463Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:10:30.261269Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:10:31.318676Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:10:35.540567Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:10:36.608829Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:10:38.733587Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:10:39.802943Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:10:41.917465Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:10:42.987349Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:10:46.168449Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:10:47.228690Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:10:50.398366Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:10:51.458509Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:10:58.861233Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:10:59.928434Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:11:07.209946Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:11:08.267229Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:11:15.561643Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:11:17.662977Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:11:31.361777Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:11:32.423763Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:11:34.507280Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:11:36.590496Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:11:47.073830Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:11:48.154812Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:11:49.219702Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:11:52.387383Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:11:58.672479Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:11:59.698535Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:06.903699Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:07.947644Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:10.024571Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:12.097880Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:13.121944Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:14.152795Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:16.223113Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:17.247416Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:22.395759Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:23.432062Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:24.449553Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:26.539609Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:31.677842Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:32.723498Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:34.773848Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:35.814802Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:44.091600Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:45.139510Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:48.265315Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:49.306361Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:56.538137Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:57.593613Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:12:58.636892Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:12:59.665956Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:13:05.862020Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:13:06.903131Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:13:19.263333Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:13:21.322807Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:13:24.416455Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:13:25.466285Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:13:45.154386Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:13:47.224809Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:13:51.375891Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:13:52.407741Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:14:01.663710Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:14:03.707166Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:14:05.799143Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:14:07.866990Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:14:14.064588Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:14:16.141887Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:14:19.236572Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:14:20.277944Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:14:24.402639Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:14:25.445885Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:14:27.503127Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:14:28.531127Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:14:30.582754Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:14:31.617872Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:14:42.967785Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:14:44.005541Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:14:49.155201Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:14:50.197230Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:14:54.309136Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:14:55.348035Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:14:57.403682Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:14:58.440934Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:15:01.507398Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:15:02.553336Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:15:05.632962Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:15:06.676164Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:15:09.767967Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:15:10.813105Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:15:23.197896Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:15:24.238180Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:15:30.433721Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:15:31.470355Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:15:47.995151Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:15:49.049040Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:15:54.223782Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:15:55.261864Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:15:56.301415Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:15:57.341608Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:16:06.697516Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:16:07.760950Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:16:14.068345Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:16:15.123869Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:16:17.213903Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:16:18.248163Z"
+        },
+        {
+          "status": "firing",
+          "at": "2025-12-09T18:16:19.264768Z"
+        },
+        {
+          "status": "resolved",
+          "at": "2025-12-09T18:16:22.354838Z"
         }
       ]
     }
   ],
-  "openTickets": [
-    {
-      "id": "ALT-1",
-      "severity": "high",
-      "title": "Billing Service error rate",
-      "message": "Error rate above 3% for 15 minutes",
-      "metric": "errorRatePercent",
-      "api": "Billing Service",
-      "triggeredAt": "2025-12-08T05:30:00.000Z",
-      "status": "firing",
-      "firstSeenAt": "2025-12-09T10:26:53.271622Z",
-      "lastStatusChangeAt": "2025-12-09T11:14:13.495823Z",
-      "history": [
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:26:55.281371Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:26:56.286907Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:27:00.312254Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:27:02.325027Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:27:07.359004Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:27:08.364439Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:27:09.369585Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:27:10.374945Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:27:12.387426Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:27:13.393013Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:27:14.398683Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:27:15.406343Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:27:18.426965Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:27:19.434903Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:27:23.460771Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:27:26.476365Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:27:27.479655Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:27:30.494256Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:27:34.506953Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:27:35.511519Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:27:37.521072Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:51:37.037943Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:51:38.040320Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:51:39.043461Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:51:40.047498Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:51:41.054006Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:51:46.099783Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:51:47.106576Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:51:52.149140Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:51:53.155572Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:51:54.164919Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:51:55.172528Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:51:57.187697Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:51:58.195528Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:52:00.214874Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:52:01.223518Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:52:02.234923Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:52:05.261047Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:52:06.268513Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:52:07.276408Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:52:08.288119Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:52:09.295709Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:52:10.305383Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:52:12.319601Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:52:13.326312Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:52:15.337606Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:52:16.348421Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:52:21.401784Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:52:22.414514Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:52:27.452667Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:52:28.459288Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:52:31.478056Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:52:33.492449Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:52:35.505285Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:52:36.511618Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:52:37.518787Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:52:39.532267Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:52:42.556339Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:52:46.588886Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:52:49.611223Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:52:50.620876Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:52:51.630268Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:52:52.637054Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:52:53.644376Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:52:56.668867Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:52:57.675128Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:52:58.682529Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:53:00.699930Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:53:01.706951Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:53:03.722223Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:53:04.730778Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:53:05.737308Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:53:06.744385Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:53:08.761648Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:53:09.769530Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:53:10.776664Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:53:12.789807Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:53:15.816637Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:53:18.842417Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:53:19.851984Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:53:20.859194Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:53:23.886716Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:53:24.894392Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:53:25.902064Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:53:26.910993Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:53:27.922456Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:53:29.946917Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:53:30.956526Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:53:32.972408Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:53:33.980575Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:53:34.988895Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:53:35.998937Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:53:37.009187Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:53:38.016009Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:53:41.044379Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:53:42.052585Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:53:43.062943Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:53:44.071599Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:53:45.080104Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:53:46.089050Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:53:47.098241Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:53:48.106697Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:53:49.116686Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:53:52.143840Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:53:54.161156Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:53:56.180098Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:53:57.188829Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:53:58.200395Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:54:00.220960Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:54:02.239708Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:54:04.249160Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:54:06.265994Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:54:07.275309Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:54:10.299786Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:54:11.309106Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:54:15.343174Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:54:16.353599Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:54:17.363879Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:54:18.372772Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:54:19.382095Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:54:20.393834Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:54:21.399593Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:54:23.417919Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:54:25.441262Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:54:26.451350Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:54:30.498918Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:54:32.522915Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:54:35.556658Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:54:39.608267Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:54:44.653644Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:54:45.665241Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:54:48.702308Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:54:50.759031Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:54:51.788095Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:54:53.805598Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:54:55.818077Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:54:56.829196Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:54:58.849656Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:54:59.855167Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:55:00.862241Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:55:01.867775Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:55:03.883885Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:55:08.938142Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:55:09.946614Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:55:11.965458Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:55:13.989995Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:55:17.026180Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:55:18.039090Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:55:23.093519Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:55:24.102469Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:55:25.118535Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:55:28.153899Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:55:29.165165Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:55:34.220100Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:55:35.226366Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:55:39.279184Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:55:42.319330Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:55:47.374464Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:55:48.382862Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:55:49.397074Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:55:51.425411Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:55:53.449002Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:55:54.461037Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:55:56.486031Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:55:57.496452Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:55:59.517550Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:56:01.541820Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:56:02.551698Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:56:03.566609Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:56:04.578634Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:56:06.603718Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:56:07.616644Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:56:08.629019Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:56:09.636870Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:56:11.664525Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:56:12.677928Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:56:13.692336Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:56:17.749872Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:56:18.765546Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:56:19.779193Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:56:20.788830Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:56:23.835547Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:56:25.857363Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:56:26.864516Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:56:27.882321Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:56:29.903796Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:56:31.925089Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:56:32.939009Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:56:33.957460Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:56:35.978356Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:56:41.039034Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:56:42.049821Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:56:43.062640Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:56:44.072883Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:56:45.089438Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:56:46.101166Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:56:51.183063Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:56:55.233241Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:57:00.302042Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:57:01.313499Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:57:06.387963Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:57:09.419054Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:57:10.430331Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:57:11.445145Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:57:14.489719Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:57:15.498457Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:57:17.512655Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:57:21.557472Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:57:23.586248Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:57:24.594317Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:57:27.639648Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:57:28.652141Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:57:29.666575Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:57:32.698796Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:57:33.713523Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:57:35.734258Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:57:36.747123Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:57:37.754953Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:57:40.794464Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:57:44.829836Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:57:49.885735Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:57:54.946557Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:57:55.956629Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:57:57.979449Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:58:03.062532Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:58:04.078791Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:58:06.108813Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:58:08.131624Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:58:11.179953Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:58:12.192180Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:58:13.206473Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:58:14.218120Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:58:19.303993Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:58:21.328043Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:58:23.352299Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:58:24.365661Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:58:26.398703Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:58:31.464040Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:58:36.555941Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:58:37.568101Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:58:38.583518Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:58:39.596382Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:58:40.612767Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:58:45.678480Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T10:58:49.747609Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:58:50.765042Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:58:54.831533Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:58:57.884551Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:58:58.902168Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:59:01.959526Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:59:02.977481Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:59:05.006830Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:59:09.077964Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:59:11.114421Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:59:13.147201Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:59:14.166106Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:59:16.202252Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:59:17.217921Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:59:18.235688Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:59:19.252705Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:59:20.269858Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:59:22.304448Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:59:24.335531Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:59:25.350600Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:59:27.406943Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:59:28.417399Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:59:29.433704Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:59:33.501710Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:59:35.549167Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:59:36.569015Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:59:37.585989Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:59:38.602513Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:59:40.635376Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:59:41.643562Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:59:42.660613Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:59:45.714430Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:59:47.756951Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:59:48.778696Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:59:51.854311Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:59:52.878461Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:59:53.901626Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T10:59:57.997984Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T10:59:59.020282Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:00:00.051047Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:00:04.164449Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:00:06.215313Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:00:07.240599Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:00:09.287671Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:00:12.353434Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:00:13.376614Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:00:14.410596Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:00:15.440802Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:00:16.463500Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:00:17.486177Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:00:22.614854Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:00:23.642146Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:00:24.662793Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:00:25.685110Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:00:28.770083Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:00:30.819626Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:00:32.874758Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:00:35.977948Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:00:37.007519Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:00:38.032970Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:00:40.087583Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:00:45.211617Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:00:46.229188Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:00:47.250490Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:00:48.280548Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:00:49.311326Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:00:50.340662Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:00:53.416045Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:00:54.444209Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:00:56.498264Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:00:58.557199Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:00:59.583509Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:01:00.612658Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:01:05.752006Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:01:06.768952Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:01:08.819198Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:01:09.845602Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:01:11.896718Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:01:16.000573Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:01:18.053855Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:01:19.078322Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:01:20.108958Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:01:21.133494Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:01:23.186079Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:01:24.213347Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:01:25.239472Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:01:27.286567Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:01:29.350698Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:01:30.387153Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:01:33.471960Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:01:38.622524Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:01:41.696334Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:01:42.727392Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:01:43.748747Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:01:44.781122Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:01:45.804012Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:01:49.919500Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:01:51.962889Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:01:52.987623Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:01:56.051290Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:01:57.088434Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:01:59.136790Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:02:00.174709Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:02:02.212059Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:02:03.249832Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:02:04.274023Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:02:05.299352Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:02:07.343146Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:02:12.495184Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:02:14.538377Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:02:15.564053Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:02:16.590700Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:02:18.651746Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:02:22.759615Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:02:23.789551Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:02:24.807750Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:02:26.863961Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:02:27.885690Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:02:29.943167Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:02:30.967269Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:02:35.089263Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:02:37.135072Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:02:39.197309Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:02:40.225028Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:02:41.246666Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:02:43.310714Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:02:45.357826Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:02:46.385188Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:02:47.421598Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:02:49.482727Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:02:51.548852Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:02:52.575122Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:02:53.600923Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:02:54.625020Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:02:55.654913Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:03:00.815924Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:03:01.839792Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:03:02.874040Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:03:03.910287Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:03:04.940405Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:03:07.007543Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:03:09.078791Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:03:14.228494Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:03:15.247996Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:03:16.276595Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:03:17.308974Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:03:19.372463Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:03:21.441557Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:03:22.484796Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:03:23.517723Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:03:24.547994Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:03:25.581976Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:03:28.671521Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:03:33.836384Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:03:34.856520Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:03:37.977732Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:03:41.082071Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:03:42.109984Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:03:43.145320Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:03:44.183467Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:03:46.253370Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:03:48.321335Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:03:53.489910Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:03:54.511221Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:03:55.544064Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:04:00.719054Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:04:01.741670Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:04:02.770156Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:04:05.871252Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:04:06.903881Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:04:07.939495Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:04:08.974609Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:04:12.073725Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:04:14.133118Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:04:16.190998Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:04:17.219061Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:04:18.246402Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:04:19.284198Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:04:20.311710Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:04:21.345428Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:04:22.373678Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:04:23.411446Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:04:24.444601Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:04:25.469227Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:04:29.599699Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:04:30.621973Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:04:31.656788Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:04:33.725764Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:04:34.754224Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:04:38.863237Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:04:39.887975Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:04:40.919968Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:04:41.940524Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:04:42.965364Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:04:48.131423Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:04:49.155887Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:04:50.197272Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:04:51.234857Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:04:52.274649Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:04:53.316094Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:04:57.466243Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:04:58.503688Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:04:59.542446Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:05:01.626318Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:05:02.660030Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:05:03.691005Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:05:04.734404Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:05:05.765475Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:05:06.801735Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:05:07.840825Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:05:10.950036Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:05:14.071373Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:05:16.140951Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:05:19.269673Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:05:21.342386Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:05:23.409435Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:05:26.534327Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:05:28.619928Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:05:29.652636Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:05:31.736952Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:05:32.753796Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:05:33.780695Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:05:34.793282Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:05:35.813646Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:05:38.895738Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:05:39.920212Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:05:41.969690Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:05:42.996388Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:05:46.031824Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:05:49.098242Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:05:50.125875Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:05:54.221571Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:05:56.265402Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:05:57.285116Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:05:58.325251Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:06:01.411520Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:06:02.439640Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:06:03.469709Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:06:04.496329Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:06:08.609205Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:06:09.635270Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:06:11.694250Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:06:16.828448Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:06:17.858054Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:06:19.914251Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:06:24.046837Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:06:25.064680Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:06:27.128962Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:06:29.179623Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:06:31.244066Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:06:33.293990Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:06:34.326178Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:06:35.353969Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:06:36.379648Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:06:39.462325Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:06:40.498019Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:06:42.544533Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:06:45.642062Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:06:48.707349Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:06:50.768509Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:06:52.809627Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:06:55.875108Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:06:56.901189Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:06:57.917877Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:06:58.946003Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:07:02.012311Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:07:03.044966Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:07:05.099809Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:07:06.127421Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:07:07.159075Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:07:08.196493Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:07:09.219940Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:07:10.243335Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:07:12.297373Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:07:17.419007Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:07:18.438232Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:07:19.476876Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:07:21.531460Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:07:22.561289Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:07:23.592389Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:07:24.612869Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:07:27.691631Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:07:32.857606Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:07:33.875685Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:07:34.905120Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:07:36.971486Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:07:41.112247Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:07:42.141418Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:07:43.168667Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:07:44.195182Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:07:49.339210Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:07:50.364265Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:07:55.501048Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:07:56.523136Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:07:57.553925Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:07:58.586307Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:08:00.653741Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:08:05.824603Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:08:06.847857Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:08:08.911499Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:08:14.078974Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:08:15.098787Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:08:16.120334Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:08:20.268534Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:08:21.303521Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:08:22.321628Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:08:23.351042Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:08:24.378571Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:08:25.408695Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:08:26.445750Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:08:27.473143Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:08:30.561931Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:08:31.596964Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:08:32.607361Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:08:36.710042Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:08:41.884638Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:08:42.906849Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:08:44.976524Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:08:46.006742Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:08:51.174610Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:08:52.196903Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:08:53.232937Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:08:58.442050Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:08:59.489749Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:09:00.528352Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:09:01.577747Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:09:04.716658Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:09:05.770610Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:09:06.824641Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:09:09.974028Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:09:12.080677Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:09:13.128241Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:09:15.233883Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:09:16.290962Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:09:19.444406Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:10:59.894126Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:11:00.904500Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:11:03.960487Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:11:06.048992Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:11:09.248996Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:11:10.293185Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:11:11.360973Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:11:13.492435Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:11:14.588774Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:11:15.661703Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:11:17.765252Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:11:18.831745Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:11:24.089884Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:11:25.128684Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:11:27.229848Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:11:28.310267Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:11:30.407066Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:11:32.514106Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:11:33.559037Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:11:34.610746Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:11:35.664331Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:11:36.715501Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:11:37.781160Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:11:38.837901Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:11:39.898186Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:11:41.989948Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:11:43.037048Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:11:45.112955Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:11:46.164381Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:11:47.215410Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:11:48.261228Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:11:49.313723Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:11:51.409983Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:11:52.455989Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:11:54.571062Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:11:56.621951Z"
-        },
-        {
-          "status": "resolved",
-          "at": "2025-12-09T11:13:38.489518Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:13:39.500140Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:13:41.535405Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:13:44.634517Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:13:45.666698Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:13:47.727518Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:13:48.760219Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:13:49.786196Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:13:50.820179Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:13:52.873468Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:13:53.903558Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:13:54.932543Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:13:55.966404Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:13:58.022728Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:13:59.036458Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:14:00.052315Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:14:04.194258Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:14:07.300577Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:14:08.334977Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:14:09.365236Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:14:10.399355Z"
-        },
-        {
-          "status": "ticket_open",
-          "at": "2025-12-09T11:14:12.455808Z"
-        },
-        {
-          "status": "firing",
-          "at": "2025-12-09T11:14:13.495823Z"
-        }
-      ]
-    }
-  ]
+  "openTickets": []
 }

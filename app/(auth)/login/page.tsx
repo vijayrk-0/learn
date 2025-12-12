@@ -76,37 +76,34 @@ export default function Login() {
                     </Alert>
                 )}
 
-<TextField
-  margin="normal"
-  required
-  fullWidth
-  id="email"
-  placeholder="Email address"
-  name="email"
-  autoComplete="email"
-  autoFocus
-  value={email}
-  onChange={(e) => setEmail(e.target.value)}
-  slotProps={{
-    input: {
-      startAdornment: (
-        <InputAdornment
-          position="start"
-          sx={{
-            pl: 1,           // padding left inside adornment
-            pr: 1,
-            color: "text.secondary",
-          }}
-        >
-          <EmailOutlined fontSize="small" />
-        </InputAdornment>
-      ),
-    },
-  }}
-/>
-
-
-
+                <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="email"
+                    placeholder="Email address"
+                    name="email"
+                    autoComplete="email"
+                    autoFocus
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    slotProps={{
+                        input: {
+                            startAdornment: (
+                                <InputAdornment
+                                    position="start"
+                                    sx={{
+                                        pl: 1,           // padding left inside adornment
+                                        pr: 1,
+                                        color: "text.secondary",
+                                    }}
+                                >
+                                    <EmailOutlined fontSize="small" />
+                                </InputAdornment>
+                            ),
+                        },
+                    }}
+                />
 
                 <PasswordField
                     value={password}

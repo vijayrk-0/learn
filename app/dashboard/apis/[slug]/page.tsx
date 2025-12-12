@@ -1,23 +1,6 @@
-"use client";
-
-import React from "react";
-import { useParams, useRouter } from "next/navigation";
+import { notFound } from "next/navigation";
+import { Box, Paper, Typography, Chip, Divider, Card, CardContent, Stack, Alert } from "@mui/material";
 import {
-    Box,
-    Paper,
-    Typography,
-    Chip,
-    Divider,
-    Button,
-    Card,
-    CardContent,
-    Stack,
-    Alert,
-    IconButton,
-    Tooltip,
-} from "@mui/material";
-import {
-    ArrowBack as ArrowBackIcon,
     CheckCircle as CheckCircleIcon,
     Warning as WarningIcon,
     Error as ErrorIcon,
@@ -26,137 +9,174 @@ import {
     ErrorOutline as ErrorOutlineIcon,
     People as PeopleIcon,
 } from "@mui/icons-material";
-import { useGetDashboardDataListQuery } from "@/store/rtk/dashboardRTK";
 import { topApiInterface } from "@/app/dashboard/dashboardSchema";
+import BackButton from "@/app/dashboard/components/BackButton";
 
-export default function ApiDetailPage() {
-    const params = useParams();
-    const router = useRouter();
-    const slug = params.slug as string;
+// ISR Configuration: Revalidate every 60 seconds
+export const revalidate = 60;
 
-    // Decode the slug to extract name, method, and path
-    const decodedSlug = decodeURIComponent(slug);
-    const parts = decodedSlug.split("-");
-
-    // Since path can contain hyphens, we need to reconstruct it
-    const name = parts[0];
-    const method = parts[1];
-    const path = parts.slice(2).join("-");
-
-    // Fetch all APIs and find the matching one
-    const { data, isLoading, isError, error } = useGetDashboardDataListQuery({
-        page: 1,
-        limit: 1000, 
-        name,
-        method,
-        path,
-    });
-
-    const api = data?.data?.[0];
-
-    const getStatusColor = (status: string) => {
-        switch (status) {
-            case "healthy":
-                return "success";
-            case "degraded":
-                return "warning";
-            case "down":
-                return "error";
-            default:
-                return "default";
-        }
-    };
-
-    // Get status icon based on status
-    const getStatusIcon = (status: string) => {
-        switch (status) {
-            case "healthy":
-                return <CheckCircleIcon />;
-            case "degraded":
-                return <WarningIcon />;
-            case "down":
-                return <ErrorIcon />;
-            default:
-                return null;
-        }
-    };
-
-    // Get method color based on method
-    const getMethodColor = (method: string) => {
-        switch (method) {
-            case "GET":
-                return "primary";
-            case "POST":
-                return "success";
-            case "PUT":
-                return "warning";
-            case "DELETE":
-                return "error";
-            default:
-                return "default";
-        }
-    };
-
-    // Handle loading state
-    if (isLoading) {
-        return (
-            <Box sx={{ p: 3 }}>
-                <Typography>Loading...</Typography>
-            </Box>
-        );
+// Helper to get base URL that works in all environments
+function getBaseUrl() {
+    if (typeof window !== 'undefined') {
+        // Browser: use relative URL
+        return '';
     }
-
-    // Handle error state
-    if (isError) {
-        return (
-            <Box sx={{ p: 3 }}>
-                <Alert severity="error">
-                    Error loading API details: {JSON.stringify(error)}
-                </Alert>
-                <Button
-                    variant="contained"
-                    startIcon={<ArrowBackIcon />}
-                    onClick={() => router.push("/dashboard/apis")}
-                    sx={{ mt: 2 }}
-                >
-                    Back to API List
-                </Button>
-            </Box>
-        );
+    if (process.env.VERCEL_URL) {
+        // Vercel deployment
+        return `https://${process.env.VERCEL_URL}`;
     }
+    if (process.env.NEXT_PUBLIC_APP_URL) {
+        // Custom app URL
+        return process.env.NEXT_PUBLIC_APP_URL;
+    }
+    // Development fallback
+    return `http://localhost:${process.env.PORT || 3000}`;
+}
+
+// Generate static params for pre-rendering at build time
+export async function generateStaticParams() {
+    try {
+        const baseUrl = getBaseUrl();
+        const response = await fetch(`${baseUrl}/api/dashboard/api-lists?page=1&limit=50`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'is-ISR': 'true',
+            },
+            next: { revalidate: 60 }, // Cache this API call for 60 seconds
+            cache: 'no-store', // Prevent build-time caching issues
+        });
+
+        if (!response.ok) {
+            console.warn("Failed to fetch APIs for static generation");
+            return [];
+        }
+
+        const data = await response.json();
+        const apis = data.data || [];
+
+        return apis.map((api: topApiInterface) => ({
+            slug: `${`${api.name}-${api.method}-${api.path}`.replace(/\//g, '_')}`,
+        }));
+    } catch (error) {
+        console.error("Error generating static params:", error);
+        return [];
+    }
+}
+
+// Fetch API data with ISR caching
+async function getApiData(slug: string): Promise<topApiInterface | null> {
+    try {
+        const params = new URLSearchParams({
+            page: '1',
+            limit: '1000',
+        });
+
+        if (/^\d+$/.test(slug)) {
+            params.append('id', slug);
+        } else {
+            const parts = slug.split('-');
+            if (parts.length >= 2) {
+                const name = decodeURIComponent(parts[0]);
+                const method = decodeURIComponent(parts[1]);
+                const path = decodeURIComponent(parts.slice(2).join('-').replace(/_/g, '/'));
+
+                params.append('name', name);
+                params.append('method', method);
+                params.append('path', path);
+            }
+        }
+
+        const baseUrl = getBaseUrl();
+        // ISR: Cache the fetch for 60 seconds, then revalidate in background
+        const response = await fetch(`${baseUrl}/api/dashboard/api-lists?${params}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'is-ISR': 'true',
+            },
+            next: { revalidate: 60 }, // Cache this API call for 60 seconds
+        });
+        if (!response.ok) {
+            console.error(`API request failed with status: ${response.status}`);
+            return null;
+        }
+
+        const data = await response.json();
+        return data.data?.[0] || null;
+    } catch (error) {
+        console.error("Error fetching API data:", error);
+        return null;
+    }
+}
+
+// Helper functions
+function getStatusColor(status: string): "success" | "warning" | "error" | "default" {
+    switch (status?.toLowerCase()) {
+        case "healthy":
+            return "success";
+        case "degraded":
+            return "warning";
+        case "down":
+            return "error";
+        default:
+            return "default";
+    }
+}
+
+// Get status icon
+function getStatusIcon(status: string) {
+    switch (status?.toLowerCase()) {
+        case "healthy":
+            return <CheckCircleIcon />;
+        case "degraded":
+            return <WarningIcon />;
+        case "down":
+            return <ErrorIcon />;
+        default:
+            return <CheckCircleIcon />;
+    }
+}
+
+
+// Get method color
+function getMethodColor(method: string): "primary" | "success" | "warning" | "error" | "default" {
+    switch (method?.toUpperCase()) {
+        case "GET":
+            return "primary";
+        case "POST":
+            return "success";
+        case "PUT":
+            return "warning";
+        case "DELETE":
+            return "error";
+        default:
+            return "default";
+    }
+}
+
+// Server Component with ISR
+export default async function ApiDetailPage({
+    params
+}: {
+    params: Promise<{ slug: string }> 
+}) {
+    // Await params
+    const { slug } = await params;
+    const api = await getApiData(slug);
 
     if (!api) {
-        return (
-            <Box sx={{ p: 3 }}>
-                <Alert severity="warning">API not found</Alert>
-                <Button
-                    variant="contained"
-                    startIcon={<ArrowBackIcon />}
-                    onClick={() => router.push("/dashboard/apis")}
-                    sx={{ mt: 2 }}
-                >
-                    Back to API List
-                </Button>
-            </Box>
-        );
+        notFound();
     }
+
+    // Get requests, error rate, latency
+    const requests = api.requests ?? 0;
+    const errorRate = api.errorRatePercent ?? 0;
+    const latency = api.p95LatencyMs ?? 0;
 
     return (
         <Box sx={{ width: "100%", p: 3 }}>
             {/* Header Section */}
             <Stack direction="row" alignItems="center" spacing={2} mb={3}>
-                <Tooltip title="Back to API List">
-                    <IconButton
-                        onClick={() => router.push("/dashboard/apis")}
-                        sx={{
-                            bgcolor: "primary.main",
-                            color: "white",
-                            "&:hover": { bgcolor: "primary.dark" }
-                        }}
-                    >
-                        <ArrowBackIcon />
-                    </IconButton>
-                </Tooltip>
+                <BackButton />
                 <Typography variant="h4" fontWeight="bold" color="primary">
                     {api.name}
                 </Typography>
@@ -175,13 +195,7 @@ export default function ApiDetailPage() {
                 </Typography>
                 <Divider sx={{ mb: 2 }} />
 
-                {/* Using Box with flex for responsive layout */}
-                <Box sx={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    gap: 3,
-                    mb: 3
-                }}>
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 3, mb: 3 }}>
                     {/* Method */}
                     <Box sx={{ flex: "1 1 200px", minWidth: "200px" }}>
                         <Typography variant="body2" color="text.secondary" gutterBottom>
@@ -201,7 +215,7 @@ export default function ApiDetailPage() {
                             Version
                         </Typography>
                         <Typography variant="h6" fontWeight="medium">
-                            {api.version}
+                            {api.version || "N/A"}
                         </Typography>
                     </Box>
 
@@ -213,7 +227,7 @@ export default function ApiDetailPage() {
                         <Stack direction="row" alignItems="center" spacing={1}>
                             <PeopleIcon color="action" />
                             <Typography variant="h6" fontWeight="medium">
-                                {api.ownerTeam}
+                                {api.ownerTeam || "Unassigned"}
                             </Typography>
                         </Stack>
                     </Box>
@@ -224,10 +238,11 @@ export default function ApiDetailPage() {
                             Status
                         </Typography>
                         <Typography variant="h6" fontWeight="medium" color={`${getStatusColor(api.status)}.main`}>
-                            {api.status.toUpperCase()}
+                            {api.status?.toUpperCase() || "UNKNOWN"}
                         </Typography>
                     </Box>
                 </Box>
+
                 {/* Endpoint Path */}
                 <Box>
                     <Typography variant="body2" color="text.secondary" gutterBottom>
@@ -240,9 +255,10 @@ export default function ApiDetailPage() {
                             fontFamily: "monospace",
                             fontSize: "0.95rem",
                             borderRadius: 1,
+                            wordBreak: "break-all",
                         }}
                     >
-                        {api.path}
+                        {api.path || "N/A"}
                     </Paper>
                 </Box>
             </Paper>
@@ -252,13 +268,7 @@ export default function ApiDetailPage() {
                 Performance Metrics
             </Typography>
 
-            {/* Using Box with flex for responsive cards */}
-            <Box sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 3,
-                mb: 3
-            }}>
+            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 3, mb: 3 }}>
                 {/* Requests Card */}
                 <Box sx={{ flex: "1 1 300px", minWidth: "280px" }}>
                     <Card
@@ -279,7 +289,7 @@ export default function ApiDetailPage() {
                                 <TrendingUpIcon color="primary" fontSize="large" />
                             </Stack>
                             <Typography variant="h3" fontWeight="bold" color="primary.main">
-                                {api.requests.toLocaleString()}
+                                {requests.toLocaleString()}
                             </Typography>
                             <Typography variant="body2" color="text.secondary" mt={1}>
                                 Total number of API calls
@@ -295,7 +305,7 @@ export default function ApiDetailPage() {
                         sx={{
                             height: "100%",
                             borderLeft: 4,
-                            borderColor: api.errorRatePercent > 1 ? "error.main" : "success.main",
+                            borderColor: errorRate > 1 ? "error.main" : "success.main",
                             transition: "transform 0.2s",
                             "&:hover": { transform: "translateY(-4px)" },
                         }}
@@ -306,16 +316,16 @@ export default function ApiDetailPage() {
                                     Error Rate
                                 </Typography>
                                 <ErrorOutlineIcon
-                                    color={api.errorRatePercent > 1 ? "error" : "success"}
+                                    color={errorRate > 1 ? "error" : "success"}
                                     fontSize="large"
                                 />
                             </Stack>
                             <Typography
                                 variant="h3"
                                 fontWeight="bold"
-                                color={api.errorRatePercent > 1 ? "error.main" : "success.main"}
+                                color={errorRate > 1 ? "error.main" : "success.main"}
                             >
-                                {api.errorRatePercent}%
+                                {errorRate}%
                             </Typography>
                             <Typography variant="body2" color="text.secondary" mt={1}>
                                 Percentage of failed requests
@@ -336,7 +346,6 @@ export default function ApiDetailPage() {
                             "&:hover": { transform: "translateY(-4px)" },
                         }}
                     >
-                        {/* P95 Latency Card */}
                         <CardContent>
                             <Stack direction="row" justifyContent="space-between" alignItems="center" mb={2}>
                                 <Typography variant="h6" color="text.secondary">
@@ -345,7 +354,7 @@ export default function ApiDetailPage() {
                                 <SpeedIcon color="warning" fontSize="large" />
                             </Stack>
                             <Typography variant="h3" fontWeight="bold" color="warning.main">
-                                {api.p95LatencyMs}
+                                {latency}
                                 <Typography component="span" variant="h6" color="text.secondary" ml={1}>
                                     ms
                                 </Typography>
@@ -360,17 +369,17 @@ export default function ApiDetailPage() {
 
             {/* Health Status Alert */}
             <Box sx={{ mt: 3 }}>
-                {api.status === "healthy" && (
+                {api.status?.toLowerCase() === "healthy" && (
                     <Alert severity="success" icon={<CheckCircleIcon />}>
                         This API is operating normally with no detected issues.
                     </Alert>
                 )}
-                {api.status === "degraded" && (
+                {api.status?.toLowerCase() === "degraded" && (
                     <Alert severity="warning" icon={<WarningIcon />}>
                         This API is experiencing some performance degradation. Monitoring recommended.
                     </Alert>
                 )}
-                {api.status === "down" && (
+                {api.status?.toLowerCase() === "down" && (
                     <Alert severity="error" icon={<ErrorIcon />}>
                         This API is currently down. Immediate attention required.
                     </Alert>

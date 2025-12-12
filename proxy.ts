@@ -10,6 +10,11 @@ export async function proxy(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith("/api/auth")) {
     return NextResponse.next();
   }
+  // get is-ISR header
+  const isISR = request.headers.get("is-ISR");
+  if (isISR) {
+    return NextResponse.next();
+  }
 
   // get token from header or cookie
   const authHeader = request.headers.get("authorization");

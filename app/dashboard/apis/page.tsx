@@ -18,17 +18,20 @@ import { topApiInterface } from "@/app/dashboard/dashboardSchema";
 type Order = "asc" | "desc";
 
 export default function ApisPage() {
+    // Sorting State
     const [order, setOrder] = useState<Order>("asc");
     const [orderBy, setOrderBy] = useState<keyof topApiInterface>("name");
 
+    // Pagination State
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
 
     // Filters State
-    const [filters, setFilters] = useState<Record<string, string>>({}); // Pending input
-    const [activeFilters, setActiveFilters] = useState<Record<string, string>>({}); // Active applied
+    const [filters, setFilters] = useState<Record<string, string>>({});
+    const [activeFilters, setActiveFilters] = useState<Record<string, string>>({});
     const [showFilters, setShowFilters] = useState(false);
 
+    // Dialog State
     const [editOpen, setEditOpen] = useState(false);
     const [deleteOpen, setDeleteOpen] = useState(false);
     const [editingApi, setEditingApi] = useState<topApiInterface | null>(null);
@@ -52,6 +55,7 @@ export default function ApisPage() {
         [page, rowsPerPage, activeFilters]
     );
 
+    // API State
     const { data, isLoading, isFetching, isError, error } = useGetDashboardDataListQuery(queryArgs);
     const [addApi, { isLoading: isAdding }] = useAddDashboardDataListMutation();
     const [updateApi, { isLoading: isUpdating }] = useUpdateDashboardDataListMutation();
@@ -69,10 +73,11 @@ export default function ApisPage() {
         setOrderBy(property);
     };
 
+    // Pagination Handlers
     const handlePageChange = (_: unknown, newPage: number) => {
         setPage(newPage);
     };
-
+    // Rows per page handler
     const handleRowsPerPageChange = (
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
@@ -80,7 +85,7 @@ export default function ApisPage() {
         setPage(0);
     };
 
-    // Update pending filters only
+    // Filter Handlers
     const handleFilterChange = (property: keyof topApiInterface, value: string) => {
         setFilters((prev) => ({ ...prev, [property]: value }));
     };
@@ -91,20 +96,24 @@ export default function ApisPage() {
         setPage(0);
     };
 
+    // Dialog Handlers
     const handleOpenCreate = () => {
         setEditingApi(null);
         setEditOpen(true);
     };
 
+    // Open Edit Dialog
     const handleOpenEdit = (api: topApiInterface) => {
         setEditingApi(api);
         setEditOpen(true);
     };
 
+    // Close Edit Dialog
     const handleCloseEdit = () => {
         setEditOpen(false);
     };
 
+    // Save API
     const handleSaveApi = async (api: topApiInterface) => {
         try {
             if (editingApi) {
@@ -131,15 +140,18 @@ export default function ApisPage() {
         }
     };
 
+    // Open Delete Dialog
     const handleOpenDelete = (api: topApiInterface) => {
         setApiToDelete(api);
         setDeleteOpen(true);
     };
 
+    // Close Delete Dialog
     const handleCloseDelete = () => {
         setDeleteOpen(false);
     };
 
+    // Confirm Delete
     const handleConfirmDelete = async () => {
         if (!apiToDelete) return;
         try {
@@ -163,9 +175,11 @@ export default function ApisPage() {
                 alignItems="center"
                 mb={2}
             >
+                {/* Header */}
                 <Typography variant="h5" fontWeight="bold" color="primary">
                     API Inventory
                 </Typography>
+                {/* Actions */}
                 <Stack direction="row" gap={1}>
                     <Button
                         variant={showFilters ? "outlined" : "text"}
@@ -212,12 +226,13 @@ export default function ApisPage() {
                 onRowsPerPageChange={handleRowsPerPageChange}
                 onEdit={handleOpenEdit}
                 onDelete={handleOpenDelete}
-                filters={filters} // Pass pending filters to UI
+                filters={filters}
                 onFilterChange={handleFilterChange}
                 showFilters={showFilters}
-                loading={loading} // Pass loading state
+                loading={loading}
             />
 
+            {/* Dialogs for edit and Create */}
             <ApiEditDialog
                 open={editOpen}
                 onClose={handleCloseEdit}
@@ -226,6 +241,7 @@ export default function ApisPage() {
                 loading={isAdding || isUpdating}
             />
 
+            {/* Dialogs for delete */}
             <ApiDeleteDialog
                 open={deleteOpen}
                 onClose={handleCloseDelete}

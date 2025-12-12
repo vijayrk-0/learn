@@ -60,7 +60,7 @@ export async function GET(request: Request) {
             const value = filters[field];
             if (!value) return true;
             const itemVal = String(item[field] ?? '');
-            return itemVal.toLowerCase().includes(value.toLowerCase());
+                return itemVal.toLowerCase().includes(value.toLowerCase());
         };
 
         // numeric equals or range (e.g. ">=100", "<50")

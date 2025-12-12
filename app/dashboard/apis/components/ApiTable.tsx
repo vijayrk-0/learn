@@ -81,7 +81,7 @@ export default function ApiTable({
     filters,
     onFilterChange,
     showFilters,
-    loading = false, // Default to false
+    loading = false, 
 }: ApiTableProps) {
 
     const getStatusColor = (status: string) => {
@@ -251,11 +251,6 @@ export default function ApiTable({
                         </TableRow>
                     )}
                 </TableBody>
-                {/* Move Pagination outside or inside locally? Original had it inside Paper but after table. 
-                    I'll include it here inside TableContainer? No, usually after.
-                    Wait, `TablePagination` is usually component="div" after TableContainer. 
-                    I'll put it in a Fragment or just include it.
-                */}
             </Table>
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}

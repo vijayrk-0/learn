@@ -1,5 +1,6 @@
 // Top API interface
 export interface topApiInterface {
+    id: any;
     name: string;
     version: string;
     method: string;

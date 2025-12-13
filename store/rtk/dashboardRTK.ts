@@ -117,6 +117,16 @@ export const dashboardApiList = createApi({
   }),
   tagTypes: ["DashboardList"],
   endpoints: (builder) => ({
+    getDashboardDataListById: builder.query<topApiInterface, string>({
+      query: (id) => ({
+        url: `/${id}`,
+        method: "GET",
+      }),
+      providesTags: (result) => [
+        "DashboardList",
+        { type: "DashboardList", id: result?.id },
+      ],
+    }),
     getDashboardDataList: builder.query<TopApisResponse, TopApisQueryArgs | void>({
       query: (args) => {
         const params = new URLSearchParams();
@@ -196,5 +206,6 @@ export const {
   useAddDashboardDataListMutation,
   useUpdateDashboardDataListMutation,
   useDeleteDashboardDataListMutation,
+  useGetDashboardDataListByIdQuery,
 } = dashboardApiList;
 export const { useGetDashboardDataQuery } = dashboardApi;

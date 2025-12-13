@@ -182,7 +182,7 @@ export default function ApiTable({
                                 >
                                     <TableCell component="th" scope="row" sx={{ fontWeight: 500 }}>
                                         <Link
-                                            href={`/dashboard/apis/${encodeURIComponent(row.name)}-${encodeURIComponent(row.method)}-${encodeURIComponent(row.path)}`}
+                                            href={`/dashboard/apis/${row.id}`}
                                             style={{
                                                 textDecoration: "none",
                                                 color: "inherit",

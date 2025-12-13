@@ -66,29 +66,10 @@ export async function generateStaticParams() {
 // Fetch API data with ISR caching
 async function getApiData(slug: string): Promise<topApiInterface | null> {
     try {
-        const params = new URLSearchParams({
-            page: '1',
-            limit: '1000',
-        });
-
-        if (/^\d+$/.test(slug)) {
-            params.append('id', slug);
-        } else {
-            const parts = slug.split('-');
-            if (parts.length >= 2) {
-                const name = decodeURIComponent(parts[0]);
-                const method = decodeURIComponent(parts[1]);
-                const path = decodeURIComponent(parts.slice(2).join('-').replace(/_/g, '/'));
-
-                params.append('name', name);
-                params.append('method', method);
-                params.append('path', path);
-            }
-        }
-
+        console.log("slug:", slug);
         const baseUrl = getBaseUrl();
         // ISR: Cache the fetch for 60 seconds, then revalidate in background
-        const response = await fetch(`${baseUrl}/api/dashboard/api-lists?${params}`, {
+        const response = await fetch(`${baseUrl}/api/dashboard/api-lists/${slug}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'is-ISR': 'true',
@@ -100,8 +81,9 @@ async function getApiData(slug: string): Promise<topApiInterface | null> {
             return null;
         }
 
-        const data = await response.json();
-        return data.data?.[0] || null;
+        const result = await response.json();
+        console.log("result:", result.data);
+        return result.data || null;
     } catch (error) {
         console.error("Error fetching API data:", error);
         return null;
@@ -157,11 +139,13 @@ function getMethodColor(method: string): "primary" | "success" | "warning" | "er
 export default async function ApiDetailPage({
     params
 }: {
-    params: Promise<{ slug: string }> 
+    params: Promise<{ slug: string }>
 }) {
     // Await params
     const { slug } = await params;
     const api = await getApiData(slug);
+
+    console.log("api:", api);
 
     if (!api) {
         notFound();

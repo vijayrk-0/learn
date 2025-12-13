@@ -19,7 +19,6 @@ type TopApi = {
 
 // Dashboard type
 type Dashboard = {
-    topApis: TopApi[];
     apiList: Record<string, TopApi>;
 };
 
@@ -37,24 +36,11 @@ export async function GET(
             return NextResponse.json({ message: "API not found" }, { status: 404 });
         }
 
-        // Return data in array format to match frontend expectations
         return NextResponse.json({ data: apiData });
     } catch (error) {
         console.error("Error fetching API data:", error);
         return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
     }
-}
-
-async function updateApiInList(apiId: string, patch: Partial<TopApi>) {
-    const dashboard: Dashboard = await readFile(dataFilePath);
-    const idx = dashboard.topApis.findIndex((api) => api.id === apiId);
-
-    if (idx === -1) {
-        return NextResponse.json({ message: "API not found" }, { status: 404 });
-    }
-
-    dashboard.topApis[idx] = { ...dashboard.topApis[idx], ...patch };
-    await writeFile(dashboard, dataFilePath);
 }
 
 
@@ -66,33 +52,12 @@ export async function PATCH(
     const patch = (await req.json()) as Partial<TopApi>;
 
     const dashboard: Dashboard = await readFile(dataFilePath);
-
-    // Fire-and-forget background work with the correct id
-    void (async (id: string) => {
-        try {
-            await updateApiInList(id, patch);
-        } catch (err) {
-            console.error("Background updateApiInList failed:", err);
-        }
-    })(apiId);
-
     dashboard.apiList[apiId] = { ...dashboard.apiList[apiId], ...patch };
+    await writeFile(dashboard, dataFilePath);
 
     return NextResponse.json(dashboard.apiList[apiId]);
 }
 
-
-async function removeApiFromList(apiId: string) {
-    const dashboard: Dashboard = await readFile(dataFilePath);
-    const idx = dashboard.topApis.findIndex((api) => api.id === apiId);
-
-    if (idx === -1) {
-        return NextResponse.json({ message: "API not found" }, { status: 404 });
-    }
-
-    dashboard.topApis.splice(idx, 1);
-    await writeFile(dashboard, dataFilePath);
-}
 
 export async function DELETE(
     _req: NextRequest,
@@ -101,16 +66,6 @@ export async function DELETE(
     const { id: apiId } = await params;
 
     const dashboard: Dashboard = await readFile(dataFilePath);
-
-    // Fire-and-forget background work with the correct id
-    void (async (id: string) => {
-        try {
-            await removeApiFromList(id);
-        } catch (err) {
-            console.error("Background removeApiFromList failed:", err);
-        }
-    })(apiId);
-
     const deleted = dashboard.apiList[apiId];
     delete dashboard.apiList[apiId];
     await writeFile(dashboard, dataFilePath);

@@ -23,6 +23,7 @@ interface ApiEditDialogProps {
 }
 
 const defaultApiState: topApiInterface = {
+    id: "",
     name: "",
     version: "v1",
     method: "GET",

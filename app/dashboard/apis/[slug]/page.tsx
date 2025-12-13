@@ -66,7 +66,7 @@ export async function generateStaticParams() {
 // Fetch API data with ISR caching
 async function getApiData(slug: string): Promise<topApiInterface | null> {
     try {
-        console.log("slug:", slug);
+    
         const baseUrl = getBaseUrl();
         // ISR: Cache the fetch for 60 seconds, then revalidate in background
         const response = await fetch(`${baseUrl}/api/dashboard/api-lists/${slug}`, {
@@ -82,7 +82,7 @@ async function getApiData(slug: string): Promise<topApiInterface | null> {
         }
 
         const result = await response.json();
-        console.log("result:", result.data);
+    
         return result.data || null;
     } catch (error) {
         console.error("Error fetching API data:", error);
@@ -144,8 +144,6 @@ export default async function ApiDetailPage({
     // Await params
     const { slug } = await params;
     const api = await getApiData(slug);
-
-    console.log("api:", api);
 
     if (!api) {
         notFound();

@@ -9,6 +9,8 @@ export async function GET(request: Request) {
 
         const dashboardData = await readFile(filePath);
 
+        dashboardData.topApis = Object.values(dashboardData.apiList);
+        
         // Return the dashboard data with cache control headers
         return NextResponse.json(dashboardData, {
             status: 200,

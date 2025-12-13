@@ -177,24 +177,23 @@ export const dashboardApiList = createApi({
 
     updateDashboardDataList: builder.mutation<
       topApiInterface,
-      { key: topApiInterface; patch: Partial<topApiInterface> }
+      { id: string; patch: Partial<topApiInterface> }
     >({
-      query: (body) => ({
-        url: "",
+      query: ({ id, patch }) => ({
+        url: `/${id}`,
         method: "PATCH",
-        body,
+        body: patch,
       }),
       invalidatesTags: ["DashboardList"],
     }),
 
     deleteDashboardDataList: builder.mutation<
       { ok: boolean },
-      { name: string; method: string; path: string }
+      { id: string }
     >({
-      query: (body) => ({
-        url: "",
+      query: ({ id }) => ({
+        url: `/${id}`,
         method: "DELETE",
-        body,
       }),
       invalidatesTags: ["DashboardList"],
     }),

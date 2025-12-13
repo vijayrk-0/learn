@@ -190,8 +190,8 @@
       "avgLatencyMs": 1
     }
   ],
-  "topApis": [
-    {
+  "apiList": {
+    "20251212-163235": {
       "id": "20251212-163235",
       "name": "Auth Service",
       "version": "v3",
@@ -203,7 +203,7 @@
       "p95LatencyMs": 25,
       "ownerTeam": "Platform"
     },
-    {
+    "20251212-163236": {
       "id": "20251212-163236",
       "name": "Billing Service",
       "version": "v1",
@@ -215,7 +215,7 @@
       "p95LatencyMs": 20,
       "ownerTeam": "Payments"
     },
-    {
+    "20251212-163237": {
       "id": "20251212-163237",
       "name": "Catalog Service",
       "version": "v1",
@@ -227,10 +227,10 @@
       "p95LatencyMs": 20,
       "ownerTeam": "Product"
     },
-    {
+    "20251212-163238": {
       "id": "20251212-163238",
       "name": "Notification Service",
-      "version": "v1",
+      "version": "v2",
       "method": "POST",
       "path": "/notify/send",
       "status": "healthy",
@@ -238,98 +238,6 @@
       "errorRatePercent": 0.05,
       "p95LatencyMs": 20,
       "ownerTeam": "Comms"
-    },
-    {
-      "id": "20251212-163239",
-      "name": "test",
-      "version": "v1",
-      "method": "GET",
-      "path": "/test",
-      "status": "healthy",
-      "requests": 0,
-      "errorRatePercent": 0,
-      "p95LatencyMs": 0,
-      "ownerTeam": "Test"
-    },
-    {
-      "id": "20251212-163240",
-      "name": "test2",
-      "version": "v1",
-      "method": "GET",
-      "path": "",
-      "status": "healthy",
-      "requests": 0,
-      "errorRatePercent": 0,
-      "p95LatencyMs": 0,
-      "ownerTeam": "Test"
-    }
-  ],
-  "apiList":{
-    "20251212-163235":{
-      "name": "Auth Service",
-      "version": "v3",
-      "method": "POST",
-      "path": "/auth/login",
-      "status": "healthy",
-      "requests": 27737,
-      "errorRatePercent": 4.02,
-      "p95LatencyMs": 25,
-      "ownerTeam": "Platform"
-    },
-    "20251212-163236":{
-      "name": "Billing Service",
-      "version": "v1",
-      "method": "POST",
-      "path": "/billing/charge",
-      "status": "degraded",
-      "requests": 8616,
-      "errorRatePercent": 0.19,
-      "p95LatencyMs": 20,
-      "ownerTeam": "Payments"
-    },
-    "20251212-163237":{
-      "name": "Catalog Service",
-      "version": "v1",
-      "method": "GET",
-      "path": "/catalog/items",
-      "status": "healthy",
-      "requests": 18976,
-      "errorRatePercent": 0.05,
-      "p95LatencyMs": 20,
-      "ownerTeam": "Product"
-    },
-    "20251212-163238":{
-      "name": "Notification Service",
-      "version": "v1",
-      "method": "POST",
-      "path": "/notify/send",
-      "status": "healthy",
-      "requests": 16926,
-      "errorRatePercent": 0.05,
-      "p95LatencyMs": 20,
-      "ownerTeam": "Comms"
-    },
-    "20251212-163239":{
-      "name": "test",
-      "version": "v1",
-      "method": "GET",
-      "path": "/test",
-      "status": "healthy",
-      "requests": 0,
-      "errorRatePercent": 0,
-      "p95LatencyMs": 0,
-      "ownerTeam": "Test"
-    },
-    "20251212-163240":{
-      "name": "test2",
-      "version": "v1",
-      "method": "GET",
-      "path": "",
-      "status": "healthy",
-      "requests": 0,
-      "errorRatePercent": 0,
-      "p95LatencyMs": 0,
-      "ownerTeam": "Test" 
     }
   },
   "statusCodes": [

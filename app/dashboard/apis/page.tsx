@@ -118,18 +118,18 @@ export default function ApisPage() {
         try {
             if (editingApi) {
                 await updateApi({
-                    key: {
-                        name: editingApi.name,
-                        version: editingApi.version,
-                        method: editingApi.method,
-                        path: editingApi.path,
-                        status: editingApi.status,
-                        requests: editingApi.requests,
-                        errorRatePercent: editingApi.errorRatePercent,
-                        p95LatencyMs: editingApi.p95LatencyMs,
-                        ownerTeam: editingApi.ownerTeam,
+                    id: api.id,
+                    patch: {
+                        name: api.name,
+                        version: api.version,
+                        method: api.method,
+                        path: api.path,
+                        status: api.status,
+                        requests: api.requests,
+                        errorRatePercent: api.errorRatePercent,
+                        p95LatencyMs: api.p95LatencyMs,
+                        ownerTeam: api.ownerTeam,
                     },
-                    patch: api,
                 }).unwrap();
             } else {
                 await addApi(api).unwrap();
@@ -156,9 +156,7 @@ export default function ApisPage() {
         if (!apiToDelete) return;
         try {
             await deleteApi({
-                name: apiToDelete.name,
-                method: apiToDelete.method,
-                path: apiToDelete.path,
+                id: apiToDelete.id,
             }).unwrap();
             setDeleteOpen(false);
         } catch (err) {

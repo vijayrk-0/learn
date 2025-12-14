@@ -17,15 +17,18 @@ import AuthCard from "@/app/(auth)/components/AuthCard";
 import PasswordField from "@/app/(auth)/components/PasswordField";
 import SubmitButton from "@/app/(auth)/components/SubmitButton";
 import AuthFooter from "@/app/(auth)/components/AuthFooter";
+import { resetAllPages, resetPageState, setPageState } from "@/store/slice/pageStateSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function SignUp() {
+  const dispatch = useDispatch();
+  const pageState = useSelector((state: { pageState: any; }) => state.pageState.signup);
   const router = useRouter();
   const [signupApi, { isLoading }] = useSignupMutation();
-
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [name, setName] = useState(pageState.name);
+  const [email, setEmail] = useState(pageState.email);
+  const [password, setPassword] = useState(pageState.password);
+  const [confirmPassword, setConfirmPassword] = useState(pageState.confirmPassword);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
@@ -93,7 +96,10 @@ export default function SignUp() {
           autoComplete="name"
           autoFocus
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => {
+            setName(e.target.value);
+            dispatch(setPageState({ page: "signup", data: { name: e.target.value, email: email, password: password, confirmPassword: confirmPassword } }))
+          }}
           slotProps={{
             input: {
               startAdornment: (
@@ -118,7 +124,10 @@ export default function SignUp() {
           name="email"
           autoComplete="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            dispatch(setPageState({ page: "signup", data: { name: name, email: e.target.value, password: password, confirmPassword: confirmPassword } }))
+          }}
           slotProps={{
             input: {
               startAdornment: (

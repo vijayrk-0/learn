@@ -13,10 +13,16 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 interface Props {
   selectedRow: number;
-  selectedPage: number;
-  totalPages: number;
-  onRowsChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | null, newRow: number) => void;
-  onPageChange: (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => void;
+  selectedPage: number; // 1-based
+  totalPages: number;   // total pages
+  onRowsChange: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | null,
+    newRow: number
+  ) => void;
+  onPageChange: (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number // 1-based
+  ) => void;
   rowOptions?: number[];
 }
 
@@ -28,27 +34,24 @@ function PaginationComponent({
   onPageChange,
   rowOptions = [5, 10, 25, 50, 100],
 }: Props) {
-
-  //  Handle Previous page
+  // Handle Previous page (1-based)
   const handlePrev = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (selectedPage > 0) {
+    if (selectedPage > 1) {
       onPageChange(event, selectedPage - 1);
     }
   };
 
-
-  //  Handle Next page
+  // Handle Next page (1-based)
   const handleNext = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (selectedPage < totalPages - 1) {
+    if (selectedPage < totalPages) {
       onPageChange(event, selectedPage + 1);
     }
   };
 
-
-  //  Handle Row Input change
+  // Handle Row Input change
   const handleRowsInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    value: string,
+    value: string
   ) => {
     const num = Number(value);
     if (!Number.isNaN(num) && num > 0) {
@@ -56,10 +59,10 @@ function PaginationComponent({
     }
   };
 
-  //  Handle row Input change
+  // Handle row dropdown change
   const handleRowsChange = (
     _event: React.SyntheticEvent,
-    value: number | string | null,
+    value: number | string | null
   ) => {
     if (value === null || value === "") return;
     const num = Number(value);
@@ -68,9 +71,9 @@ function PaginationComponent({
     }
   };
 
-
-  const isPrevDisabled = selectedPage === 0 || totalPages === 0;
-  const isNextDisabled = selectedPage === totalPages - 1 || totalPages === 0;
+  // Disable logic in 1-based terms
+  const isPrevDisabled = selectedPage <= 1 || totalPages === 0;
+  const isNextDisabled = selectedPage >= totalPages || totalPages === 0;
 
   return (
     <Paper
@@ -88,7 +91,7 @@ function PaginationComponent({
       aria-label="Table pagination"
     >
       <Stack direction="row" spacing={2} alignItems="center">
-        {/* Input box for the no of row per page */}
+        {/* Input box for number of rows per page */}
         <Autocomplete
           size="small"
           freeSolo
@@ -101,8 +104,9 @@ function PaginationComponent({
           renderInput={(params) => (
             <TextField
               {...params}
-
-              onChange={(event) => handleRowsInputChange(event, event.target.value)}
+              onChange={(event) =>
+                handleRowsInputChange(event, event.target.value)
+              }
               inputProps={{
                 ...params.inputProps,
                 inputMode: "numeric",
@@ -117,17 +121,16 @@ function PaginationComponent({
 
         {/* Display the current page and total pages */}
         <Typography variant="body2" color="text.secondary">
-          Page {totalPages === 0 ? 0 : selectedPage + 1} of {totalPages}
+          Page {totalPages === 0 ? 0 : selectedPage} of {totalPages}
         </Typography>
       </Stack>
 
-      {/* Handle Previous and Next */}
+      {/* Previous and Next buttons */}
       <Box
         component="nav"
         aria-label="Pagination navigation"
         sx={{ display: "flex", alignItems: "center", gap: 0.5 }}
       >
-
         <IconButton
           size="small"
           onClick={handlePrev}

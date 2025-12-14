@@ -6,6 +6,7 @@ import { initAuth } from '@/store/slice/authSlice';
 import type { AppDispatch, RootState } from '@/store/store';
 import { Box, CircularProgress } from '@mui/material';
 import React from 'react';
+import { initPageState } from '@/store/slice/pageStateSlice';
 
 export function AuthInitializer({ children }: { children: React.ReactNode }) {
     const dispatch = useDispatch<AppDispatch>();
@@ -14,6 +15,7 @@ export function AuthInitializer({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         // Initialize auth state from localStorage if it available
         dispatch(initAuth());
+        dispatch(initPageState());
     }, [dispatch]);
 
     // Show loading while auth state is being restored from localStorage

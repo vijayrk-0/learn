@@ -3,11 +3,14 @@ import authReducer from './slice/authSlice'
 import { dashboardApi, dashboardApiList } from './rtk/dashboardRTK';
 import { forgetPasswordApi } from './rtk/forgetPasswordRTK';
 import { authApi } from './rtk/authRTK';
+import pageStateReducer from './slice/pageStateSlice';
 export const store = configureStore({
     // Create a store
     reducer: {
         // Create an authReducer
         auth: authReducer,
+        // Create a pageStateReducer
+        pageState: pageStateReducer,
 
         // Create a dashboardApi reducer
         [dashboardApi.reducerPath]: dashboardApi.reducer,

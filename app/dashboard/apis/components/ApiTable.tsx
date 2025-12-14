@@ -25,6 +25,7 @@ import {
 } from "@mui/icons-material";
 import { Skeleton } from "@mui/material"; // Import Skeleton
 import { topApiInterface } from "@/app/dashboard/dashboardSchema";
+import Pagination from "./Pagination";
 
 type Order = "asc" | "desc";
 
@@ -81,7 +82,7 @@ export default function ApiTable({
     filters,
     onFilterChange,
     showFilters,
-    loading = false, 
+    loading = false,
 }: ApiTableProps) {
 
     const getStatusColor = (status: string) => {
@@ -252,7 +253,7 @@ export default function ApiTable({
                     )}
                 </TableBody>
             </Table>
-            <TablePagination
+            {/* <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"
                 count={totalCount}
@@ -260,7 +261,30 @@ export default function ApiTable({
                 page={page}
                 onPageChange={onPageChange}
                 onRowsPerPageChange={onRowsPerPageChange}
+            /> */}
+            <Pagination
+                selectedRow={rowsPerPage}
+                selectedPage={page}
+                totalPages={Math.ceil(totalCount / rowsPerPage)}
+                // event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | null, newRow: number
+                onRowsChange={(event, newRow) => {
+                    // build a minimal synthetic event for ApiTable’s handler
+                    const syntheticEvent = {
+                        ...(event as React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>),
+                        target: { value: String(newRow) },
+                    } as React.ChangeEvent<HTMLInputElement>;
+
+                    onRowsPerPageChange(syntheticEvent);
+                }}
+                // event: MouseEvent<HTMLButtonElement> | null, newPage: number
+                onPageChange={(event, newPage) => {
+                    onPageChange(event as React.MouseEvent<HTMLButtonElement> | null, newPage);
+                }}
+                rowOptions={[5, 10, 25, 50, 100]}
             />
+
+
+
         </TableContainer>
     );
 }

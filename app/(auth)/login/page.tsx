@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Box,
     Link,
@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import { EmailOutlined } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
 import { useLoginMutation } from "@/store/rtk/authRTK";
 import { setAuth } from "@/store/slice/authSlice";
 import { loginSchema } from "@/lib/validation-schema";
@@ -20,13 +19,16 @@ import AuthCard from "@/app/(auth)/components/AuthCard";
 import PasswordField from "@/app/(auth)/components/PasswordField";
 import SubmitButton from "@/app/(auth)/components/SubmitButton";
 import AuthFooter from "@/app/(auth)/components/AuthFooter";
+import { resetAllPages, resetPageState, setPageState } from "@/store/slice/pageStateSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function Login() {
     const dispatch = useDispatch();
+    const pageState = useSelector((state: { pageState: any; }) => state.pageState.login);
     const router = useRouter();
     const [loginMutation, { isLoading }] = useLoginMutation();
 
-    const [email, setEmail] = useState("");
+    const [email, setEmail] = useState(pageState.email);
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
@@ -55,6 +57,7 @@ export default function Login() {
                     user: result?.data?.user,
                 })
             );
+            dispatch(resetPageState("login"));
             router.push("/dashboard");
         } catch (err: any) {
             setError(
@@ -86,7 +89,10 @@ export default function Login() {
                     autoComplete="email"
                     autoFocus
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => {
+                        setEmail(e.target.value);
+                        dispatch(setPageState({ page: "login", data: { email: e.target.value, password: password } }))
+                    }}
                     slotProps={{
                         input: {
                             startAdornment: (
@@ -119,7 +125,7 @@ export default function Login() {
                         mt: 1,
                     }}
                 >
-                    <Link href="/forget-password" variant="body2" underline="hover">
+                    <Link href="/forget-password" variant="body2" underline="hover" onClick={() => { }}>
                         Forgot your password?
                     </Link>
                 </Box>

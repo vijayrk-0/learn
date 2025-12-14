@@ -116,6 +116,16 @@ export default function ApisPage() {
     );
   };
 
+  const handleResetFilters = () => {
+    setFilters({});
+    dispatch(
+      setPageState({
+        page: "apisListPage",
+        data: { ...pageState, activeFilters: null, page: 1 },
+      })
+    );
+  };
+
   // Dialogs
   const handleOpenCreate = () => {
     setEditingApi(null);
@@ -235,7 +245,7 @@ export default function ApisPage() {
         order={order}
         orderBy={orderBy}
         onRequestSort={handleRequestSort}
-        page={page} // 1-based, from Redux
+        page={page} 
         rowsPerPage={rowsPerPage}
         totalCount={totalCount}
         onPageChange={handlePageChange}
@@ -244,6 +254,7 @@ export default function ApisPage() {
         onDelete={handleOpenDelete}
         filters={filters}
         onFilterChange={handleFilterChange}
+        handleResetFilters={handleResetFilters}
         showFilters={showFilters}
         loading={loading}
       />

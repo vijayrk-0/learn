@@ -15,6 +15,7 @@ import {
     Tooltip,
     IconButton,
     Box,
+    Button,
 } from "@mui/material";
 import {
     Edit as EditIcon,
@@ -22,8 +23,9 @@ import {
     Search as SearchIcon,
     ArrowUpward as ArrowUpwardIcon,
     ArrowDownward as ArrowDownwardIcon,
+    Refresh as RefreshIcon,
 } from "@mui/icons-material";
-import { Skeleton } from "@mui/material"; // Import Skeleton
+import { Skeleton, } from "@mui/material"; // Import Skeleton
 import { topApiInterface } from "@/app/dashboard/dashboardSchema";
 import Pagination from "./Pagination";
 
@@ -46,7 +48,7 @@ const headCells: readonly HeadCell[] = [
     { id: "requests", label: "Requests", numeric: true, sortable: true, filterable: true },
     { id: "errorRatePercent", label: "Error %", numeric: true, sortable: true, filterable: true },
     { id: "p95LatencyMs", label: "Latency (P95)", numeric: true, sortable: true, filterable: true },
-    { id: "ownerTeam", label: "Owner Team", numeric: false, sortable: true, filterable: true },
+    { id: "ownerTeam", label: "Owner Team", numeric: false, sortable: true, filterable: true }
 ];
 
 interface ApiTableProps {
@@ -63,8 +65,9 @@ interface ApiTableProps {
     onDelete: (api: topApiInterface) => void;
     filters: Record<string, string>;
     onFilterChange: (property: keyof topApiInterface, value: string) => void;
+    handleResetFilters: () => void;
     showFilters: boolean;
-    loading?: boolean; // Add loading prop
+    loading?: boolean; 
 }
 
 export default function ApiTable({
@@ -81,6 +84,7 @@ export default function ApiTable({
     onDelete,
     filters,
     onFilterChange,
+    handleResetFilters,
     showFilters,
     loading = false,
 }: ApiTableProps) {
@@ -146,15 +150,25 @@ export default function ApiTable({
                                                         <SearchIcon fontSize="small" color="action" />
                                                     </InputAdornment>
                                                 ),
-                                                style: { fontSize: "0.875rem" }
+                                                style: { fontSize: "0.875rem" },
                                             }}
                                         />
                                     )}
                                 </TableCell>
                             ))}
-                            <TableCell />
+
+                            <TableCell align="right" sx={{ p: 1, whiteSpace: "nowrap" }}>
+                                <Button
+                                    size="small"
+                                    variant="text"
+                                    onClick={handleResetFilters}
+                                >
+                                    Reset filters
+                                </Button>
+                            </TableCell>
                         </TableRow>
                     )}
+
                 </TableHead>
                 <TableBody>
                     {loading ? (

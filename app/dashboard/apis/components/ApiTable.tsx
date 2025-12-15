@@ -27,6 +27,7 @@ import {
 import { Skeleton } from "@mui/material";
 import { topApiInterface } from "@/app/dashboard/dashboardSchema";
 import Pagination from "./Pagination";
+import { useGetDashboardDataListByIdQuery, useGetDashboardDataListQuery } from "@/store/rtk/dashboardRTK";
 
 type Order = "asc" | "desc";
 
@@ -88,7 +89,7 @@ export default function ApiTable({
   loading = false,
 }: ApiTableProps) {
 
-    // Get Status Color
+  // Get Status Color
   const getStatusColor = (status: string) => {
     switch (status) {
       case "healthy":
@@ -146,7 +147,9 @@ export default function ApiTable({
     return grouped;
   };
 
-  const groupedData = useMemo(() => groupByFieldUniqueValues(data), [data]);
+  const allApis = useGetDashboardDataListQuery()
+
+  const groupedData = useMemo(() => groupByFieldUniqueValues(allApis.data?.data || []), [allApis.data?.data]);
 
   return (
     <TableContainer>
@@ -193,11 +196,20 @@ export default function ApiTable({
                 <TableCell key={`filter-${headCell.id}`} align="left" sx={{ p: 1 }}>
                   {headCell.filterable && (
                     <Autocomplete<string, false, false, false>
+                      freeSolo
                       options={groupedData[headCell.id] ?? []}
-                      value={filters[headCell.id] ?? ""}
-                      onChange={(_, newValue) =>
-                        onFilterChange(headCell.id, newValue ?? "")
-                      }
+                      // text currently in the input
+                      inputValue={filters[headCell.id] ?? ""}
+                      onInputChange={(_, newInputValue) => {
+                        onFilterChange(headCell.id, newInputValue ?? "");
+                      }}
+                      value={null}
+                      onChange={(_, newValue) => {
+                        if (typeof newValue === "string") {
+                          onFilterChange(headCell.id, newValue);
+                        }
+                      }}
+                      getOptionLabel={(option) => option ?? ""}
                       renderInput={(params) => (
                         <TextField
                           {...params}
@@ -218,6 +230,9 @@ export default function ApiTable({
                       )}
                     />
                   )}
+
+
+
                 </TableCell>
               ))}
 
@@ -284,8 +299,8 @@ export default function ApiTable({
                         row.method === "GET"
                           ? "primary"
                           : row.method === "POST"
-                          ? "success"
-                          : "warning"
+                            ? "success"
+                            : "warning"
                       }
                       variant="outlined"
                       sx={{ fontWeight: "bold", width: 60 }}

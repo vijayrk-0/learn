@@ -12,12 +12,7 @@ import { Visibility, VisibilityOff, LockOutlined } from "@mui/icons-material";
 interface PasswordFieldProps
   extends Omit<
     TextFieldProps,
-    | "type"
-    | "onChange"
-    | "value"
-    | "InputProps"
-    | "inputProps"
-    | "slotProps"
+    "type" | "onChange" | "value" | "InputProps" | "inputProps" | "slotProps"
   > {
   value: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -64,17 +59,27 @@ export default function PasswordField({
       error={error}
       helperText={helperText}
       {...rest}
+      sx={{
+        "& .MuiInputBase-input": {
+          fontSize: { xs: "0.875rem", sm: "0.95rem" },
+        },
+      }}
       slotProps={{
         input: {
           startAdornment: (
             <InputAdornment
               position="start"
               sx={{
-                px: 1,
+                px: { xs: 0.5, sm: 1 },
                 color: "text.secondary",
               }}
             >
-              <LockOutlined color="action" />
+              <LockOutlined
+                sx={{
+                  fontSize: { xs: "1rem", sm: "1.2rem" },
+                }}
+                color="action"
+              />
             </InputAdornment>
           ),
           endAdornment: (
@@ -89,13 +94,17 @@ export default function PasswordField({
                   "&:hover": {
                     backgroundColor: "action.hover",
                   },
-                  px: 2,
+                  px: { xs: 1, sm: 2 },
                 }}
               >
                 {showPassword ? (
-                  <VisibilityOff fontSize="small" />
+                  <VisibilityOff
+                    sx={{ fontSize: { xs: "1rem", sm: "1.2rem" } }}
+                  />
                 ) : (
-                  <Visibility fontSize="small" />
+                  <Visibility
+                    sx={{ fontSize: { xs: "1rem", sm: "1.2rem" } }}
+                  />
                 )}
               </IconButton>
             </InputAdornment>

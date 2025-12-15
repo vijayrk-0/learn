@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
     Box,
     Link,
@@ -19,15 +19,17 @@ import AuthCard from "@/app/(auth)/components/AuthCard";
 import PasswordField from "@/app/(auth)/components/PasswordField";
 import SubmitButton from "@/app/(auth)/components/SubmitButton";
 import AuthFooter from "@/app/(auth)/components/AuthFooter";
-import { resetAllPages, resetPageState, setPageState } from "@/store/slice/pageStateSlice";
+import { resetPageState, setPageState } from "@/store/slice/pageStateSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 export default function Login() {
     const dispatch = useDispatch();
-    const pageState = useSelector((state: { pageState: any; }) => state.pageState.login);
+    const pageState = useSelector(
+        (state: { pageState: any }) => state.pageState.login
+    );
     const router = useRouter();
     const [loginMutation, { isLoading }] = useLoginMutation();
-    const [email, setEmail] = useState(pageState.email);
+    const [email, setEmail] = useState(pageState.email || "");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
@@ -35,7 +37,6 @@ export default function Login() {
         event.preventDefault();
         setError("");
 
-        // Client-side validation
         try {
             await loginSchema.validate({ email, password });
         } catch (error) {
@@ -47,7 +48,6 @@ export default function Login() {
             return;
         }
 
-        // Server-side validation
         try {
             const result = await loginMutation({ email, password }).unwrap();
             dispatch(
@@ -71,9 +71,22 @@ export default function Login() {
             title="Welcome back"
             subtitle="Please sign in to continue"
         >
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Box
+                component="form"
+                noValidate
+                onSubmit={handleSubmit}
+                sx={{
+                    mt: { xs: 0.5, sm: 1 },
+                }}
+            >
                 {error && (
-                    <Alert severity="error" sx={{ mb: 2 }}>
+                    <Alert
+                        severity="error"
+                        sx={{
+                            mb: { xs: 1.5, sm: 2 },
+                            fontSize: { xs: "0.8rem", sm: "0.875rem" },
+                        }}
+                    >
                         {error}
                     </Alert>
                 )}
@@ -90,7 +103,12 @@ export default function Login() {
                     value={email}
                     onChange={(e) => {
                         setEmail(e.target.value);
-                        dispatch(setPageState({ page: "login", data: { email: e.target.value, password: password } }))
+                        dispatch(
+                            setPageState({
+                                page: "login",
+                                data: { email: e.target.value, password },
+                            })
+                        );
                     }}
                     slotProps={{
                         input: {
@@ -98,14 +116,24 @@ export default function Login() {
                                 <InputAdornment
                                     position="start"
                                     sx={{
-                                        pl: 1,           // padding left inside adornment
+                                        pl: 1,
                                         pr: 1,
                                         color: "text.secondary",
                                     }}
                                 >
-                                    <EmailOutlined fontSize="small" />
+                                    <EmailOutlined
+                                        sx={{
+                                            fontSize: { xs: "1rem", sm: "1.2rem" },
+                                        }}
+                                        color="action"
+                                    />
                                 </InputAdornment>
                             ),
+                        },
+                    }}
+                    sx={{
+                        "& .MuiInputBase-input": {
+                            fontSize: { xs: "0.875rem", sm: "0.95rem" },
                         },
                     }}
                 />
@@ -121,21 +149,32 @@ export default function Login() {
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "center",
-                        mt: 1,
+                        mt: { xs: 0.5, sm: 1 },
                     }}
                 >
-                    <Link href="/forget-password" variant="body2" underline="hover" onClick={() => { }}>
+                    <Link
+                        href="/forget-password"
+                        variant="body2"
+                        underline="hover"
+                        sx={{
+                            fontSize: { xs: "0.8rem", sm: "0.875rem" },
+                        }}
+                    >
                         Forgot your password?
                     </Link>
                 </Box>
 
-                <SubmitButton isLoading={isLoading}>Sign in</SubmitButton>
+                <Box sx={{ mt: { xs: 1.5, sm: 2 } }}>
+                    <SubmitButton isLoading={isLoading}>Sign in</SubmitButton>
+                </Box>
 
-                <AuthFooter
-                    text="Don't have an account yet?"
-                    linkText="Sign up"
-                    linkHref="/signup"
-                />
+                <Box sx={{ mt: { xs: 1.5, sm: 2 } }}>
+                    <AuthFooter
+                        text="Don't have an account yet?"
+                        linkText="Sign up"
+                        linkHref="/signup"
+                    />
+                </Box>
             </Box>
         </AuthCard>
     );

@@ -28,12 +28,12 @@ export default function SubmitButton({
             size={size}
             disabled={isLoading}
             sx={{
-                mt: 3,
-                mb: 2,
-                py: 1.5,
+                mt: { xs: 2, sm: 3 },
+                mb: { xs: 1.5, sm: 2 },
+                py: { xs: 1.1, sm: 1.5 },
                 borderRadius: 2,
                 textTransform: "none",
-                fontSize: "1rem",
+                fontSize: { xs: "0.9rem", sm: "1rem" },
                 fontWeight: 600,
                 letterSpacing: "0.02em",
                 transition: "all 0.2s ease-in-out",
@@ -53,7 +53,11 @@ export default function SubmitButton({
             }}
         >
             {isLoading ? (
-                <CircularProgress size={24} color="inherit" sx={{ opacity: 0.8 }} />
+                <CircularProgress
+                    size={22}
+                    color="inherit"
+                    sx={{ opacity: 0.8 }}
+                />
             ) : (
                 children
             )}

@@ -17,11 +17,23 @@ interface AuthCardProps {
 
 export default function AuthCard({ title, subtitle, children }: AuthCardProps) {
     return (
-        <Container component="main" maxWidth="xs">
+        <Container
+            component="main"
+            maxWidth="xs"
+            disableGutters
+            sx={{
+                width: "100%",
+                minHeight: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                px: { xs: 1.5, sm: 0 },
+                py: { xs: 1.5, sm: 3, md: 4 },
+            }}
+        >
             <Box
                 sx={{
-                    marginTop: { xs: 4, sm: 6, md: 8 },
-                    marginBottom: { xs: 4, sm: 6 },
+                    width: "100%",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
@@ -31,17 +43,17 @@ export default function AuthCard({ title, subtitle, children }: AuthCardProps) {
                     elevation={0}
                     sx={{
                         width: "100%",
-                        maxWidth: 480,
-                        borderRadius: 3,
-                        padding: { xs: 2, sm: 3, md: 4 },
+                        maxWidth: 420,
+                        borderRadius: 2,
+                        p: { xs: 1.75, sm: 3, md: 4 },
                         backgroundColor: "rgba(255, 255, 255, 0.95)",
                         backdropFilter: "blur(20px)",
                         border: "1px solid",
                         borderColor: "divider",
-                        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.08)",
+                        boxShadow: "0 6px 20px rgba(0, 0, 0, 0.06)",
                         transition: "all 0.3s ease-in-out",
                         "&:hover": {
-                            boxShadow: "0 12px 48px rgba(0, 0, 0, 0.12)",
+                            boxShadow: "0 10px 32px rgba(0, 0, 0, 0.12)",
                             transform: "translateY(-2px)",
                         },
                     }}
@@ -52,7 +64,7 @@ export default function AuthCard({ title, subtitle, children }: AuthCardProps) {
                                 display: "flex",
                                 flexDirection: "column",
                                 alignItems: "center",
-                                mb: 4,
+                                mb: { xs: 2.5, sm: 4 },
                                 textAlign: "center",
                             }}
                         >
@@ -62,8 +74,12 @@ export default function AuthCard({ title, subtitle, children }: AuthCardProps) {
                                 sx={{
                                     fontWeight: 700,
                                     color: "primary.main",
-                                    mb: 1,
-                                    fontSize: { xs: "1.75rem", sm: "2rem", md: "2.125rem" },
+                                    mb: 0.75,
+                                    fontSize: {
+                                        xs: "1.25rem",   
+                                        sm: "1.6rem",
+                                        md: "2rem",
+                                    },
                                     letterSpacing: "-0.02em",
                                 }}
                             >
@@ -73,8 +89,8 @@ export default function AuthCard({ title, subtitle, children }: AuthCardProps) {
                                 variant="body1"
                                 sx={{
                                     color: "text.secondary",
-                                    fontSize: { xs: "0.875rem", sm: "1rem" },
-                                    maxWidth: "80%",
+                                    fontSize: { xs: "0.8rem", sm: "0.95rem" },
+                                    maxWidth: { xs: "100%", sm: "80%" },
                                 }}
                             >
                                 {subtitle}

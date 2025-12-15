@@ -6,8 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "@/store/store";
 import { logout } from "@/store/slice/authSlice";
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function Header() {
     const dispatch = useDispatch();
@@ -15,19 +14,24 @@ export default function Header() {
     const { isAuthenticated } = useSelector((state: RootState) => state.auth);
 
     const router = useRouter();
+
     useEffect(() => {
-        if (!isAuthenticated && pathname !== "/login" && pathname !== "/signup" && pathname !== "/forget-password") {
+        if (
+            !isAuthenticated &&
+            pathname !== "/login" &&
+            pathname !== "/signup" &&
+            pathname !== "/forget-password"
+        ) {
             router.push("/login");
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, pathname, router]);
+
     const publicLinks = [
         { label: "Sign In", href: "/login" },
         { label: "Sign Up", href: "/signup" },
     ];
 
-    const privateLinks = [
-        { label: "Dashboard", href: "/dashboard" },
-    ];
+    const privateLinks = [{ label: "Dashboard", href: "/dashboard" }];
 
     const handleLogout = () => {
         dispatch(logout());
@@ -39,6 +43,9 @@ export default function Header() {
             color="default"
             elevation={0}
             sx={{
+                height: 60,
+                minHeight: 60,
+                maxHeight: 60,
                 borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
                 bgcolor: (theme) =>
                     theme.palette.mode === "dark"
@@ -48,48 +55,69 @@ export default function Header() {
         >
             <Toolbar
                 sx={{
-                    minHeight: 56,
-                    px: { xs: 2, sm: 3, md: 4 },
+                    minHeight: 60,
+                    px: { xs: 1.5, sm: 3, md: 4 },
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    gap: 2,
+                    gap: { xs: 1, sm: 2 },
                 }}
             >
-
-                <Typography
-                    variant="h6"
-                    component={Link}
-                    href="/"
+                {/* Title */}
+                <Box
                     sx={{
-                        textDecoration: "none",
-                        color: "text.primary",
-                        fontWeight: 600,
-                        letterSpacing: 0.3,
+                        display: "flex",
+                        alignItems: "center",
+                        minWidth: 0,
                     }}
                 >
-                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <Typography
+                        variant="h6"
+                        component={Link}
+                        href="/"
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            textDecoration: "none",
+                            color: "text.primary",
+                            fontWeight: 600,
+                            letterSpacing: 0.3,
+                            fontSize: { xs: "0.95rem", sm: "1.05rem" },
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                        }}
+                    >
                         <Avatar
                             sx={{
                                 bgcolor: "primary.main",
                                 color: "white",
                                 mr: 1,
-                                width: 32,
-                                height: 32,
-                                fontSize: "0.8rem",
+                                width: { xs: 28, sm: 32 },
+                                height: { xs: 28, sm: 32 },
+                                fontSize: { xs: "0.7rem", sm: "0.8rem" },
+                                flexShrink: 0,
                             }}
                         >
                             API
                         </Avatar>
-                        API Analytics
-                    </Box>
-                </Typography>
+
+                        <Box component="span" sx={{ display: { xs: "none", sm: "inline" } }}>
+                            API Analytics
+                        </Box>
+                        <Box component="span" sx={{ display: { xs: "inline", sm: "none" } }}>
+                            API
+                        </Box>
+                    </Typography>
+                </Box>
 
                 <Box
                     sx={{
                         display: "flex",
                         alignItems: "center",
-                        gap: { xs: 1, sm: 1.5 },
+                        justifyContent: "flex-end",
+                        gap: { xs: 0.5, sm: 1.5 },
+                        flexWrap: "wrap",
                     }}
                 >
                     {!isAuthenticated &&
@@ -102,8 +130,9 @@ export default function Header() {
                                 size="small"
                                 sx={{
                                     textTransform: "none",
-                                    fontSize: "0.85rem",
+                                    fontSize: { xs: "0.75rem", sm: "0.85rem" },
                                     fontWeight: 500,
+                                    px: { xs: 1, sm: 1.5 },
                                 }}
                             >
                                 {item.label}
@@ -120,8 +149,9 @@ export default function Header() {
                                 size="small"
                                 sx={{
                                     textTransform: "none",
-                                    fontSize: "0.85rem",
+                                    fontSize: { xs: "0.75rem", sm: "0.85rem" },
                                     fontWeight: 500,
+                                    px: { xs: 1, sm: 1.5 },
                                 }}
                             >
                                 {item.label}
@@ -135,8 +165,9 @@ export default function Header() {
                             size="small"
                             sx={{
                                 textTransform: "none",
-                                fontSize: "0.85rem",
+                                fontSize: { xs: "0.75rem", sm: "0.85rem" },
                                 fontWeight: 500,
+                                px: { xs: 1, sm: 1.5 },
                             }}
                         >
                             Logout

@@ -7,7 +7,7 @@ import { AuthInitializer } from "./components/AuthInitializer";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import { Box, Container } from "@mui/material";
+import { Box } from "@mui/material";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,11 +24,13 @@ export const metadata: Metadata = {
   description: "API Monitoring Tool",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+const HEADER_HEIGHT = 60;
+
+type RootLayoutProps = Readonly<{
   children: React.ReactNode;
-}>) {
+}>;
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body
@@ -48,50 +50,42 @@ export default function RootLayout({
                   sx={{
                     display: "flex",
                     flexDirection: "column",
-                    flex: 1,
-                    minHeight: 0,      
+                    minHeight: "100vh",
+                    width: "100%",
                   }}
                 >
+                  {/* Header */}
                   <Box
                     component="header"
                     sx={{
                       flexShrink: 0,
                       zIndex: 10,
+                      height: HEADER_HEIGHT,
+                      width: "100%",
                     }}
                   >
                     <Header />
                   </Box>
 
+                  {/* Main content */}
                   <Box
                     component="main"
                     sx={{
                       flex: 1,
                       minHeight: 0,
-                      overflowY: "auto",
+                      overflowY: "hidden",
                       overflowX: "hidden",
                       display: "flex",
                       flexDirection: "column",
+                      width: "100%",
                     }}
                   >
-                    <Container
-                      maxWidth="lg"
-                      sx={{
-                        flex: 1,
-                        width: "100%",
-                        minHeight: "calc(100vh - 200px)",
-                        py: { xs: 2, sm: 3, md: 4 },
-                      }}
-                    >
-                      {children}
-                    </Container>
+                    {children}
                   </Box>
 
+                  {/* Footer */}
                   <Box
                     component="footer"
-                    sx={{
-                      flexShrink: 0,
-                      zIndex: 10,
-                    }}
                   >
                     <Footer />
                   </Box>

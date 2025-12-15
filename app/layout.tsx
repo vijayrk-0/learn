@@ -33,7 +33,6 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        // make body a full-height flex column
         style={{
           margin: 0,
           minHeight: "100vh",
@@ -50,10 +49,9 @@ export default function RootLayout({
                     display: "flex",
                     flexDirection: "column",
                     flex: 1,
-                    minHeight: 0,      // allow children to shrink
+                    minHeight: 0,      
                   }}
                 >
-                  {/* Header */}
                   <Box
                     component="header"
                     sx={{
@@ -64,7 +62,6 @@ export default function RootLayout({
                     <Header />
                   </Box>
 
-                  {/* Main */}
                   <Box
                     component="main"
                     sx={{
@@ -89,7 +86,6 @@ export default function RootLayout({
                     </Container>
                   </Box>
 
-                  {/* Footer */}
                   <Box
                     component="footer"
                     sx={{

@@ -27,7 +27,6 @@ export default function Login() {
     const pageState = useSelector((state: { pageState: any; }) => state.pageState.login);
     const router = useRouter();
     const [loginMutation, { isLoading }] = useLoginMutation();
-
     const [email, setEmail] = useState(pageState.email);
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");

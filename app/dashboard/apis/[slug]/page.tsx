@@ -42,8 +42,8 @@ export async function generateStaticParams() {
                 'Content-Type': 'application/json',
                 'is-ISR': 'true',
             },
-            next: { revalidate: 60 }, // Cache this API call for 60 seconds
-            cache: 'no-store', // Prevent build-time caching issues
+            next: { revalidate: 60 },
+            cache: 'no-store',
         });
 
         if (!response.ok) {
@@ -55,7 +55,7 @@ export async function generateStaticParams() {
         const apis = data.data || [];
 
         return apis.map((api: topApiInterface) => ({
-            slug: `${`${api.name}-${api.method}-${api.path}`.replace(/\//g, '_')}`,
+            slug: `${`${api.id}`.replace(/\//g, '_')}`,
         }));
     } catch (error) {
         console.error("Error generating static params:", error);
@@ -66,15 +66,14 @@ export async function generateStaticParams() {
 // Fetch API data with ISR caching
 async function getApiData(slug: string): Promise<topApiInterface | null> {
     try {
-    
+        console.log("Fetching API data for slug:", slug);
         const baseUrl = getBaseUrl();
-        // ISR: Cache the fetch for 60 seconds, then revalidate in background
         const response = await fetch(`${baseUrl}/api/dashboard/api-lists/${slug}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'is-ISR': 'true',
             },
-            next: { revalidate: 60 }, // Cache this API call for 60 seconds
+            next: { revalidate: 60 }, 
         });
         if (!response.ok) {
             console.error(`API request failed with status: ${response.status}`);
@@ -82,7 +81,6 @@ async function getApiData(slug: string): Promise<topApiInterface | null> {
         }
 
         const result = await response.json();
-    
         return result.data || null;
     } catch (error) {
         console.error("Error fetching API data:", error);

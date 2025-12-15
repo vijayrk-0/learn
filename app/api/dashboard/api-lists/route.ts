@@ -102,6 +102,22 @@ export async function GET(request: NextRequest) {
         );
     });
 
+    // Sorting
+    const sortBy = searchParams.get("sortBy") as keyof TopApi | null;
+    const order = searchParams.get("order") === "desc" ? -1 : 1;
+
+    if (sortBy) {
+        filtered.sort((a, b) => {
+            const valA = (a as any)[sortBy];
+            const valB = (b as any)[sortBy];
+
+            if (typeof valA === "number" && typeof valB === "number") {
+                return (valA - valB) * order;
+            }
+            return String(valA).localeCompare(String(valB)) * order;
+        });
+    }
+
     const total = filtered.length;
     const offset = (safePage - 1) * safeLimit;
     const pagedItems = filtered.slice(offset, offset + safeLimit);

@@ -6,6 +6,7 @@ type RowsPerPageOption = number;
 interface RowsPerPageSelectProps {
   rowOptions: RowsPerPageOption[];
   selectedRow: RowsPerPageOption | null;
+  disableClearable?: boolean | undefined;
   onRowsChange: (
     event: React.SyntheticEvent | React.FocusEvent<HTMLInputElement>,
     value: RowsPerPageOption
@@ -60,13 +61,13 @@ export function RowsPerPageSelect({
     }
   };
 
-  
+
   const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     commitValue(event, inputValue);
   };
 
   return (
-    <Autocomplete<RowsPerPageOption | string, false, false, true>
+    <Autocomplete<RowsPerPageOption | string, false, true, true>
       size="small"
       freeSolo
       options={rowOptions}

@@ -16,6 +16,7 @@ import {
 import { topApiInterface } from "@/app/dashboard/dashboardSchema";
 import { setPageState } from "@/store/slice/pageStateSlice";
 import { useDispatch, useSelector } from "react-redux";
+import ApiFilterSidebar from "./components/ApiFilterSidebar";
 
 type Order = "asc" | "desc";
 
@@ -55,8 +56,10 @@ export default function ApisPage() {
       errorRatePercent: activeFilters.errorRatePercent,
       p95LatencyMs: activeFilters.p95LatencyMs,
       ownerTeam: activeFilters.ownerTeam,
+      sortBy: orderBy,
+      order: order,
     }),
-    [page, rowsPerPage, activeFilters]
+    [page, rowsPerPage, activeFilters, orderBy, order]
   );
 
   const { data, isLoading, isFetching, isError, error } =
@@ -112,6 +115,17 @@ export default function ApisPage() {
       setPageState({
         page: "apisListPage",
         data: { ...pageState, activeFilters: filters, page: 1 },
+      })
+    );
+  };
+
+  const handleFilterDelete = (property: keyof topApiInterface) => {
+    const nextFilters = { ...(filters ?? {}), [property]: "" };
+    setFilters(nextFilters);
+    dispatch(
+      setPageState({
+        page: "apisListPage",
+        data: { ...pageState, activeFilters: nextFilters, page: 1 },
       })
     );
   };
@@ -245,7 +259,7 @@ export default function ApisPage() {
         order={order}
         orderBy={orderBy}
         onRequestSort={handleRequestSort}
-        page={page} 
+        page={page}
         rowsPerPage={rowsPerPage}
         totalCount={totalCount}
         onPageChange={handlePageChange}
@@ -254,6 +268,7 @@ export default function ApisPage() {
         onDelete={handleOpenDelete}
         filters={filters}
         onFilterChange={handleFilterChange}
+        onFilterDelete={handleFilterDelete}
         handleResetFilters={handleResetFilters}
         showFilters={showFilters}
         loading={loading}
@@ -273,6 +288,14 @@ export default function ApisPage() {
         onConfirm={handleConfirmDelete}
         apiToDelete={apiToDelete as any}
         loading={isDeleting}
+      />
+      <ApiFilterSidebar
+        open={showFilters}
+        onClose={() => dispatch(setPageState({ page: "apisListPage", data: { ...pageState, showFilters: false } }))}
+        filters={filters}
+        onFilterChange={handleFilterChange}
+        onApply={handleApplyFilters}
+        onReset={handleResetFilters}
       />
     </Box>
   );

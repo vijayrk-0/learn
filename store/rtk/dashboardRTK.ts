@@ -72,6 +72,8 @@ export type TopApisQueryArgs = {
   errorRatePercent?: string;
   p95LatencyMs?: string;
   ownerTeam?: string;
+  sortBy?: string;
+  order?: "asc" | "desc";
 };
 
 // shared prepareHeaders for bearer token
@@ -143,10 +145,15 @@ export const dashboardApiList = createApi({
           errorRatePercent,
           p95LatencyMs,
           ownerTeam,
+          sortBy,
+          order,
         } = args || {};
 
         params.set("page", String(page));
         params.set("limit", String(limit));
+
+        if (sortBy) params.set("sortBy", sortBy);
+        if (order) params.set("order", order);
 
         if (name) params.set("name", name);
         if (version) params.set("version", version);

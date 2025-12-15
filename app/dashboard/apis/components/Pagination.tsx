@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { RowsPerPageSelect } from "./RowsPerPageSelect";
 
 interface Props {
   selectedRow: number;
@@ -92,32 +93,12 @@ function PaginationComponent({
     >
       <Stack direction="row" spacing={2} alignItems="center">
         {/* Input box for number of rows per page */}
-        <Autocomplete
-          size="small"
-          freeSolo
-          options={rowOptions}
-          value={selectedRow}
-          onChange={handleRowsChange}
-          getOptionLabel={(option) =>
-            typeof option === "number" ? option.toString() : option
-          }
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              onChange={(event) =>
-                handleRowsInputChange(event, event.target.value)
-              }
-              inputProps={{
-                ...params.inputProps,
-                inputMode: "numeric",
-                pattern: "[0-9]*",
-              }}
-            />
-          )}
-          sx={{
-            minWidth: 150,
-          }}
-        />
+          <RowsPerPageSelect
+            rowOptions={rowOptions}
+            selectedRow={selectedRow}
+            onRowsChange={handleRowsChange}
+          />
+        
 
         {/* Display the current page and total pages */}
         <Typography variant="body2" color="text.secondary">

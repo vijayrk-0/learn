@@ -87,7 +87,8 @@ export default function SignUp() {
 
         {/* Name */}
         <TextField
-          margin="normal"
+          margin="dense"
+          size="small"
           required
           fullWidth
           id="name"
@@ -100,6 +101,11 @@ export default function SignUp() {
             setName(e.target.value);
             dispatch(setPageState({ page: "signup", data: { name: e.target.value, email: email, password: password, confirmPassword: confirmPassword } }))
           }}
+          sx={{
+            "& .MuiInputBase-input": {
+              fontSize: { xs: "0.875rem", sm: "0.95rem" },
+            },
+          }}
           slotProps={{
             input: {
               startAdornment: (
@@ -107,7 +113,10 @@ export default function SignUp() {
                   position="start"
                   sx={{ pl: 1, pr: 1 }}
                 >
-                  <PersonOutline color="action" />
+                  <PersonOutline
+                    color="action"
+                    sx={{ fontSize: { xs: "1rem", sm: "1.2rem" } }}
+                  />
                 </InputAdornment>
               ),
             },
@@ -116,7 +125,8 @@ export default function SignUp() {
 
         {/* Email */}
         <TextField
-          margin="normal"
+          margin="dense"
+          size="small"
           required
           fullWidth
           id="email"
@@ -128,6 +138,11 @@ export default function SignUp() {
             setEmail(e.target.value);
             dispatch(setPageState({ page: "signup", data: { name: name, email: e.target.value, password: password, confirmPassword: confirmPassword } }))
           }}
+          sx={{
+            "& .MuiInputBase-input": {
+              fontSize: { xs: "0.875rem", sm: "0.95rem" },
+            },
+          }}
           slotProps={{
             input: {
               startAdornment: (
@@ -135,7 +150,10 @@ export default function SignUp() {
                   position="start"
                   sx={{ pl: 1, pr: 1 }}
                 >
-                  <EmailOutlined color="action" />
+                  <EmailOutlined
+                    color="action"
+                    sx={{ fontSize: { xs: "1rem", sm: "1.2rem" } }}
+                  />
                 </InputAdornment>
               ),
             },
@@ -148,6 +166,8 @@ export default function SignUp() {
           onChange={(e) => setPassword(e.target.value)}
           autoComplete="new-password"
           placeholder="Password"
+          size="small"
+          margin="dense"
         />
 
         {/* Confirm Password */}
@@ -158,6 +178,8 @@ export default function SignUp() {
           placeholder="Confirm password"
           id="confirmPassword"
           name="confirmPassword"
+          size="small"
+          margin="dense"
         />
 
         <SubmitButton isLoading={isLoading}>Sign up</SubmitButton>

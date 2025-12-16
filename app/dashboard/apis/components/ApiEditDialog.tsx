@@ -89,8 +89,8 @@ export default function ApiEditDialog({
                             overflowY: "auto",
                             display: "flex",
                             flexDirection: "column",
-                            justifyContent: "center", 
-                            alignItems: "center", 
+                            justifyContent: "center",
+                            alignItems: "center",
                             textAlign: "center",
                         }}
                     >
@@ -105,7 +105,8 @@ export default function ApiEditDialog({
 
             <DialogContent dividers>
                 <Grid container spacing={2} pt={1}>
-                    <Grid container spacing={2}>
+                    {/* Name */}
+                    <Grid size={{ xs: 12 }}>
                         <TextField
                             label="Name"
                             fullWidth
@@ -118,7 +119,8 @@ export default function ApiEditDialog({
                         />
                     </Grid>
 
-                    <Grid container spacing={2}>
+                    {/* Method & Version */}
+                    <Grid size={{ xs: 12, sm: 6 }}>
                         <FormControl fullWidth error={!!errors.method}>
                             <InputLabel>Method</InputLabel>
                             <Select
@@ -140,20 +142,7 @@ export default function ApiEditDialog({
                         </FormControl>
                     </Grid>
 
-                    <Grid container spacing={2}>
-                        <TextField
-                            label="Path"
-                            fullWidth
-                            value={currentApi.path}
-                            onChange={(e) =>
-                                setCurrentApi({ ...currentApi, path: e.target.value })
-                            }
-                            error={!!errors.path}
-                            helperText={errors.path}
-                        />
-                    </Grid>
-
-                    <Grid container spacing={2}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                         <TextField
                             label="Version"
                             fullWidth
@@ -166,7 +155,22 @@ export default function ApiEditDialog({
                         />
                     </Grid>
 
-                    <Grid container spacing={2}>
+                    {/* Path */}
+                    <Grid size={{ xs: 12 }}>
+                        <TextField
+                            label="Path"
+                            fullWidth
+                            value={currentApi.path}
+                            onChange={(e) =>
+                                setCurrentApi({ ...currentApi, path: e.target.value })
+                            }
+                            error={!!errors.path}
+                            helperText={errors.path}
+                        />
+                    </Grid>
+
+                    {/* Status && Owner Team */}
+                    <Grid size={{ xs: 12, sm: 6 }}>
                         <FormControl fullWidth error={!!errors.status}>
                             <InputLabel>Status</InputLabel>
                             <Select
@@ -186,7 +190,24 @@ export default function ApiEditDialog({
                         </FormControl>
                     </Grid>
 
-                    <Grid container spacing={2}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
+                        <TextField
+                            label="Owner Team"
+                            fullWidth
+                            value={currentApi.ownerTeam}
+                            onChange={(e) =>
+                                setCurrentApi({
+                                    ...currentApi,
+                                    ownerTeam: e.target.value,
+                                })
+                            }
+                            error={!!errors.ownerTeam}
+                            helperText={errors.ownerTeam}
+                        />
+                    </Grid>
+
+                    {/* Metrics */}
+                    <Grid size={{ xs: 12, sm: 4 }}>
                         <TextField
                             label="Requests"
                             type="number"
@@ -203,7 +224,7 @@ export default function ApiEditDialog({
                         />
                     </Grid>
 
-                    <Grid container spacing={2}>
+                    <Grid size={{ xs: 12, sm: 4 }}>
                         <TextField
                             label="Error %"
                             type="number"
@@ -220,7 +241,7 @@ export default function ApiEditDialog({
                         />
                     </Grid>
 
-                    <Grid container spacing={2}>
+                    <Grid size={{ xs: 12, sm: 4 }}>
                         <TextField
                             label="Latency (ms)"
                             type="number"
@@ -234,22 +255,6 @@ export default function ApiEditDialog({
                             }
                             error={!!errors.p95LatencyMs}
                             helperText={errors.p95LatencyMs}
-                        />
-                    </Grid>
-
-                    <Grid container spacing={2}>
-                        <TextField
-                            label="Owner Team"
-                            fullWidth
-                            value={currentApi.ownerTeam}
-                            onChange={(e) =>
-                                setCurrentApi({
-                                    ...currentApi,
-                                    ownerTeam: e.target.value,
-                                })
-                            }
-                            error={!!errors.ownerTeam}
-                            helperText={errors.ownerTeam}
                         />
                     </Grid>
                 </Grid>

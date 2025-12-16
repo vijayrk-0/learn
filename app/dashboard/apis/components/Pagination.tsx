@@ -81,24 +81,26 @@ function PaginationComponent({
       elevation={0}
       variant="outlined"
       sx={{
-        px: 2,
-        py: 1.5,
+        px: { xs: 2, sm: 2 },
+        py: { xs: 2, sm: 1.5 },
         display: "flex",
+        flexDirection: { xs: "column", sm: "row" },
         alignItems: "center",
         justifyContent: "space-between",
         gap: 2,
+        width: "100%",
       }}
       component="section"
       aria-label="Table pagination"
     >
       <Stack direction="row" spacing={2} alignItems="center">
         {/* Input box for number of rows per page */}
-          <RowsPerPageSelect
-            rowOptions={rowOptions}
-            selectedRow={selectedRow}
-            onRowsChange={handleRowsChange}
-          />
-        
+        <RowsPerPageSelect
+          rowOptions={rowOptions}
+          selectedRow={selectedRow}
+          onRowsChange={handleRowsChange}
+        />
+
 
         {/* Display the current page and total pages */}
         <Typography variant="body2" color="text.secondary">

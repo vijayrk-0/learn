@@ -3,15 +3,7 @@
 import React, { useState } from "react";
 import {
     Box,
-    Button,
-    TextField,
-    Typography,
-    Card,
-    CardContent,
-    InputAdornment,
     Alert,
-    CircularProgress,
-    Link as MuiLink,
     Stepper,
     Step,
     StepLabel,
@@ -29,6 +21,7 @@ import {
     useResetPasswordMutation,
 } from "@/store/rtk/forgetPasswordRTK";
 
+import AuthCard from "@/app/(auth)/components/AuthCard";
 import StepRequestOtp from "@/app/(auth)/forget-password/components/StepRequestOtp";
 import StepVerifyOtp from "@/app/(auth)/forget-password/components/StepVerifyOtp";
 import StepResetPassword from "@/app/(auth)/forget-password/components/StepResetPassword";
@@ -113,7 +106,6 @@ export default function ForgotPassword() {
         e.preventDefault();
         setError("");
         setSuccess("");
-
         try {
             await resetPasswordSchema.validate({
                 password: newPassword,
@@ -168,108 +160,60 @@ export default function ForgotPassword() {
     const loading = isSendingOtp || isVerifyingOtp || isResetting;
 
     return (
-        <Box
-            sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                minHeight: "100vh",
-                p: { xs: 2, sm: 3 },
-            }}
-        >
-            <Box
-                sx={{
-                    maxWidth: 500,
-                    width: "100%",
-                }}
-            >
-                <Card
-                    sx={{
-                        boxShadow: 3,
-                        borderRadius: 2,
-                        p: { xs: 2, sm: 3 },
-                        bgcolor: "background.paper",
-                    }}
-                >
-                    <CardContent>
-                        <Box
-                            sx={{
-                                display: "flex",
-                                flexDirection: "column",
-                                alignItems: "center",
-                                mb: 3,
-                            }}
-                        >
-                            <Typography
-                                component="h1"
-                                variant="h4"
-                                sx={{
-                                    fontWeight: "bold",
-                                    color: "primary.main",
-                                    mb: 1,
-                                }}
-                            >
-                                Forgot Password
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                Reset your password in 3 simple steps
-                            </Typography>
-                        </Box>
+        <AuthCard title="Forgot Password" subtitle="Reset your password in 3 simple steps">
+            <Stepper activeStep={getStepIndex()} sx={{ mb: 4, width: '100%' }}>
+                {steps.map((label) => (
+                    <Step key={label}>
+                        <StepLabel>{label}</StepLabel>
+                    </Step>
+                ))}
+            </Stepper>
 
-                        <Stepper activeStep={getStepIndex()} sx={{ mb: 4 }}>
-                            {steps.map((label) => (
-                                <Step key={label}>
-                                    <StepLabel>{label}</StepLabel>
-                                </Step>
-                            ))}
-                        </Stepper>
+            {error && (
+                <Alert severity="error" sx={{ mb: 2, width: '100%' }}>
+                    {error}
+                </Alert>
+            )}
+            {success && (
+                <Alert severity="success" sx={{ mb: 2, width: '100%' }}>
+                    {success}
+                </Alert>
+            )}
 
-                        {error && (
-                            <Alert severity="error" sx={{ mb: 2 }}>
-                                {error}
-                            </Alert>
-                        )}
-                        {success && (
-                            <Alert severity="success" sx={{ mb: 2 }}>
-                                {success}
-                            </Alert>
-                        )}
+            <Box sx={{ width: '100%' }}>
+                {activeStep === "email" && (
+                    <StepRequestOtp
+                        email={email}
+                        onEmailChange={setEmail}
+                        onSubmit={handleSendOTP}
+                        loading={loading}
+                    />
+                )}
 
-                        {activeStep === "email" && (
-                            <StepRequestOtp
-                                email={email}
-                                onEmailChange={setEmail}
-                                onSubmit={handleSendOTP}
-                                loading={loading}
-                            />
-                        )}
+                {activeStep === "otp" && (
+                    <StepVerifyOtp
+                        email={email}
+                        otp={otp}
+                        onOtpChange={setOtp}
+                        onSubmit={handleVerifyOTP}
+                        onChangeEmail={() => setActiveStep("email")}
+                        loading={loading}
+                    />
+                )}
 
-                        {activeStep === "otp" && (
-                            <StepVerifyOtp
-                                email={email}
-                                otp={otp}
-                                onOtpChange={setOtp}
-                                onSubmit={handleVerifyOTP}
-                                onChangeEmail={() => setActiveStep("email")}
-                                loading={loading}
-                            />
-                        )}
+                {activeStep === "password" && (
+                    <StepResetPassword
+                        newPassword={newPassword}
+                        onNewPasswordChange={setNewPassword}
+                        confirmPassword={confirmPassword}
+                        onConfirmPasswordChange={setConfirmPassword}
+                        onSubmit={handleResetPassword}
+                        loading={loading}
+                    />
+                )}
 
-                        {activeStep === "password" && (
-                            <StepResetPassword
-                                newPassword={newPassword}
-                                onNewPasswordChange={setNewPassword}
-                                confirmPassword={confirmPassword}
-                                onConfirmPasswordChange={setConfirmPassword}
-                                onSubmit={handleResetPassword}
-                                loading={loading}
-                            />
-                        )}
-
-                        <ForgotPasswordFooter />
-                    </CardContent>
-                </Card>
+                <ForgotPasswordFooter />
             </Box>
-        </Box>
+        </AuthCard>
     );
 }

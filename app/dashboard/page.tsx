@@ -62,9 +62,9 @@ export default function Dashboard() {
     }
 
     return (
-        <Box sx={{ bgcolor: '#f8f9fa', width: '100%', overflowX: 'hidden', minHeight: '100vh', pb: 8 }}>
+        <Box sx={{ bgcolor: '#f8f9fa', width: '100%', overflowX: 'hidden', minHeight: '100%', pb: { xs: 4, sm: 8 } }}>
             {/* Main Content */}
-            <Container maxWidth="xl" sx={{ mt: 4 }}>
+            <Container maxWidth="xl" sx={{ mt: { xs: 2, sm: 4 }, px: { xs: 2, sm: 3 } }}>
                 <Grid container spacing={3}>
                     {/* Left Column - Alerts & Top APIs */}
                     <Grid size={{ xs: 12, lg: 8 }}>

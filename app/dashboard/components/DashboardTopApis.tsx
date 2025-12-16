@@ -48,7 +48,7 @@ const DashboardTopApis: React.FC<DashboardTopApisProps> = ({ topApis }) => {
                     View all APIs
                 </Link>
             </Box>
-            <TableContainer>
+            <TableContainer sx={{ overflowX: 'auto' }}>
                 {/* Table of APIs */}
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead sx={{ bgcolor: 'background.default' }}>

@@ -24,7 +24,8 @@ const StepRequestOtp: React.FC<StepRequestOtpProps> = ({
     return (
         <Box component="form" onSubmit={onSubmit}>
             <TextField
-                margin="normal"
+                margin="dense"
+                size="small"
                 required
                 fullWidth
                 id="email"
@@ -34,11 +35,19 @@ const StepRequestOtp: React.FC<StepRequestOtpProps> = ({
                 autoFocus
                 value={email}
                 onChange={(e) => onEmailChange(e.target.value)}
+                sx={{
+                    "& .MuiInputBase-input": {
+                        fontSize: { xs: "0.875rem", sm: "0.95rem" },
+                    },
+                }}
                 slotProps={{
                     input: {
                         startAdornment: (
                             <InputAdornment position="start" sx={{ pl: 1, pr: 1 }}>
-                                <EmailOutlined color="action" />
+                                <EmailOutlined
+                                    color="action"
+                                    sx={{ fontSize: { xs: "1rem", sm: "1.2rem" } }}
+                                />
                             </InputAdornment>
                         ),
                     },

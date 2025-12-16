@@ -32,7 +32,8 @@ const StepResetPassword: React.FC<StepResetPasswordProps> = ({
     return (
         <Box component="form" onSubmit={onSubmit}>
             <TextField
-                margin="normal"
+                margin="dense"
+                size="small"
                 required
                 fullWidth
                 name="newPassword"
@@ -41,11 +42,19 @@ const StepResetPassword: React.FC<StepResetPasswordProps> = ({
                 id="newPassword"
                 value={newPassword}
                 onChange={(e) => onNewPasswordChange(e.target.value)}
+                sx={{
+                    "& .MuiInputBase-input": {
+                        fontSize: { xs: "0.875rem", sm: "0.95rem" },
+                    },
+                }}
                 slotProps={{
                     input: {
                         startAdornment: (
                             <InputAdornment position="start" sx={{ pl: 1, pr: 1 }}>
-                                <LockOutlined color="action" />
+                                <LockOutlined
+                                    color="action"
+                                    sx={{ fontSize: { xs: "1rem", sm: "1.2rem" } }}
+                                />
                             </InputAdornment>
                         ),
                         endAdornment: (
@@ -70,7 +79,8 @@ const StepResetPassword: React.FC<StepResetPasswordProps> = ({
                 }}
             />
             <TextField
-                margin="normal"
+                margin="dense"
+                size="small"
                 required
                 fullWidth
                 name="confirmPassword"
@@ -79,11 +89,19 @@ const StepResetPassword: React.FC<StepResetPasswordProps> = ({
                 id="confirmPassword"
                 value={confirmPassword}
                 onChange={(e) => onConfirmPasswordChange(e.target.value)}
+                sx={{
+                    "& .MuiInputBase-input": {
+                        fontSize: { xs: "0.875rem", sm: "0.95rem" },
+                    },
+                }}
                 slotProps={{
                     input: {
                         startAdornment: (
                             <InputAdornment position="start" sx={{ pl: 1, pr: 1 }}>
-                                <LockOutlined color="action" />
+                                <LockOutlined
+                                    color="action"
+                                    sx={{ fontSize: { xs: "1rem", sm: "1.2rem" } }}
+                                />
                             </InputAdornment>
                         ),
                         endAdornment: (

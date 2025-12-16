@@ -43,9 +43,9 @@ export default function AuthCard({ title, subtitle, children }: AuthCardProps) {
                     elevation={0}
                     sx={{
                         width: "100%",
-                        maxWidth: 420,
+                        maxWidth: 400,
                         borderRadius: 2,
-                        p: { xs: 1.75, sm: 3, md: 4 },
+                        p: { xs: 2, sm: 3 },
                         backgroundColor: "rgba(255, 255, 255, 0.95)",
                         backdropFilter: "blur(20px)",
                         border: "1px solid",
@@ -64,7 +64,7 @@ export default function AuthCard({ title, subtitle, children }: AuthCardProps) {
                                 display: "flex",
                                 flexDirection: "column",
                                 alignItems: "center",
-                                mb: { xs: 2.5, sm: 4 },
+                                mb: { xs: 2, sm: 3 },
                                 textAlign: "center",
                             }}
                         >
@@ -76,9 +76,8 @@ export default function AuthCard({ title, subtitle, children }: AuthCardProps) {
                                     color: "primary.main",
                                     mb: 0.75,
                                     fontSize: {
-                                        xs: "1.25rem",   
-                                        sm: "1.6rem",
-                                        md: "2rem",
+                                        xs: "1.25rem",
+                                        sm: "1.5rem",
                                     },
                                     letterSpacing: "-0.02em",
                                 }}
@@ -89,8 +88,8 @@ export default function AuthCard({ title, subtitle, children }: AuthCardProps) {
                                 variant="body1"
                                 sx={{
                                     color: "text.secondary",
-                                    fontSize: { xs: "0.8rem", sm: "0.95rem" },
-                                    maxWidth: { xs: "100%", sm: "80%" },
+                                    fontSize: { xs: "0.8rem", sm: "0.875rem" },
+                                    maxWidth: { xs: "100%", sm: "90%" },
                                 }}
                             >
                                 {subtitle}

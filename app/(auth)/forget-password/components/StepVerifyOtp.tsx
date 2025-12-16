@@ -36,7 +36,8 @@ const StepVerifyOtp: React.FC<StepVerifyOtpProps> = ({
                 Please enter the 6-digit OTP sent to <strong>{email}</strong>
             </Typography>
             <TextField
-                margin="normal"
+                margin="dense"
+                size="small"
                 required
                 fullWidth
                 id="otp"
@@ -49,11 +50,19 @@ const StepVerifyOtp: React.FC<StepVerifyOtpProps> = ({
                     maxLength: 6,
                     pattern: "[0-9]*",
                 }}
+                sx={{
+                    "& .MuiInputBase-input": {
+                        fontSize: { xs: "0.875rem", sm: "0.95rem" },
+                    },
+                }}
                 slotProps={{
                     input: {
                         startAdornment: (
                             <InputAdornment position="start" sx={{ pl: 1, pr: 1 }}>
-                                <PinOutlined color="action" />
+                                <PinOutlined
+                                    color="action"
+                                    sx={{ fontSize: { xs: "1rem", sm: "1.2rem" } }}
+                                />
                             </InputAdornment>
                         ),
                     },

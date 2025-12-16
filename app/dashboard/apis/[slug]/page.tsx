@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { Box, Paper, Typography, Chip, Divider, Card, CardContent, Stack, Alert } from "@mui/material";
+import { Box, Paper, Typography, Chip, Card, CardContent, Stack, Alert, Grid, Avatar } from "@mui/material";
 import {
     CheckCircle as CheckCircleIcon,
     Warning as WarningIcon,
@@ -73,7 +73,7 @@ async function getApiData(slug: string): Promise<topApiInterface | null> {
                 'Content-Type': 'application/json',
                 'is-ISR': 'true',
             },
-            next: { revalidate: 60 }, 
+            next: { revalidate: 60 },
         });
         if (!response.ok) {
             console.error(`API request failed with status: ${response.status}`);
@@ -153,199 +153,258 @@ export default async function ApiDetailPage({
     const latency = api.p95LatencyMs ?? 0;
 
     return (
-        <Box sx={{ width: "100%", p: 3 }}>
+        <Box sx={{ width: "100%", p: { xs: 2, sm: 4 } }}>
             {/* Header Section */}
-            <Stack direction="row" alignItems="center" spacing={2} mb={3}>
+            <Stack
+                direction={{ xs: "column", sm: "row" }}
+                alignItems={{ xs: "flex-start", sm: "center" }}
+                spacing={2}
+                mb={4}
+            >
                 <BackButton />
-                <Typography variant="h4" fontWeight="bold" color="primary">
+                <Typography
+                    variant="h3"
+                    fontWeight="800"
+                    color="text.primary"
+                    sx={{ fontSize: { xs: "1.75rem", sm: "2.5rem" }, letterSpacing: "-0.02em" }}
+                >
                     {api.name}
                 </Typography>
                 <Chip
                     label={api.status}
                     color={getStatusColor(api.status) as any}
-                    icon={getStatusIcon(api.status) as any}
-                    sx={{ textTransform: "capitalize", fontWeight: "bold" }}
+                    size="small"
+                    sx={{
+                        textTransform: "capitalize",
+                        fontWeight: "bold",
+                        px: 1,
+                        height: 32,
+                        borderRadius: "16px",
+                    }}
                 />
             </Stack>
 
             {/* API Overview Card */}
-            <Paper elevation={2} sx={{ p: 3, mb: 3, borderRadius: 2 }}>
-                <Typography variant="h6" fontWeight="bold" gutterBottom>
-                    API Overview
+            <Paper
+                elevation={0}
+                sx={{
+                    p: { xs: 2, sm: 4 },
+                    mb: 4,
+                    borderRadius: 3,
+                    border: "1px solid",
+                    borderColor: "divider",
+                }}
+            >
+                <Typography
+                    variant="subtitle1"
+                    fontWeight="bold"
+                    gutterBottom
+                    sx={{ textTransform: "uppercase", letterSpacing: "1px", color: "text.secondary", fontSize: "0.75rem", mb: 2 }}
+                >
+                    API Configuration
                 </Typography>
-                <Divider sx={{ mb: 2 }} />
 
-                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 3, mb: 3 }}>
+                <Grid container spacing={4}>
                     {/* Method */}
-                    <Box sx={{ flex: "1 1 200px", minWidth: "200px" }}>
-                        <Typography variant="body2" color="text.secondary" gutterBottom>
+                    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                        <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 1, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                             Method
                         </Typography>
                         <Chip
                             label={api.method}
                             color={getMethodColor(api.method) as any}
-                            variant="outlined"
-                            sx={{ fontWeight: "bold", fontSize: "0.95rem" }}
+                            sx={{ fontWeight: "800", borderRadius: 1.5, px: 1 }}
                         />
-                    </Box>
+                    </Grid>
 
                     {/* Version */}
-                    <Box sx={{ flex: "1 1 200px", minWidth: "200px" }}>
-                        <Typography variant="body2" color="text.secondary" gutterBottom>
+                    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                        <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 1, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                             Version
                         </Typography>
-                        <Typography variant="h6" fontWeight="medium">
+                        <Typography variant="h6" fontWeight="600">
                             {api.version || "N/A"}
                         </Typography>
-                    </Box>
+                    </Grid>
 
                     {/* Owner Team */}
-                    <Box sx={{ flex: "1 1 200px", minWidth: "200px" }}>
-                        <Typography variant="body2" color="text.secondary" gutterBottom>
+                    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                        <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 1, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                             Owner Team
                         </Typography>
                         <Stack direction="row" alignItems="center" spacing={1}>
-                            <PeopleIcon color="action" />
-                            <Typography variant="h6" fontWeight="medium">
+                            <Avatar sx={{ width: 24, height: 24, bgcolor: 'primary.light' }}>
+                                <PeopleIcon sx={{ fontSize: 14, color: 'primary.main' }} />
+                            </Avatar>
+                            <Typography variant="body1" fontWeight="500">
                                 {api.ownerTeam || "Unassigned"}
                             </Typography>
                         </Stack>
-                    </Box>
+                    </Grid>
 
-                    {/* Status */}
-                    <Box sx={{ flex: "1 1 200px", minWidth: "200px" }}>
-                        <Typography variant="body2" color="text.secondary" gutterBottom>
-                            Status
+                    {/* Status Text */}
+                    <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+                        <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 1, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                            Current Status
                         </Typography>
-                        <Typography variant="h6" fontWeight="medium" color={`${getStatusColor(api.status)}.main`}>
+                        <Typography variant="body1" fontWeight="600" color={`${getStatusColor(api.status)}.main`}>
                             {api.status?.toUpperCase() || "UNKNOWN"}
                         </Typography>
-                    </Box>
-                </Box>
+                    </Grid>
 
-                {/* Endpoint Path */}
-                <Box>
-                    <Typography variant="body2" color="text.secondary" gutterBottom>
-                        Endpoint Path
-                    </Typography>
-                    <Paper
-                        sx={{
-                            p: 2,
-                            bgcolor: "grey.100",
-                            fontFamily: "monospace",
-                            fontSize: "0.95rem",
-                            borderRadius: 1,
-                            wordBreak: "break-all",
-                        }}
-                    >
-                        {api.path || "N/A"}
-                    </Paper>
-                </Box>
+                    {/* Endpoint Path */}
+                    <Grid size={{ xs: 12 }}>
+                        <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 1, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                            Endpoint Path
+                        </Typography>
+                        <Paper
+                            elevation={0}
+                            sx={{
+                                p: 2,
+                                bgcolor: "grey.50",
+                                fontFamily: "Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace",
+                                fontSize: "0.9rem",
+                                borderRadius: 2,
+                                border: "1px dashed",
+                                borderColor: "divider",
+                                wordBreak: "break-all",
+                                color: "text.primary"
+                            }}
+                        >
+                            {api.path || "N/A"}
+                        </Paper>
+                    </Grid>
+                </Grid>
             </Paper>
 
             {/* Metrics Section */}
-            <Typography variant="h5" fontWeight="bold" mb={2}>
+            <Typography variant="h5" fontWeight="800" sx={{ mb: 3, letterSpacing: "-0.01em" }}>
                 Performance Metrics
             </Typography>
 
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 3, mb: 3 }}>
+            <Grid container spacing={3} mb={4}>
                 {/* Requests Card */}
-                <Box sx={{ flex: "1 1 300px", minWidth: "280px" }}>
+                <Grid size={{ xs: 12, md: 4 }}>
                     <Card
-                        elevation={2}
+                        elevation={0}
                         sx={{
                             height: "100%",
-                            borderLeft: 4,
-                            borderColor: "primary.main",
-                            transition: "transform 0.2s",
-                            "&:hover": { transform: "translateY(-4px)" },
+                            border: "1px solid",
+                            borderColor: "divider",
+                            borderRadius: 3,
+                            transition: "all 0.2s",
+                            "&:hover": {
+                                borderColor: "primary.main",
+                                transform: "translateY(-2px)",
+                                boxShadow: "0 4px 12px rgba(0,0,0,0.05)"
+                            },
                         }}
                     >
-                        <CardContent>
-                            <Stack direction="row" justifyContent="space-between" alignItems="center" mb={2}>
-                                <Typography variant="h6" color="text.secondary">
-                                    Total Requests
-                                </Typography>
-                                <TrendingUpIcon color="primary" fontSize="large" />
-                            </Stack>
-                            <Typography variant="h3" fontWeight="bold" color="primary.main">
+                        <CardContent sx={{ p: 3 }}>
+                            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 2 }}>
+                                <Avatar sx={{ bgcolor: "primary.50", color: "primary.main", width: 48, height: 48 }}>
+                                    <TrendingUpIcon />
+                                </Avatar>
+                                <Chip label="Last 24h" size="small" sx={{ bgcolor: "grey.100", fontWeight: 600, fontSize: "0.75rem" }} />
+                            </Box>
+                            <Typography variant="h3" fontWeight="800" color="text.primary" sx={{ fontSize: { xs: "2rem", sm: "2.5rem" }, mb: 0.5 }}>
                                 {requests.toLocaleString()}
                             </Typography>
-                            <Typography variant="body2" color="text.secondary" mt={1}>
-                                Total number of API calls
+                            <Typography variant="body2" color="text.secondary" fontWeight="500">
+                                Total API Requests
                             </Typography>
                         </CardContent>
                     </Card>
-                </Box>
+                </Grid>
 
                 {/* Error Rate Card */}
-                <Box sx={{ flex: "1 1 300px", minWidth: "280px" }}>
+                <Grid size={{ xs: 12, md: 4 }}>
                     <Card
-                        elevation={2}
+                        elevation={0}
                         sx={{
                             height: "100%",
-                            borderLeft: 4,
-                            borderColor: errorRate > 1 ? "error.main" : "success.main",
-                            transition: "transform 0.2s",
-                            "&:hover": { transform: "translateY(-4px)" },
+                            border: "1px solid",
+                            borderColor: "divider",
+                            borderRadius: 3,
+                            transition: "all 0.2s",
+                            "&:hover": {
+                                borderColor: errorRate > 1 ? "error.main" : "success.main",
+                                transform: "translateY(-2px)",
+                                boxShadow: "0 4px 12px rgba(0,0,0,0.05)"
+                            },
                         }}
                     >
-                        <CardContent>
-                            <Stack direction="row" justifyContent="space-between" alignItems="center" mb={2}>
-                                <Typography variant="h6" color="text.secondary">
-                                    Error Rate
-                                </Typography>
-                                <ErrorOutlineIcon
-                                    color={errorRate > 1 ? "error" : "success"}
-                                    fontSize="large"
+                        <CardContent sx={{ p: 3 }}>
+                            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 2 }}>
+                                <Avatar sx={{
+                                    bgcolor: errorRate > 1 ? "error.50" : "success.50",
+                                    color: errorRate > 1 ? "error.main" : "success.main",
+                                    width: 48,
+                                    height: 48
+                                }}>
+                                    <ErrorOutlineIcon />
+                                </Avatar>
+                                <Chip label={errorRate > 1 ? "Action Needed" : "Optimal"} size="small"
+                                    sx={{
+                                        bgcolor: errorRate > 1 ? "error.50" : "success.50",
+                                        color: errorRate > 1 ? "error.dark" : "success.dark",
+                                        fontWeight: 700,
+                                        fontSize: "0.75rem"
+                                    }}
                                 />
-                            </Stack>
+                            </Box>
                             <Typography
                                 variant="h3"
-                                fontWeight="bold"
-                                color={errorRate > 1 ? "error.main" : "success.main"}
+                                fontWeight="800"
+                                color={errorRate > 1 ? "error.main" : "text.primary"}
+                                sx={{ fontSize: { xs: "2rem", sm: "2.5rem" }, mb: 0.5 }}
                             >
                                 {errorRate}%
                             </Typography>
-                            <Typography variant="body2" color="text.secondary" mt={1}>
-                                Percentage of failed requests
+                            <Typography variant="body2" color="text.secondary" fontWeight="500">
+                                Error Rate
                             </Typography>
                         </CardContent>
                     </Card>
-                </Box>
+                </Grid>
 
                 {/* Latency Card */}
-                <Box sx={{ flex: "1 1 300px", minWidth: "280px" }}>
+                <Grid size={{ xs: 12, md: 4 }}>
                     <Card
-                        elevation={2}
+                        elevation={0}
                         sx={{
                             height: "100%",
-                            borderLeft: 4,
-                            borderColor: "warning.main",
-                            transition: "transform 0.2s",
-                            "&:hover": { transform: "translateY(-4px)" },
+                            border: "1px solid",
+                            borderColor: "divider",
+                            borderRadius: 3,
+                            transition: "all 0.2s",
+                            "&:hover": {
+                                borderColor: "warning.main",
+                                transform: "translateY(-2px)",
+                                boxShadow: "0 4px 12px rgba(0,0,0,0.05)"
+                            },
                         }}
                     >
-                        <CardContent>
-                            <Stack direction="row" justifyContent="space-between" alignItems="center" mb={2}>
-                                <Typography variant="h6" color="text.secondary">
-                                    P95 Latency
-                                </Typography>
-                                <SpeedIcon color="warning" fontSize="large" />
-                            </Stack>
-                            <Typography variant="h3" fontWeight="bold" color="warning.main">
+                        <CardContent sx={{ p: 3 }}>
+                            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 2 }}>
+                                <Avatar sx={{ bgcolor: "warning.50", color: "warning.main", width: 48, height: 48 }}>
+                                    <SpeedIcon />
+                                </Avatar>
+                                <Chip label="Target: <200ms" size="small" sx={{ bgcolor: "grey.100", fontWeight: 600, fontSize: "0.75rem" }} />
+                            </Box>
+                            <Typography variant="h3" fontWeight="800" color="text.primary" sx={{ fontSize: { xs: "2rem", sm: "2.5rem" }, mb: 0.5 }}>
                                 {latency}
-                                <Typography component="span" variant="h6" color="text.secondary" ml={1}>
+                                <Typography component="span" variant="h6" color="text.secondary" sx={{ ml: 1, fontWeight: 600 }}>
                                     ms
                                 </Typography>
                             </Typography>
-                            <Typography variant="body2" color="text.secondary" mt={1}>
-                                95th percentile response time
+                            <Typography variant="body2" color="text.secondary" fontWeight="500">
+                                P95 Latency
                             </Typography>
                         </CardContent>
                     </Card>
-                </Box>
-            </Box>
+                </Grid>
+            </Grid>
 
             {/* Health Status Alert */}
             <Box sx={{ mt: 3 }}>

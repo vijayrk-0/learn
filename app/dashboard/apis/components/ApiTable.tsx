@@ -144,7 +144,8 @@ export default function ApiTable({
         onDelete={onFilterDelete}
         onClearAll={handleResetFilters}
       />
-      <TableContainer>
+      {/* Desktop Table View */}
+      <TableContainer sx={{ display: { xs: "none", md: "block" } }}>
         <Table sx={{ minWidth: 750 }} size="medium">
           <TableHead sx={{ bgcolor: "grey.100", color: "Grey" }}>
             <TableRow>
@@ -319,28 +320,124 @@ export default function ApiTable({
             )}
           </TableBody>
         </Table>
-        <Pagination
-          selectedRow={rowsPerPage}
-          selectedPage={page}
-          totalPages={Math.ceil(totalCount / rowsPerPage)}
-          onRowsChange={(event, newRow) => {
-            const syntheticEvent = {
-              ...(event as React.ChangeEvent<
-                HTMLInputElement | HTMLTextAreaElement
-              >),
-              target: { value: String(newRow) },
-            } as React.ChangeEvent<HTMLInputElement>;
-            onRowsPerPageChange(syntheticEvent);
-          }}
-          onPageChange={(event, newPage) => {
-            onPageChange(
-              event as React.MouseEvent<HTMLButtonElement> | null,
-              newPage
-            );
-          }}
-          rowOptions={[5, 10, 25, 50, 100]}
-        />
       </TableContainer>
+
+      {/* Mobile Card View */}
+      <Box sx={{ display: { xs: "flex", md: "none" }, flexDirection: "column", gap: 2 }}>
+        {loading ? (
+          Array.from(new Array(3)).map((_, i) => (
+            <Skeleton key={i} variant="rectangular" height={200} sx={{ borderRadius: 2 }} />
+          ))
+        ) : (
+          data.map((row) => (
+            <Box
+              key={`${row.name}-${row.method}-${row.path}`}
+              sx={{
+                p: 2,
+                border: "1px solid",
+                borderColor: "divider",
+                borderRadius: 2,
+                bgcolor: "background.paper"
+              }}
+            >
+              <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 2 }}>
+                <Box>
+                  <Link
+                    href={`/dashboard/apis/${row.id}`}
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <Typography variant="h6" fontWeight="bold" color="primary">
+                      {row.name}
+                    </Typography>
+                  </Link>
+                  <Typography variant="caption" color="text.secondary">
+                    v{row.version} • {row.ownerTeam}
+                  </Typography>
+                </Box>
+                <Chip
+                  label={row.status}
+                  size="small"
+                  color={getStatusColor(row.status) as any}
+                  sx={{ textTransform: "capitalize", height: 24 }}
+                />
+              </Box>
+
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2, bgcolor: "grey.50", p: 1, borderRadius: 1 }}>
+                <Chip
+                  label={row.method}
+                  size="small"
+                  color={
+                    row.method === "GET"
+                      ? "primary"
+                      : row.method === "POST"
+                        ? "success"
+                        : "warning"
+                  }
+                  variant="outlined"
+                  sx={{ fontWeight: "bold", width: 50, height: 20, fontSize: "0.7rem" }}
+                />
+                <Typography variant="body2" sx={{ fontFamily: "monospace", fontSize: "0.8rem", wordBreak: "break-all" }}>
+                  {row.path}
+                </Typography>
+              </Box>
+
+              <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 1, mb: 2 }}>
+                <Box>
+                  <Typography variant="caption" color="text.secondary">Requests</Typography>
+                  <Typography variant="body2" fontWeight="bold">{row.requests.toLocaleString()}</Typography>
+                </Box>
+                <Box>
+                  <Typography variant="caption" color="text.secondary">Error Rate</Typography>
+                  <Typography variant="body2" fontWeight="bold" color={row.errorRatePercent > 1 ? "error.main" : "text.primary"}>
+                    {row.errorRatePercent}%
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography variant="caption" color="text.secondary">Latency</Typography>
+                  <Typography variant="body2" fontWeight="bold">{row.p95LatencyMs}ms</Typography>
+                </Box>
+              </Box>
+
+              <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1, pt: 1, borderTop: "1px solid", borderColor: "divider" }}>
+                <Button startIcon={<EditIcon />} size="small" onClick={() => onEdit(row)}>
+                  Edit
+                </Button>
+                <Button startIcon={<DeleteIcon />} size="small" color="error" onClick={() => onDelete(row)}>
+                  Delete
+                </Button>
+              </Box>
+            </Box>
+          ))
+        )}
+        {!loading && data.length === 0 && (
+          <Box sx={{ p: 4, textAlign: "center", bgcolor: "background.paper", borderRadius: 2 }}>
+            <Typography color="text.secondary">No APIs found</Typography>
+          </Box>
+        )}
+      </Box>
+
+      {/* Shared Pagination */}
+      <Pagination
+        selectedRow={rowsPerPage}
+        selectedPage={page}
+        totalPages={Math.ceil(totalCount / rowsPerPage)}
+        onRowsChange={(event, newRow) => {
+          const syntheticEvent = {
+            ...(event as React.ChangeEvent<
+              HTMLInputElement | HTMLTextAreaElement
+            >),
+            target: { value: String(newRow) },
+          } as React.ChangeEvent<HTMLInputElement>;
+          onRowsPerPageChange(syntheticEvent);
+        }}
+        onPageChange={(event, newPage) => {
+          onPageChange(
+            event as React.MouseEvent<HTMLButtonElement> | null,
+            newPage
+          );
+        }}
+        rowOptions={[5, 10, 25, 50, 100]}
+      />
     </React.Fragment>
 
   );

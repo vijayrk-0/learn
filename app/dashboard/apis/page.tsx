@@ -201,22 +201,36 @@ export default function ApisPage() {
   };
 
   return (
-    <Box sx={{ width: "100%", p: 2 }}>
+    <Box sx={{ width: "100%", p: { xs: 2, sm: 3 }, mt: { xs: 1, sm: 0 } }}>
       {/* Header / Actions */}
       <Stack
-        direction="row"
+        direction={{ xs: "column", sm: "row" }}
         justifyContent="space-between"
-        alignItems="center"
-        mb={2}
+        alignItems={{ xs: "flex-start", sm: "center" }}
+        mb={{ xs: 3, sm: 4 }}
+        gap={2}
       >
-        <Typography variant="h5" fontWeight="bold" color="primary">
+        <Typography
+          variant="h4"
+          fontWeight="800"
+          color="text.primary"
+          sx={{
+            fontSize: { xs: "1.75rem", sm: "2.125rem" },
+            letterSpacing: "-0.01em"
+          }}
+        >
           API Inventory
         </Typography>
 
-        <Stack direction="row" gap={1}>
+        <Stack
+          direction="row"
+          gap={1.5}
+          width={{ xs: "100%", sm: "auto" }}
+          flexWrap="wrap"
+        >
           <Button
             variant={showFilters ? "outlined" : "text"}
-            size="small"
+            size="medium"
             startIcon={<FilterListIcon />}
             onClick={() =>
               dispatch(
@@ -226,6 +240,7 @@ export default function ApisPage() {
                 })
               )
             }
+            sx={{ flex: { xs: 1, sm: "initial" } }}
           >
             {showFilters ? "Hide Filters" : "Filters"}
           </Button>
@@ -233,16 +248,25 @@ export default function ApisPage() {
           {showFilters && (
             <Button
               variant="contained"
-              size="small"
+              size="medium"
               color="secondary"
               startIcon={<CheckIcon />}
               onClick={handleApplyFilters}
+              sx={{ flex: { xs: 1, sm: "initial" } }}
             >
               Apply
             </Button>
           )}
 
-          <Button variant="contained" onClick={handleOpenCreate}>
+          <Button
+            variant="contained"
+            onClick={handleOpenCreate}
+            size="medium"
+            sx={{
+              flex: { xs: "1 1 100%", sm: "initial" },
+              mt: { xs: 1, sm: 0 }
+            }}
+          >
             Add API
           </Button>
         </Stack>

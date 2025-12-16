@@ -29,7 +29,7 @@ const DashboardSummary: React.FC<DashboardSummaryProps> = ({ summary }) => {
                 Summary
             </Typography>
             {/* Summary Grid */}
-            <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 3, mt: 2 }}>
+            <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 3, mt: 2 }}>
                 <Box>
                     <Typography variant="caption" sx={{ opacity: 0.8 }}>
                         Total Requests

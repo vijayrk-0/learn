@@ -44,7 +44,7 @@ export default function ApiFilterSidebar({
         <Drawer anchor="right" open={open} onClose={onClose}>
             <Box
                 sx={{
-                    width: 380,
+                    width: { xs: "100%", sm: 380 },
                     p: 3,
                     display: "flex",
                     flexDirection: "column",

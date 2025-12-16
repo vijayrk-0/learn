@@ -55,7 +55,7 @@ export async function generateStaticParams() {
         const apis = data.data || [];
 
         return apis.map((api: topApiInterface) => ({
-            slug: `${`${api.id}`.replace(/\//g, '_')}`,
+            id: `${`${api.id}`.replace(/\//g, '_')}`,
         }));
     } catch (error) {
         console.error("Error generating static params:", error);
@@ -64,11 +64,11 @@ export async function generateStaticParams() {
 }
 
 // Fetch API data with ISR caching
-async function getApiData(slug: string): Promise<topApiInterface | null> {
+async function getApiData(id: string): Promise<topApiInterface | null> {
     try {
-        console.log("Fetching API data for slug:", slug);
+        console.log("Fetching API data for id:", id);
         const baseUrl = getBaseUrl();
-        const response = await fetch(`${baseUrl}/api/dashboard/api-lists/${slug}`, {
+        const response = await fetch(`${baseUrl}/api/dashboard/api-lists/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'is-ISR': 'true',
@@ -137,11 +137,11 @@ function getMethodColor(method: string): "primary" | "success" | "warning" | "er
 export default async function ApiDetailPage({
     params
 }: {
-    params: Promise<{ slug: string }>
+    params: Promise<{ id: string }>
 }) {
     // Await params
-    const { slug } = await params;
-    const api = await getApiData(slug);
+    const { id } = await params;
+    const api = await getApiData(id);
 
     if (!api) {
         notFound();

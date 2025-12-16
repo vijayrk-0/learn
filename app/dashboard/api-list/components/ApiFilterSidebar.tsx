@@ -41,11 +41,18 @@ export default function ApiFilterSidebar({
     onReset,
 }: ApiFilterSidebarProps) {
     return (
-        <Drawer anchor="right" open={open} onClose={onClose}>
+        <Drawer
+            anchor="right"
+            open={open}
+            onClose={onClose}
+            PaperProps={{
+                sx: { width: { xs: "100%", sm: 380 } }
+            }}
+        >
             <Box
                 sx={{
-                    width: { xs: "100%", sm: 380 },
-                    p: 3,
+                    width: "100%",
+                    p: { xs: 2, sm: 3 },
                     display: "flex",
                     flexDirection: "column",
                     height: "100%",
@@ -62,14 +69,14 @@ export default function ApiFilterSidebar({
                     <Typography variant="h6" fontWeight="bold">
                         Filter APIs
                     </Typography>
-                    <IconButton onClick={onClose} size="small">
+                    <IconButton onClick={onClose} size="small" edge="end">
                         <CloseIcon />
                     </IconButton>
                 </Stack>
                 <Divider sx={{ mb: 3 }} />
 
                 {/* Form Fields Container */}
-                <Box sx={{ flexGrow: 1, overflowY: "auto", pr: 1 }}>
+                <Box sx={{ flexGrow: 1, overflowY: "auto", pr: 1, pb: 2 }}>
                     <Stack spacing={2.5}>
                         {/* General Information */}
                         <Box>
@@ -362,15 +369,20 @@ export default function ApiFilterSidebar({
                     </Stack>
                 </Box>
 
-                <Divider sx={{ my: 3 }} />
+                <Divider sx={{ my: 2 }} />
 
                 {/* Footer Actions */}
-                <Stack direction="row" spacing={2} justifyContent="flex-end">
+                <Stack
+                    direction={{ xs: "column", sm: "row" }}
+                    spacing={2}
+                    justifyContent="flex-end"
+                >
                     <Button
                         variant="outlined"
                         onClick={onReset}
                         fullWidth
                         color="inherit"
+                        size="large"
                     >
                         Clear All
                     </Button>
@@ -379,6 +391,7 @@ export default function ApiFilterSidebar({
                         onClick={onApply}
                         fullWidth
                         disableElevation
+                        size="large"
                     >
                         Apply Filters
                     </Button>

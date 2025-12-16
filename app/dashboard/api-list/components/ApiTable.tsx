@@ -211,7 +211,7 @@ export default function ApiTable({
                   >
                     <TableCell component="th" scope="row" sx={{ fontWeight: 500 }}>
                       <Link
-                        href={`/dashboard/apis/${row.id}`}
+                        href={`/dashboard/api-list/${row.id}`}
                         style={{
                           textDecoration: "none",
                           color: "inherit",
@@ -343,7 +343,7 @@ export default function ApiTable({
               <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 2 }}>
                 <Box>
                   <Link
-                    href={`/dashboard/apis/${row.id}`}
+                    href={`/dashboard/api-list/${row.id}`}
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
                     <Typography variant="h6" fontWeight="bold" color="primary">

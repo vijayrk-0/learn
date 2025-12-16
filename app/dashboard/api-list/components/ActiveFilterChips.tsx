@@ -24,8 +24,20 @@ export default function ActiveFilterChips({
     }
 
     return (
-        <Box display="flex" flexWrap="wrap" gap={1} alignItems="center" mb={2}>
-            <Typography variant="body2" color="text.secondary" mr={1}>
+        <Box
+            display="flex"
+            flexWrap={{ xs: "nowrap", sm: "wrap" }}
+            gap={1}
+            alignItems="center"
+            mb={2}
+            sx={{
+                overflowX: { xs: "auto", sm: "visible" },
+                pb: { xs: 1, sm: 0 },
+                scrollbarWidth: "none", // Hide scrollbar for cleaner look
+                "&::-webkit-scrollbar": { display: "none" }
+            }}
+        >
+            <Typography variant="body2" color="text.secondary" mr={1} whiteSpace="nowrap">
                 Active Filters:
             </Typography>
             {activeKeys.map((key) => {
@@ -41,6 +53,7 @@ export default function ActiveFilterChips({
                         color="primary"
                         variant="outlined"
                         size="small"
+                        sx={{ whiteSpace: "nowrap" }}
                     />
                 );
             })}
@@ -51,7 +64,7 @@ export default function ActiveFilterChips({
                     color="default"
                     variant="filled"
                     size="small"
-                    sx={{ cursor: "pointer" }}
+                    sx={{ cursor: "pointer", whiteSpace: "nowrap" }}
                 />
             )}
         </Box>

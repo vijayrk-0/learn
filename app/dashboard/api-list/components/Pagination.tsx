@@ -93,14 +93,18 @@ function PaginationComponent({
       component="section"
       aria-label="Table pagination"
     >
-      <Stack direction="row" spacing={2} alignItems="center">
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        spacing={{ xs: 2, sm: 2 }}
+        alignItems="center"
+        width={{ xs: "100%", sm: "auto" }}
+      >
         {/* Input box for number of rows per page */}
         <RowsPerPageSelect
           rowOptions={rowOptions}
           selectedRow={selectedRow}
           onRowsChange={handleRowsChange}
         />
-
 
         {/* Display the current page and total pages */}
         <Typography variant="body2" color="text.secondary">

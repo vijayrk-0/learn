@@ -39,7 +39,7 @@ const DashboardTopApis: React.FC<DashboardTopApisProps> = ({ topApis }) => {
                     Performance metrics by endpoint
                 </Typography>
                 <Link
-                    href="/dashboard/apis"
+                    href="/dashboard/api-list"
                     underline="hover"
                     variant="body2"
                     color="primary"

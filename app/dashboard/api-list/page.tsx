@@ -201,7 +201,7 @@ export default function ApisPage() {
   };
 
   return (
-    <Box sx={{ width: "100%", p: { xs: 2, sm: 3 }, mt: { xs: 1, sm: 0 } }}>
+    <Box sx={{ width: "100%", p: { xs: 2, sm: 3, md: 4 }, mt: { xs: 1, sm: 0 } }}>
       {/* Header / Actions */}
       <Stack
         direction={{ xs: "column", sm: "row" }}
@@ -210,17 +210,23 @@ export default function ApisPage() {
         mb={{ xs: 3, sm: 4 }}
         gap={2}
       >
-        <Typography
-          variant="h4"
-          fontWeight="800"
-          color="text.primary"
-          sx={{
-            fontSize: { xs: "1.75rem", sm: "2.125rem" },
-            letterSpacing: "-0.01em"
-          }}
-        >
-          API Inventory
-        </Typography>
+        <Box>
+          <Typography
+            variant="h4"
+            fontWeight="800"
+            color="text.primary"
+            sx={{
+              fontSize: { xs: "1.5rem", sm: "2rem", md: "2.125rem" },
+              letterSpacing: "-0.02em",
+              mb: { xs: 0.5, sm: 0 }
+            }}
+          >
+            API Inventory
+          </Typography>
+          <Typography variant="body2" color="text.secondary" sx={{ display: { xs: 'block', sm: 'none' } }}>
+            Manage your system APIs
+          </Typography>
+        </Box>
 
         <Stack
           direction="row"
@@ -240,9 +246,13 @@ export default function ApisPage() {
                 })
               )
             }
-            sx={{ flex: { xs: 1, sm: "initial" } }}
+            sx={{
+              flex: { xs: 1, sm: "initial" },
+              height: { xs: 40, sm: "auto" },
+              borderColor: showFilters ? "primary.main" : "divider",
+            }}
           >
-            {showFilters ? "Hide Filters" : "Filters"}
+            {showFilters ? "Hide" : "Filters"}
           </Button>
 
           {showFilters && (
@@ -252,7 +262,7 @@ export default function ApisPage() {
               color="secondary"
               startIcon={<CheckIcon />}
               onClick={handleApplyFilters}
-              sx={{ flex: { xs: 1, sm: "initial" } }}
+              sx={{ flex: { xs: 1, sm: "initial" }, height: { xs: 40, sm: "auto" } }}
             >
               Apply
             </Button>
@@ -264,7 +274,9 @@ export default function ApisPage() {
             size="medium"
             sx={{
               flex: { xs: "1 1 100%", sm: "initial" },
-              mt: { xs: 1, sm: 0 }
+              mt: { xs: 1, sm: 0 },
+              height: { xs: 44, sm: "auto" }, // Taller touch target on mobile
+              boxShadow: { xs: 2, sm: 1 }
             }}
           >
             Add API

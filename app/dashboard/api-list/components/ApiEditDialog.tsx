@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { apiSchema } from "@/app/dashboard/apis/schema";
+import { apiSchema } from "@/app/dashboard/api-list/schema";
 import {
     Dialog,
     DialogTitle,
@@ -13,6 +13,8 @@ import {
     Select,
     MenuItem,
     Alert,
+    useMediaQuery,
+    useTheme,
 } from "@mui/material";
 import { topApiInterface } from "@/app/dashboard/dashboardSchema";
 
@@ -73,14 +75,23 @@ export default function ApiEditDialog({
         }
     };
 
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
     return (
-        <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
+        <Dialog
+            open={open}
+            onClose={onClose}
+            maxWidth="sm"
+            fullWidth
+            fullScreen={isMobile}
+        >
             <DialogTitle>{initialData ? "Edit API" : "Add New API"}</DialogTitle>
 
             {Object.keys(errors).length > 0 && (
                 <Alert
                     severity="error"
-                    sx={{ mb: 2 }}
+                    sx={{ mb: 2, borderRadius: 0 }}
                     onClose={() => setErrors({})}
                 >
                     <div

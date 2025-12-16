@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { apiSchema } from "@/app/dashboard/api-list/schema";
 import {
     Dialog,
     DialogTitle,
@@ -16,6 +15,7 @@ import {
     useMediaQuery,
     useTheme,
 } from "@mui/material";
+import { apiSchema } from "@/app/dashboard/api-list/schema";
 import { topApiInterface } from "@/app/dashboard/dashboardSchema";
 
 interface ApiEditDialogProps {
@@ -48,7 +48,10 @@ export default function ApiEditDialog({
 }: ApiEditDialogProps) {
     const [currentApi, setCurrentApi] =
         useState<topApiInterface>(defaultApiState);
-    const [errors, setErrors] = useState<{ [key: string]: string }>({});
+    const [errors, setErrors] = useState<Record<string, string>>({});
+
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
     useEffect(() => {
         if (open) {
@@ -64,7 +67,7 @@ export default function ApiEditDialog({
             onSave(currentApi);
         } catch (err: any) {
             if (err.inner) {
-                const fieldErrors: { [key: string]: string } = {};
+                const fieldErrors: Record<string, string> = {};
                 err.inner.forEach((e: any) => {
                     if (e.path && !fieldErrors[e.path]) {
                         fieldErrors[e.path] = e.message;
@@ -75,8 +78,11 @@ export default function ApiEditDialog({
         }
     };
 
-    const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const labelStyle = {
+        mb: 0.5,
+        fontSize: 13,
+        fontWeight: 500,
+    };
 
     return (
         <Dialog
@@ -86,41 +92,26 @@ export default function ApiEditDialog({
             fullWidth
             fullScreen={isMobile}
         >
-            <DialogTitle>{initialData ? "Edit API" : "Add New API"}</DialogTitle>
+            <DialogTitle>
+                {initialData ? "Edit API" : "Add New API"}
+            </DialogTitle>
 
             {Object.keys(errors).length > 0 && (
-                <Alert
-                    severity="error"
-                    sx={{ mb: 2, borderRadius: 0 }}
-                    onClose={() => setErrors({})}
-                >
-                    <div
-                        style={{
-                            maxHeight: 120,
-                            overflowY: "auto",
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            textAlign: "center",
-                        }}
-                    >
-                        {Object.values(errors).map((error) => (
-                            <div key={error}>{error}</div>
-                        ))}
-                    </div>
+                <Alert severity="error" sx={{ mb: 2 }}>
+                    {Object.values(errors).map((err) => (
+                        <div key={err}>{err}</div>
+                    ))}
                 </Alert>
             )}
 
-
-
             <DialogContent dividers>
-                <Grid container spacing={2} pt={1}>
-                    {/* Name */}
-                    <Grid size={{ xs: 12 }}>
+                <Grid container spacing={2}>
+                    {/* API Name */}
+                    <Grid xs={12}>
+                        <InputLabel sx={labelStyle}>Name</InputLabel>
                         <TextField
-                            label="Name"
                             fullWidth
+                            size="small"
                             value={currentApi.name}
                             onChange={(e) =>
                                 setCurrentApi({ ...currentApi, name: e.target.value })
@@ -130,13 +121,12 @@ export default function ApiEditDialog({
                         />
                     </Grid>
 
-                    {/* Method & Version */}
-                    <Grid size={{ xs: 12, sm: 6 }}>
-                        <FormControl fullWidth error={!!errors.method}>
-                            <InputLabel>Method</InputLabel>
+                    {/* Request Method */}
+                    <Grid xs={12} sm={6}>
+                        <InputLabel sx={labelStyle}>Method</InputLabel>
+                        <FormControl fullWidth size="small" error={!!errors.method}>
                             <Select
                                 value={currentApi.method}
-                                label="Method"
                                 onChange={(e) =>
                                     setCurrentApi({
                                         ...currentApi,
@@ -153,10 +143,12 @@ export default function ApiEditDialog({
                         </FormControl>
                     </Grid>
 
-                    <Grid size={{ xs: 12, sm: 6 }}>
+                    {/* API Version */}
+                    <Grid xs={12} sm={6}>
+                        <InputLabel sx={labelStyle}>Version</InputLabel>
                         <TextField
-                            label="Version"
                             fullWidth
+                            size="small"
                             value={currentApi.version}
                             onChange={(e) =>
                                 setCurrentApi({ ...currentApi, version: e.target.value })
@@ -166,11 +158,12 @@ export default function ApiEditDialog({
                         />
                     </Grid>
 
-                    {/* Path */}
-                    <Grid size={{ xs: 12 }}>
+                    {/* Endpoint Path */}
+                    <Grid xs={12}>
+                        <InputLabel sx={labelStyle}>Path</InputLabel>
                         <TextField
-                            label="Path"
                             fullWidth
+                            size="small"
                             value={currentApi.path}
                             onChange={(e) =>
                                 setCurrentApi({ ...currentApi, path: e.target.value })
@@ -180,13 +173,12 @@ export default function ApiEditDialog({
                         />
                     </Grid>
 
-                    {/* Status && Owner Team */}
-                    <Grid size={{ xs: 12, sm: 6 }}>
-                        <FormControl fullWidth error={!!errors.status}>
-                            <InputLabel>Status</InputLabel>
+                    {/* API Status */}
+                    <Grid xs={12} sm={6}>
+                        <InputLabel sx={labelStyle}>Status</InputLabel>
+                        <FormControl fullWidth size="small" error={!!errors.status}>
                             <Select
                                 value={currentApi.status}
-                                label="Status"
                                 onChange={(e) =>
                                     setCurrentApi({
                                         ...currentApi,
@@ -201,10 +193,12 @@ export default function ApiEditDialog({
                         </FormControl>
                     </Grid>
 
-                    <Grid size={{ xs: 12, sm: 6 }}>
+                    {/* Owner Team */}
+                    <Grid xs={12} sm={6}>
+                        <InputLabel sx={labelStyle}>Owner Team</InputLabel>
                         <TextField
-                            label="Owner Team"
                             fullWidth
+                            size="small"
                             value={currentApi.ownerTeam}
                             onChange={(e) =>
                                 setCurrentApi({
@@ -218,11 +212,12 @@ export default function ApiEditDialog({
                     </Grid>
 
                     {/* Metrics */}
-                    <Grid size={{ xs: 12, sm: 4 }}>
+                    <Grid xs={12} sm={4}>
+                        <InputLabel sx={labelStyle}>Requests</InputLabel>
                         <TextField
-                            label="Requests"
-                            type="number"
                             fullWidth
+                            size="small"
+                            type="number"
                             value={currentApi.requests}
                             onChange={(e) =>
                                 setCurrentApi({
@@ -235,11 +230,12 @@ export default function ApiEditDialog({
                         />
                     </Grid>
 
-                    <Grid size={{ xs: 12, sm: 4 }}>
+                    <Grid xs={12} sm={4}>
+                        <InputLabel sx={labelStyle}>Error %</InputLabel>
                         <TextField
-                            label="Error %"
-                            type="number"
                             fullWidth
+                            size="small"
+                            type="number"
                             value={currentApi.errorRatePercent}
                             onChange={(e) =>
                                 setCurrentApi({
@@ -252,11 +248,12 @@ export default function ApiEditDialog({
                         />
                     </Grid>
 
-                    <Grid size={{ xs: 12, sm: 4 }}>
+                    <Grid xs={12} sm={4}>
+                        <InputLabel sx={labelStyle}>Latency (ms)</InputLabel>
                         <TextField
-                            label="Latency (ms)"
-                            type="number"
                             fullWidth
+                            size="small"
+                            type="number"
                             value={currentApi.p95LatencyMs}
                             onChange={(e) =>
                                 setCurrentApi({
@@ -275,7 +272,11 @@ export default function ApiEditDialog({
                 <Button onClick={onClose} color="inherit">
                     Cancel
                 </Button>
-                <Button onClick={handleSave} variant="contained" disabled={loading}>
+                <Button
+                    onClick={handleSave}
+                    variant="contained"
+                    disabled={loading}
+                >
                     {initialData ? "Update" : "Create"}
                 </Button>
             </DialogActions>
